@@ -13,6 +13,7 @@ The studio does not sell generic "AI art." It sells bounded production outcomes:
 - Interactive visual prototypes
 - Creative-model evaluation and deployment packs
 - Provenance, manifests, QA, and technical handoff
+- Surgical, evidence-producing build plans for narrow asset and metadata changes
 
 ## Initial market focus
 
@@ -36,6 +37,20 @@ Only sell packages that meet all five conditions:
 3. Acceptance tests can be written in advance.
 4. Delivery can be completed in five production days.
 5. Source files, runtime files, QA evidence, and manifests can be packaged together.
+
+## Surgical production substrate
+
+The repository now includes an executable builder foundation for controlled production changes:
+
+```bash
+python3 tools/studio_builder.py plan <plan.json>
+python3 tools/studio_builder.py apply <plan.json> --yes
+python3 tools/studio_builder.py verify <receipt.json>
+```
+
+A builder plan declares its exact write boundary, current-state preconditions, deterministic operations, and postconditions. Dry runs show the write set and text diffs. Successful application produces a receipt with the plan hash and before/after file hashes. Domain operators use the same contract; the first implemented asset operator normalizes an image onto an exact transparent canvas using explicit source and target anchors.
+
+This substrate is intentionally below individual service packages. Future palette, animation alignment, preview, Godot, and package builders should register as operations rather than becoming isolated scripts.
 
 ## Initial service packages
 
@@ -86,13 +101,18 @@ Owns scope, schedule, checkpoints, approvals, manifests, change control, and fin
 - `02_CAPABILITY_REGISTRY.md` — capabilities, readiness, evidence, and constraints
 - `03_SERVICE_CATALOG.md` — commercial service menu
 - `04_LAUNCH_ROADMAP.md` — sequence for proving and launching packages
+- `builder/` — machine-readable builder capability and plan contracts
+- `studio_builder/` — deterministic builder engine and registered domain operations
+- `tools/` — command-line validation and builder entrypoints
+- `benchmarks/` — internal production reference workspaces
 - `packages/` — complete one-week package definitions
-- `operations/` — intake, production, delivery, and change-control procedures
+- `operations/` — intake, production, delivery, builder, and change-control procedures
 - `templates/` — reusable briefs, manifests, proposals, and acceptance forms
 - `sales/` — qualification, pricing, and outreach positioning
 - `qa/` — quality gates and validation checklists
+- `tracking/` — readiness ledgers and evidence scorecards
 - `model_ops/` — model-evaluation and deployment workflow
 
 ## Current initialization status
 
-The studio is initialized at **Operating Model v0.1**. The commercial model, package definitions, workflow, and templates exist. The next gate is evidence: complete one internal benchmark for each launch package, record actual hours and defects, and promote only the packages that consistently pass the five-day delivery gate.
+The studio is initialized at **Operating Model v0.2 — Builder Foundation**. Commercial package definitions and workflow documents remain in internal proof, but the repository now has an executable substrate for previewable, guarded, transactionally applied changes with receipts and drift verification. The next evidence gate is to run the builder against the real Storm source, retain the receipt, and add palette, sequence-alignment, Godot-resource, and deterministic package operators.
