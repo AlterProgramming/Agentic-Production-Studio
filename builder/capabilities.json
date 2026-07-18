@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "substrate": "surgical-builder",
-  "status": "foundation",
+  "status": "composition-workbench",
   "capabilities": [
     {"id": "workspace.confinement", "status": "implemented", "evidence": "tests/test_studio_builder.py::test_path_escape_and_disallowed_target_are_rejected"},
     {"id": "plan.dry_run", "status": "implemented", "evidence": "tests/test_studio_builder.py::test_preview_is_non_mutating_and_shows_exact_diff"},
@@ -13,9 +13,18 @@
     {"id": "evidence.drift_verification", "status": "implemented", "evidence": "studio-builder verify"},
     {"id": "operations.extension_registry", "status": "implemented", "evidence": "OperationRegistry"},
     {"id": "asset.image_normalize", "status": "implemented", "evidence": "tests/test_studio_builder.py::test_image_normalize_places_source_anchor_exactly"},
-    {"id": "asset.palette_enforce", "status": "next", "depends_on": ["operations.extension_registry"]},
-    {"id": "godot.spriteframes_compile", "status": "next", "depends_on": ["operations.extension_registry", "evidence.receipts"]},
-    {"id": "graph.incremental_build", "status": "planned", "depends_on": ["evidence.receipts"]},
+    {"id": "asset.palette_enforce", "status": "implemented", "evidence": "tests/test_production_ops.py::test_palette_enforce_uses_nearest_color_and_preserves_alpha"},
+    {"id": "preview.contact_sheet", "status": "implemented", "evidence": "tests/test_production_ops.py::test_contact_sheet_is_nearest_neighbor_and_deterministic"},
+    {"id": "godot.spriteframes_compile", "status": "implemented", "evidence": "tests/test_production_ops.py::test_godot_spriteframes_compile_writes_resource_and_metadata"},
+    {"id": "delivery.deterministic_zip", "status": "implemented", "evidence": "tests/test_production_ops.py::test_package_zip_is_sorted_and_byte_reproducible"},
+    {"id": "visual.freehand_capture", "status": "implemented", "evidence": "studio_workbench/src/app.js"},
+    {"id": "visual.studio_glyph_ast", "status": "implemented", "evidence": "builder/schemas/studio-glyph-ast.schema.json and tests-js/studio_workbench.test.js"},
+    {"id": "visual.studio_ir", "status": "implemented", "evidence": "builder/schemas/studio-ir.schema.json and tests-js/studio_workbench.test.js"},
+    {"id": "visual.builder_plan_compile", "status": "implemented", "evidence": "tests-js/studio_workbench.test.js::builder plan maps visual operators to executable builder operations"},
+    {"id": "visual.live_diagnostics", "status": "implemented", "evidence": "studio_workbench/src/app.js"},
+    {"id": "graph.incremental_build", "status": "planned", "depends_on": ["evidence.receipts", "visual.studio_ir"]},
+    {"id": "visual.template_dictionary", "status": "planned", "depends_on": ["visual.studio_glyph_ast"]},
+    {"id": "animation.temporal_alignment", "status": "planned", "depends_on": ["operations.extension_registry", "asset.image_normalize"]},
     {"id": "sandbox.external_tools", "status": "planned", "depends_on": ["workspace.confinement", "execution.transactional"]}
   ]
 }
