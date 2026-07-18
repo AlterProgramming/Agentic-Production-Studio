@@ -6,6 +6,7 @@ from typing import Any
 from PIL import Image
 
 from .core import BuilderError, Context, OperationRegistry, normalize_rel, operation_id, sha256_bytes
+from .production_ops import register_production_operations
 
 
 def _point(value: Any, name: str) -> tuple[int, int]:
@@ -60,3 +61,4 @@ def image_normalize(ctx: Context, operation: dict[str, Any]) -> list[str]:
 
 def register_image_operations(registry: OperationRegistry) -> None:
     registry.register("image_normalize", image_normalize)
+    register_production_operations(registry)
