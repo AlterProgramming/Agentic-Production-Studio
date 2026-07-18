@@ -1,4 +1,5 @@
-import { SAMPLE_STROKES, compileBuilderPlan, compileStudioIR, parseStudioGlyph } from "./core.js";
+import { SAMPLE_STROKES, compileBuilderPlan, compileStudioIR } from "./core.js";
+import { parseStudioGlyphWithTemplates } from "./custom-templates.js";
 
 const drawCanvas = document.querySelector("#drawCanvas");
 const flowCanvas = document.querySelector("#flowCanvas");
@@ -37,6 +38,7 @@ let ast = null;
 let ir = null;
 let compiled = null;
 let pointerId = null;
+let customTemplates = [];
 
 function canvasPoint(event) {
   const bounds = drawCanvas.getBoundingClientRect();
@@ -88,7 +90,7 @@ function parseBindings() {
 }
 
 function recompute() {
-  ast = parseStudioGlyph(strokes);
+  ast = parseStudioGlyphWithTemplates(strokes, { templates: customTemplates });
   ir = compileStudioIR(ast);
   const bindingState = parseBindings();
   compiled = compileBuilderPlan(ir, bindingState.value);
@@ -204,6 +206,22 @@ document.querySelector("#importDrawingInput").addEventListener("change", async e
     recompute();
   } catch (error) {
     alert(`Cannot import drawing: ${error.message}`);
+  } finally {
+    event.target.value = "";
+  }
+});
+
+document.querySelector("#importDictionaryInput").addEventListener("change", async event => {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  try {
+    const parsed = JSON.parse(await file.text());
+    const entries = Array.isArray(parsed) ? parsed : parsed.entries;
+    if (!Array.isArray(entries) || !entries.every(entry => entry?.id && entry?.strokeTemplate?.strokes)) throw new Error("Dictionary JSON requires entries with id and strokeTemplate.strokes");
+    customTemplates = entries;
+    recompute();
+  } catch (error) {
+    alert(`Cannot import operator dictionary: ${error.message}`);
   } finally {
     event.target.value = "";
   }
