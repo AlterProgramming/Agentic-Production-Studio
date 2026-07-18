@@ -23,4 +23,4 @@ jobs:
       - name: Run visual workbench tests
         run: npm run test:workbench
       - name: Check browser module syntax
-        run: node --check studio_workbench/src/core.js && node --check studio_workbench/src/app.js
+        run: node --check studio_workbench/src/core.js && node --check studio_workbench/src/app.js && node --check studio_workbench/src/template.js && node --check studio_workbench/src/custom-templates.js && node --check studio_workbench/src/operator-lab.js
