@@ -34,9 +34,11 @@ The drawing is not treated as a flat image. It becomes structured source code. T
 
 A shape dictionary describes both what a mark looks like and what it means. The first studio dictionary includes input, normalization, palette enforcement, contact sheets, Godot compilation, packaging, strictness, evidence, and parallel intent.
 
+The Operator Lab extends this into an authoring loop: draw a mark, normalize its strokes, inspect the reconstructed template, export recognition plus semantics, and import that dictionary into the main workbench without modifying parser source.
+
 ### 4. Diagnostics are a first-class product surface
 
-Unknown marks, open scope boundaries, missing inputs, duplicate operators, missing execution bindings, and stale builder state remain visible. The system does not silently substitute behavior.
+Unknown marks, low-confidence template guesses, open scope boundaries, missing inputs, duplicate operators, missing execution bindings, and stale builder state remain visible. The system does not silently substitute behavior.
 
 ### 5. Prepared and active states matter
 
@@ -44,7 +46,7 @@ An open scope ring is a prepared composition. Closing the boundary attempts comp
 
 ### 6. Labs become capability factories
 
-The source project includes template, detector, and effect labs. The studio counterpart should grow dedicated labs for operator authoring, palette tuning, temporal alignment, Godot resources, and package inspection.
+The source project includes template, detector, and effect labs. The studio counterpart now includes an Operator Lab and should grow dedicated labs for palette tuning, temporal alignment, Godot resources, and package inspection.
 
 ## What the studio deliberately did not absorb
 
@@ -55,10 +57,14 @@ The source project includes template, detector, and effect labs. The studio coun
 
 ## Evolution path
 
-1. **Visual compiler foundation — implemented**
+1. **Visual compiler and dictionary authoring — implemented**
    - freehand capture
    - scope detection
    - primitive operator recognition
+   - normalized custom stroke templates
+   - rotation-invariant and multi-stroke matching
+   - operator authoring/viewer lab
+   - custom dictionary import
    - `StudioGlyphAST`
    - `StudioIR`
    - diagnostics and live flow preview
@@ -72,10 +78,10 @@ The source project includes template, detector, and effect labs. The studio coun
    - deterministic ZIP packages
 
 3. **Next evolution**
-   - dictionary-authored templates rather than fixed primitive rules
    - nested subcircuits and reusable production macros
    - graph scheduling and content-addressed incremental builds
    - browser-to-local builder bridge with preview/apply approval
    - temporal frame alignment and stable-region constraints
    - model suggestions represented as reviewable candidate circuits, never direct writes
    - replayable sessions and comparison of alternative compositions
+   - palette, temporal, Godot, and package inspection labs
