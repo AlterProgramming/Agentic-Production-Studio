@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-production-studio.local/schemas/studio-glyph-ast-v1.json",
+  "title": "Studio Glyph AST",
+  "type": "object",
+  "required": ["type", "version", "scope", "candidates", "symbols", "unknowns", "metrics", "warnings"],
+  "properties": {
+    "type": {"const": "StudioGlyphAST"},
+    "version": {"const": "1.0"},
+    "scope": {
+      "type": "object",
+      "required": ["found", "complete", "radius", "roundness"],
+      "properties": {
+        "found": {"type": "boolean"},
+        "complete": {"type": "boolean"},
+        "strokeIndex": {"type": ["integer", "null"]},
+        "center": {"type": ["object", "null"]},
+        "radius": {"type": "number", "minimum": 0},
+        "roundness": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "candidates": {"type": "array"},
+    "symbols": {"type": "array"},
+    "unknowns": {"type": "array"},
+    "metrics": {"type": "object"},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  }
+}
