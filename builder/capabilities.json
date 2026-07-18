@@ -22,8 +22,10 @@
     {"id": "visual.studio_ir", "status": "implemented", "evidence": "builder/schemas/studio-ir.schema.json and tests-js/studio_workbench.test.js"},
     {"id": "visual.builder_plan_compile", "status": "implemented", "evidence": "tests-js/studio_workbench.test.js::builder plan maps visual operators to executable builder operations"},
     {"id": "visual.live_diagnostics", "status": "implemented", "evidence": "studio_workbench/src/app.js"},
+    {"id": "visual.template_dictionary", "status": "implemented", "evidence": "studio_workbench/src/template.js and tests-js/studio_workbench.test.js"},
+    {"id": "visual.operator_lab", "status": "implemented", "evidence": "studio_workbench/operator-lab.html"},
+    {"id": "visual.dictionary_import", "status": "implemented", "evidence": "studio_workbench/src/custom-templates.js"},
     {"id": "graph.incremental_build", "status": "planned", "depends_on": ["evidence.receipts", "visual.studio_ir"]},
-    {"id": "visual.template_dictionary", "status": "planned", "depends_on": ["visual.studio_glyph_ast"]},
     {"id": "animation.temporal_alignment", "status": "planned", "depends_on": ["operations.extension_registry", "asset.image_normalize"]},
     {"id": "sandbox.external_tools", "status": "planned", "depends_on": ["workspace.confinement", "execution.transactional"]}
   ]
