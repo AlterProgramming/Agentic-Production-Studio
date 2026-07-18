@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "asset_id": "storm",
+  "source": {
+    "id": null,
+    "path": null,
+    "checksum_sha256": null,
+    "creator_or_system": null
+  },
+  "tools": [],
+  "model_assistance": [],
+  "manual_edits": [],
+  "rights": {
+    "status": null,
+    "notes": null
+  },
+  "review": {
+    "reviewer": null,
+    "validated_at": null
+  }
+}

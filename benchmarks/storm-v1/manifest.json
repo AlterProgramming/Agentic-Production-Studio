@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "pipeline_version": "v1",
+  "asset_id": "storm",
+  "animation_id": "storm_integrated_v1",
+  "frame_count": null,
+  "fps": null,
+  "loop": null,
+  "canvas": {
+    "width": null,
+    "height": null
+  },
+  "anchor": {
+    "x": null,
+    "y": null
+  },
+  "frames": {
+    "directory": "frames",
+    "pattern": "storm_integrated_v1_{index:03d}.png"
+  },
+  "event_frames": [],
+  "outputs": {
+    "preview": "previews/storm_integrated_v1.gif",
+    "contact_sheet": "previews/storm_integrated_v1_contact-sheet.png",
+    "godot_spriteframes": "godot/storm_integrated_v1.tres",
+    "integration_guide": "integration-guide.md"
+  }
+}

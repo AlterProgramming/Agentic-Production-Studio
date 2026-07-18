@@ -1,0 +1,20 @@
+name: V1 animation validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - "agent/**"
+
+jobs:
+  validator-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify runner Python
+        run: python3 --version
+      - name: Install validation dependencies
+        run: python3 -m pip install --upgrade pip && python3 -m pip install -r requirements-dev.txt
+      - name: Run validator tests
+        run: python3 -m pytest -q

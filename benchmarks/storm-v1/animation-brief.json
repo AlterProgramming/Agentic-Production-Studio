@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "status": "draft",
+  "asset_id": "storm",
+  "animation_id": "storm_integrated_v1",
+  "gameplay_purpose": null,
+  "frame_count": null,
+  "fps": null,
+  "loop": null,
+  "canvas": {
+    "width": null,
+    "height": null
+  },
+  "anchor": {
+    "x": null,
+    "y": null
+  },
+  "timing": {
+    "anticipation": null,
+    "action": null,
+    "impact": null,
+    "peak_effect": null,
+    "recovery": null
+  },
+  "palette": {
+    "maximum_colors": null,
+    "allowed_rgba": []
+  },
+  "background_conditions": [],
+  "export": {
+    "native_scale": 1,
+    "preview_scale": 4,
+    "godot_version": null
+  },
+  "notes": "Lock only after inspecting the canonical Storm source and agreeing gameplay timing."
+}
