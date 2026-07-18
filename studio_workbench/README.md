@@ -47,6 +47,18 @@ Modifiers:
 - check — evidence/postcondition policy
 - parallel lines — parallelization intent for a future graph executor
 
+## Operator Lab
+
+Open `/studio_workbench/operator-lab.html` to author a new recognition template without editing parser code. The lab:
+
+- captures one or more freehand strokes;
+- resamples them to deterministic point counts;
+- normalizes translation and scale while retaining aspect ratio;
+- reconstructs saved templates for inspection;
+- exports a dictionary entry with recognition and builder semantics.
+
+The main workbench can import an array of these entries, or an object with an `entries` array. Optional rotation-invariant matching tries deterministic rotational samples. Multi-stroke entries tolerate stroke-order and stroke-direction differences for small templates. Low-confidence matches remain unknown diagnostics.
+
 ## Contracts
 
 ### `StudioGlyphAST`
@@ -63,9 +75,8 @@ The final compiler maps recognized stages plus explicit execution bindings into 
 
 ## Boundaries
 
-The recognizer is intentionally small and deterministic. It is a foundation for:
+The recognizer is intentionally deterministic. It is now extensible through imported stroke templates and remains a foundation for:
 
-- dictionary-backed template recognition;
 - nested scopes and reusable subcircuits;
 - graph dependency scheduling;
 - recorded stroke replay;
