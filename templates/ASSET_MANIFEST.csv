@@ -1,0 +1,2 @@
+asset_id,asset_name,package,source_path,runtime_path,asset_type,width,height,frame_count,fps,pivot_x,pivot_y,creation_method,source_reference,model_or_adapter,license_or_rights,revision,approval_status,notes
+EXAMPLE-001,example_idle,Godot Vertical-Slice Art Pack,01_source/example_idle.aseprite,02_runtime/example_idle.png,sprite_animation,128,128,8,12,64,110,original,CLIENT-REF-01,,client-approved-reference,v1,approved,Replace example row
