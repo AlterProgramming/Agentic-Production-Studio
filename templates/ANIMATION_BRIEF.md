@@ -1,0 +1,22 @@
+# Animation Brief
+
+- Asset ID:
+- State or action:
+- Gameplay or communication trigger:
+- Canvas size:
+- Frame count:
+- FPS:
+- Duration:
+- Loop behavior:
+- Anchor or pivot:
+- Anticipation timing:
+- Main action timing:
+- Impact frame:
+- Peak effect:
+- Recovery timing:
+- Palette and outline rules:
+- Lighting direction:
+- Background conditions:
+- VFX requirements:
+- Export formats:
+- Acceptance notes:
