@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio Operator Lab</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Agentic Production Studio</p>
+        <h1>Operator Lab</h1>
+        <p class="lede">Author normalized stroke templates, inspect reconstructed geometry, and export dictionary entries for new production operators.</p>
+      </div>
+      <a class="file-button secondary" href="./">Back to workbench</a>
+    </header>
+    <section class="lab-grid">
+      <section class="canvas-panel">
+        <div class="canvas-wrap"><canvas id="templateCanvas" width="720" height="520"></canvas></div>
+        <div class="toolbar">
+          <button id="undoTemplate">Undo</button><button id="clearTemplate">Clear</button><button id="sampleTemplate" class="secondary">Load sample</button><button id="exportTemplate" class="accent">Export entry</button>
+        </div>
+      </section>
+      <aside class="panel lab-controls">
+        <h2>Dictionary entry</h2>
+        <label>ID<input id="entryId" value="custom-operator"></label>
+        <label>Display name<input id="entryName" value="Custom Operator"></label>
+        <label>Kind<select id="entryKind"><option>operator</option><option>modifier</option></select></label>
+        <label>Builder operation<input id="builderOperation" value="write_text"></label>
+        <label><input id="rotationInvariant" type="checkbox"> Rotation invariant</label>
+        <h3>Exported JSON</h3>
+        <textarea id="templateOutput" spellcheck="false"></textarea>
+      </aside>
+    </section>
+    <section class="panel viewer-panel">
+      <div><h2>Template viewer</h2><p>Paste a raw `strokeTemplate` or a full dictionary entry, then render the normalized strokes.</p><button id="renderTemplate" class="secondary">Render JSON</button></div>
+      <textarea id="viewerInput" spellcheck="false"></textarea>
+      <canvas id="viewerCanvas" width="420" height="260"></canvas>
+    </section>
+  </main>
+  <script type="module" src="./src/operator-lab.js"></script>
+</body>
+</html>

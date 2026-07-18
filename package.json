@@ -1,0 +1,8 @@
+{
+  "name": "agentic-production-studio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:workbench": "node --test tests-js/*.test.js"
+  }
+}

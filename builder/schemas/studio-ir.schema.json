@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-production-studio.local/schemas/studio-ir-v1.json",
+  "title": "Studio Composition Intermediate Representation",
+  "type": "object",
+  "required": ["type", "version", "valid", "prepared", "status", "stages", "policy", "quality", "warnings", "signature"],
+  "properties": {
+    "type": {"const": "StudioIR"},
+    "version": {"const": "1.0"},
+    "valid": {"type": "boolean"},
+    "prepared": {"type": "boolean"},
+    "status": {"type": "string"},
+    "stages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "operator", "confidence", "dependsOn", "angleDeg"],
+        "properties": {
+          "id": {"type": "string"},
+          "operator": {"enum": ["input", "normalize", "palette", "contact-sheet", "godot", "package"]},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "dependsOn": {"type": "array", "items": {"type": "string"}},
+          "angleDeg": {"type": "number"}
+        }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "required": ["strict", "evidenceRequired", "parallelRequested"],
+      "properties": {
+        "strict": {"type": "boolean"},
+        "evidenceRequired": {"type": "boolean"},
+        "parallelRequested": {"type": "boolean"}
+      }
+    },
+    "quality": {"type": "number", "minimum": 0, "maximum": 1},
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "signature": {"type": "string"}
+  }
+}

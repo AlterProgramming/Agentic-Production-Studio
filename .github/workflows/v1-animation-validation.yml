@@ -1,4 +1,4 @@
-name: V1 animation validation
+name: Studio validation
 
 on:
   pull_request:
@@ -16,5 +16,11 @@ jobs:
         run: python3 --version
       - name: Install validation dependencies
         run: python3 -m pip install --upgrade pip && python3 -m pip install -r requirements-dev.txt
-      - name: Run validator tests
+      - name: Run Python validation and builder tests
         run: python3 -m pytest -q
+      - name: Verify runner Node
+        run: node --version
+      - name: Run visual workbench tests
+        run: npm run test:workbench
+      - name: Check browser module syntax
+        run: node --check studio_workbench/src/core.js && node --check studio_workbench/src/app.js && node --check studio_workbench/src/template.js && node --check studio_workbench/src/custom-templates.js && node --check studio_workbench/src/operator-lab.js

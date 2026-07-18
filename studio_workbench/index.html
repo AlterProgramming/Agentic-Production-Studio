@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio Composition Workbench</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Agentic Production Studio</p>
+        <h1>Composition Workbench</h1>
+        <p class="lede">Draw a bounded production circuit. The workbench parses geometry, compiles behavior, exposes diagnostics, and exports a guarded surgical-builder plan.</p>
+      </div>
+      <div class="status-stack">
+        <span id="statusBadge" class="badge">Draw a scope ring</span>
+        <span id="qualityBadge" class="quality">Quality 0%</span>
+      </div>
+    </header>
+
+    <section class="workspace-grid">
+      <aside class="panel dictionary-panel">
+        <h2>Operator dictionary</h2>
+        <p>Place operators clockwise inside one enclosing ring. Add modifiers near the center.</p>
+        <div class="glyph-list">
+          <div><span class="glyph circle"></span><strong>Input</strong><small>Source asset</small></div>
+          <div><span class="glyph triangle"></span><strong>Normalize</strong><small>Canvas + anchor</small></div>
+          <div><span class="glyph square"></span><strong>Palette</strong><small>Nearest-color enforcement</small></div>
+          <div><span class="glyph diamond"></span><strong>Contact sheet</strong><small>Frame overview</small></div>
+          <div><span class="glyph arrow">➜</span><strong>Godot</strong><small>SpriteFrames compiler</small></div>
+          <div><span class="glyph zigzag">⌁</span><strong>Package</strong><small>Deterministic ZIP</small></div>
+        </div>
+        <h3>Modifiers</h3>
+        <div class="glyph-list compact">
+          <div><span class="glyph plus">+</span><strong>Strict</strong></div>
+          <div><span class="glyph check">✓</span><strong>Evidence</strong></div>
+          <div><span class="glyph parallel">∥</span><strong>Parallel intent</strong></div>
+        </div>
+        <button id="sampleButton" class="secondary">Load sample circuit</button>
+        <label class="file-button secondary">Import operator dictionary<input id="importDictionaryInput" type="file" accept="application/json"></label>
+        <a class="file-button secondary" href="./operator-lab.html">Open Operator Lab</a>
+      </aside>
+
+      <section class="canvas-panel">
+        <div class="canvas-wrap">
+          <canvas id="drawCanvas" width="720" height="520" aria-label="Draw a production circuit"></canvas>
+          <canvas id="flowCanvas" width="720" height="520" aria-hidden="true"></canvas>
+        </div>
+        <div class="toolbar">
+          <button id="undoButton">Undo</button>
+          <button id="clearButton">Clear</button>
+          <button id="exportDrawingButton" class="secondary">Export drawing</button>
+          <label class="file-button secondary">Import drawing<input id="importDrawingInput" type="file" accept="application/json"></label>
+          <button id="exportPlanButton" class="accent">Export builder plan</button>
+        </div>
+        <p class="hint">Use deliberate strokes. Close the outer ring last when you want the composition to become executable.</p>
+      </section>
+
+      <aside class="panel inspector-panel">
+        <div class="tabs" role="tablist">
+          <button data-tab="summary" class="active">Summary</button>
+          <button data-tab="ast">AST</button>
+          <button data-tab="ir">IR</button>
+          <button data-tab="plan">Plan</button>
+        </div>
+        <section id="summaryTab" class="tab active">
+          <h2>Compilation</h2>
+          <ol id="stageList" class="stage-list"></ol>
+          <h3>Diagnostics</h3>
+          <ul id="diagnosticList" class="diagnostics"></ul>
+        </section>
+        <section id="astTab" class="tab"><pre id="astOutput"></pre></section>
+        <section id="irTab" class="tab"><pre id="irOutput"></pre></section>
+        <section id="planTab" class="tab"><pre id="planOutput"></pre></section>
+      </aside>
+    </section>
+
+    <section class="bindings panel">
+      <div>
+        <h2>Execution bindings</h2>
+        <p>The drawing expresses intent. Bindings supply exact paths, canvas values, palette, animation metadata, and package contents.</p>
+      </div>
+      <textarea id="bindingsInput" spellcheck="false" aria-label="Builder plan bindings"></textarea>
+    </section>
+  </main>
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
