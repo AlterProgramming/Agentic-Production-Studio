@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "plan_id": "storm-contract-lock-example",
+  "description": "Illustrates guarded, surgical updates after real Storm measurements are known. Replace example values before use.",
+  "allowed_paths": ["benchmarks/storm-v1/*.json"],
+  "preconditions": [
+    {"id": "brief-is-draft", "type": "json_pointer_equals", "path": "benchmarks/storm-v1/animation-brief.json", "pointer": "/status", "value": "draft"}
+  ],
+  "operations": [
+    {
+      "id": "lock-brief-fields",
+      "type": "json_patch",
+      "path": "benchmarks/storm-v1/animation-brief.json",
+      "changes": [
+        {"pointer": "/canvas/width", "expect": null, "value": 64},
+        {"pointer": "/canvas/height", "expect": null, "value": 64},
+        {"pointer": "/frame_count", "expect": null, "value": 6},
+        {"pointer": "/fps", "expect": null, "value": 10},
+        {"pointer": "/status", "expect": "draft", "value": "locked"}
+      ]
+    },
+    {
+      "id": "align-manifest",
+      "type": "json_patch",
+      "path": "benchmarks/storm-v1/manifest.json",
+      "changes": [
+        {"pointer": "/canvas/width", "expect": null, "value": 64},
+        {"pointer": "/canvas/height", "expect": null, "value": 64},
+        {"pointer": "/frame_count", "expect": null, "value": 6},
+        {"pointer": "/fps", "expect": null, "value": 10}
+      ]
+    }
+  ],
+  "postconditions": [
+    {"id": "brief-locked", "type": "json_pointer_equals", "path": "benchmarks/storm-v1/animation-brief.json", "pointer": "/status", "value": "locked"},
+    {"id": "manifest-frame-count", "type": "json_pointer_equals", "path": "benchmarks/storm-v1/manifest.json", "pointer": "/frame_count", "value": 6}
+  ]
+}

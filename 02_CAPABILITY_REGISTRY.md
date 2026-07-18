@@ -5,6 +5,7 @@
 - **Active:** Can be sold after one internal benchmark passes.
 - **Conditional:** Sell only when the client provides specific inputs or the scope is restricted.
 - **Development:** Build evidence before external sale.
+- **Foundation:** Implemented as internal infrastructure; must be exercised by package benchmarks before it is treated as a sellable outcome.
 
 | Capability | Readiness | Sellable outcome | Required evidence | Main constraint |
 |---|---|---|---|---|
@@ -24,6 +25,11 @@
 | Agentic research-to-deliverable workflows | Active | Sourced brief, production plan, package, and evidence ledger | End-to-end case study | Research boundaries and source quality required |
 | Lightweight technical integration | Active | Import, scene assembly, export automation, handoff | Target-platform integration test | Not a substitute for full product engineering |
 | White-label agency production | Development | Confidential overflow sprint | NDA-ready process and partner benchmark | Requires trust, responsiveness, and consistent capacity |
+| Surgical builder planning | Foundation | Exact write-set preview with preconditions and postconditions | Builder regression suite and one real benchmark receipt | Plans must remain narrow and inspectable |
+| Guarded metadata mutation | Foundation | Exact text and JSON changes without broad rewrites | Stale-state rejection tests | Requires explicit expected current values |
+| Transactional workspace application | Foundation | Multi-file changes applied only after full simulation | Rollback and failed-postcondition tests | Filesystem transactions are emulated through backup and restore |
+| Builder evidence receipts | Foundation | Plan hash, operation list, and before/after artifact hashes | Apply-and-verify benchmark | Receipts prove file state, not artistic quality |
+| Anchor-aware image normalization | Foundation | Exact RGBA canvas and anchor placement | Real Storm normalization receipt and visual inspection | Does not yet enforce palette or silhouette rules |
 
 ## Capability groupings
 
@@ -63,3 +69,15 @@
 - Rights declarations
 - QA evidence
 - Handoff documentation
+
+### F. Surgical Builder Infrastructure
+- Workspace path confinement and output allowlists
+- Dry-run write sets and unified text diffs
+- Guarded exact text replacement
+- Guarded JSON pointer updates
+- Checksummed copy and deletion
+- Transactional apply and rollback
+- Plan and artifact hash receipts
+- Drift verification
+- Registered domain-specific operations
+- Anchor-aware deterministic image normalization
