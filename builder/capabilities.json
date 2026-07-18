@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "substrate": "surgical-builder",
+  "status": "foundation",
+  "capabilities": [
+    {"id": "workspace.confinement", "status": "implemented", "evidence": "tests/test_studio_builder.py::test_path_escape_and_disallowed_target_are_rejected"},
+    {"id": "plan.dry_run", "status": "implemented", "evidence": "tests/test_studio_builder.py::test_preview_is_non_mutating_and_shows_exact_diff"},
+    {"id": "mutation.exact_text", "status": "implemented", "evidence": "replace_text with expected_count"},
+    {"id": "mutation.guarded_json", "status": "implemented", "evidence": "json_patch with expect/value guards"},
+    {"id": "mutation.checksummed_delete", "status": "implemented", "evidence": "delete_file requires expect_sha256"},
+    {"id": "execution.transactional", "status": "implemented", "evidence": "prevalidated staged state and rollback path"},
+    {"id": "evidence.receipts", "status": "implemented", "evidence": ".studio-builder/receipts"},
+    {"id": "evidence.drift_verification", "status": "implemented", "evidence": "studio-builder verify"},
+    {"id": "operations.extension_registry", "status": "implemented", "evidence": "OperationRegistry"},
+    {"id": "asset.image_normalize", "status": "implemented", "evidence": "tests/test_studio_builder.py::test_image_normalize_places_source_anchor_exactly"},
+    {"id": "asset.palette_enforce", "status": "next", "depends_on": ["operations.extension_registry"]},
+    {"id": "godot.spriteframes_compile", "status": "next", "depends_on": ["operations.extension_registry", "evidence.receipts"]},
+    {"id": "graph.incremental_build", "status": "planned", "depends_on": ["evidence.receipts"]},
+    {"id": "sandbox.external_tools", "status": "planned", "depends_on": ["workspace.confinement", "execution.transactional"]}
+  ]
+}
