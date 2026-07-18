@@ -1,0 +1,18 @@
+{
+  "limits": {
+    "max_frame_bytes": 100000,
+    "max_sequence_bytes": 1000000,
+    "max_package_bytes": 5000000
+  },
+  "alpha": {
+    "require_transparent_border": true
+  },
+  "drift": {
+    "check_alpha_centroid": false,
+    "max_centroid_delta_pixels": 1.0
+  },
+  "loop_seam": {
+    "check_pixel_difference": false,
+    "max_changed_pixel_ratio": 0.15
+  }
+}
