@@ -19,7 +19,7 @@
         "required": ["id", "type"],
         "properties": {
           "id": {"type": "string", "minLength": 1},
-          "type": {"enum": ["copy_file", "delete_file", "image_normalize", "json_patch", "replace_text", "write_text"]}
+          "type": {"enum": ["contact_sheet", "copy_file", "delete_file", "godot_spriteframes_compile", "image_normalize", "json_patch", "package_zip", "palette_enforce", "replace_text", "write_text"]}
         }
       }
     },
