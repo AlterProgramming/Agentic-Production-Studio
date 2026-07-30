@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "kind": "studio.capability-manifest",
   "capability_id": "visual-generation.model-first.v1",
   "title": "Model-First Visual Generation",
@@ -9,65 +9,99 @@
     "rule": "A generated image is a view of a retained scene, not the terminal artifact."
   },
   "availability": {
-    "status": "source_available_not_session_injected",
-    "meaning": "The doctrine is durable, but a new assistant session does not receive the runtime merely by loading canonical memory.",
+    "status": "runtime_bridge_source_ready_deployment_pending",
+    "meaning": "A signed first-party invocation path now exists in source. Sessions may claim executable availability only after discovery succeeds against the deployed BrightEngine endpoint.",
     "global_tool_registered": false,
-    "automatic_session_bootstrap": false,
+    "automatic_session_bootstrap": "implemented_in_command_center_source_deployment_pending",
     "must_not_claim": [
       "Do not claim model-first completion after only generating or editing a flat image.",
-      "Do not claim that canonical memory grants access to SceneForge, AvatarForge, prior container files, or prior session artifacts.",
-      "Do not claim cross-session executable availability without a successful runtime discovery and execution receipt."
+      "Do not claim runtime availability unless GET /v1/capabilities/model-first succeeds and identifies first_party_local execution.",
+      "Do not claim completion without a downloaded execution receipt proving the retained scene was written and reopened before rendering."
     ]
+  },
+  "runtime_bridge": {
+    "gateway_authority": "AlterProgramming/BrightEngine-Forge",
+    "source_authority": "AlterProgramming/Agentic-Production-Studio",
+    "catalog": "https://api.brightengine.live/v1/capabilities",
+    "descriptor": "https://api.brightengine.live/v1/capabilities/model-first",
+    "execute": "https://api.brightengine.live/v1/capabilities/model-first/execute",
+    "permissions": [
+      "forge:model-first:execute",
+      "forge:model-first:read"
+    ],
+    "authentication": "request-bound expiring Forge capability",
+    "provider_mode": "first_party_local",
+    "external_providers": false,
+    "session_client": "capabilities/model-first-visual-generation/runtime/invoke.mjs"
   },
   "discovery": {
     "bootstrap": "capabilities/model-first-visual-generation/SESSION_BOOTSTRAP.md",
     "doctrine": "05_MODEL_FIRST_VISUAL_DOCTRINE.md",
-    "current_first_party_entrypoint": "tools/scene_from_image.py",
+    "runtime_client": "capabilities/model-first-visual-generation/runtime/invoke.mjs",
+    "gateway_contract": "AlterProgramming/BrightEngine-Forge:contracts/model-first-capability.json",
+    "fallback_entrypoint": "tools/scene_from_image.py",
     "benchmark_receipt": "benchmarks/model-first-byte-reconstruction/receipt.json"
   },
   "entrypoints": [
     {
+      "id": "brightengine-model-first-runtime",
+      "status": "source_ready_deployment_pending",
+      "runtime": "node_http_capability",
+      "command": "node capabilities/model-first-visual-generation/runtime/invoke.mjs --request REQUEST.json --token-file CAPABILITY.token --out OUTPUT_DIR",
+      "outputs": [
+        "scene/scene.glb",
+        "scene/scene.json",
+        "scene/manifest.json",
+        "scene/recovery.json",
+        "renders/hero.png",
+        "renders/depth.png",
+        "renders/object_mask.png",
+        "motion/orbit.json",
+        "preview/index.html",
+        "receipt.json",
+        "session-receipt.json"
+      ],
+      "boundary": "The session client discovers and invokes the request-bound BrightEngine runtime, downloads the complete scene package, and verifies the receipt locally."
+    },
+    {
       "id": "image-to-retained-scene",
-      "status": "available",
+      "status": "available_local_fallback",
       "runtime": "python",
       "command": "python3 tools/scene_from_image.py INPUT_IMAGE --out OUTPUT_DIR/scene/scene.glb --title TITLE",
       "outputs": [
         "scene/scene.glb",
         "scene/scene.scene.json"
       ],
-      "boundary": "This entrypoint retains an image as a modeled scene surface with named geometry, camera, lights, and animation. It is not the complete unrestricted SceneForge runtime."
-    },
-    {
-      "id": "full-sceneforge-avatarforge-runtime",
-      "status": "packaged_not_globally_deployed",
-      "runtime": "python_and_browser",
-      "boundary": "The richer character, recovery, motion, speech, textile, and scene pipeline has implementation evidence, but it is not installed as a universal ChatGPT tool or automatically materialized into new sessions."
+      "boundary": "This fallback retains an image as a modeled scene surface. It is not the full capability and must be labeled as a bounded fallback."
     }
   ],
   "session_requirements": [
     "Retrieve this manifest before claiming capability availability.",
-    "Confirm a usable execution environment and materialize the named first-party source.",
-    "Write the retained scene or model before producing the accepted final render.",
-    "Reopen and validate the persisted asset.",
-    "Produce a hash-linked receipt and at least one motion, alternate-view, or interactive derivative for a full model-first claim."
+    "Discover the BrightEngine descriptor and verify first_party_local execution with external_providers false.",
+    "Use a request-bound capability containing forge:model-first:execute and forge:model-first:read.",
+    "Invoke the runtime and download all contracted artifacts.",
+    "Verify scene SHA-256, reopen status, scene-before-render ordering, and recovery receipt.",
+    "Fail closed to a labeled flat-image source stage when runtime discovery or execution is unavailable."
   ],
   "acceptance": {
     "minimum_model_first": [
       "structured scene specification exists",
-      "persistent model or scene exists before final render",
+      "persistent GLB exists before final render",
       "persisted asset reopens successfully",
       "render provenance resolves to the persisted asset"
     ],
     "full_capability": [
       "beauty render",
-      "depth or object-ID pass",
+      "depth and object-ID passes",
       "motion or interactive derivative",
       "validation and recovery receipt",
-      "packaged reusable source assets"
+      "packaged reusable source assets",
+      "session materialization receipt"
     ]
   },
   "fallback_policy": {
     "flat_image": "A flat image may be delivered only as an explicitly labeled lightweight result or source/reference stage.",
-    "missing_runtime": "State that the executable runtime is unavailable in the session. Do not relabel a flat image as a modeled scene."
+    "missing_runtime": "State that the deployed executable runtime is unavailable. Do not relabel a flat image as a modeled scene.",
+    "image_gen": "May provide a source image to the runtime, but cannot satisfy the terminal model-first completion gate by itself."
   }
 }
