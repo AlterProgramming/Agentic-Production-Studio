@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "model-first-scene-benchmark-receipt",
+  "benchmark_id": "model-first-byte-reconstruction-2026-07-29",
+  "canonical_reference": "visual-generation.model-first.v1",
+  "capability": "Model-first scene generation",
+  "readiness_at_execution": "Foundation",
+  "executed_at": "2026-07-29T21:30:00-05:00",
+  "input": {
+    "kind": "generated substitute from corrupted byte-fragment attempt",
+    "source_sha256": "dde92b91d624fa6ec2740598d06daf5f8c6b09df05dd5f24569193c9084942b5",
+    "original_content_status": "quarantined-unrecoverable",
+    "truth_boundary": "No evidence links the generated substitute to the original missing frame. The benchmark validates scene retention and recovery handling, not original-image fidelity."
+  },
+  "retained_scene": {
+    "glb_bytes": 68264,
+    "glb_sha256": "628779425ee8fdd4fb3d99d3f93a96a48448a9ceaaf672c3b7b52f309dc61f69",
+    "geometry_count": 3,
+    "embedded_images": 1,
+    "named_camera": true,
+    "light_count": 2,
+    "animation_count": 1,
+    "animation_channels": 2
+  },
+  "validation": {
+    "glb_header_valid": true,
+    "reopened": true,
+    "finite_positions": true,
+    "indices_valid": true,
+    "required_named_nodes": true,
+    "camera_outside_geometry": true,
+    "source_hash_recorded": true
+  },
+  "derivatives": {
+    "hero": {
+      "bytes": 226712,
+      "sha256": "40303c7d8d34c365845c20d7471e3ee854c13fa62de806d29e1609e6b8a120d3"
+    },
+    "depth": {
+      "bytes": 2490,
+      "sha256": "8f8a1990134d3da0fcd97df299b32424e12d0fa6d008c165e3233942922ef692"
+    },
+    "object_id": {
+      "bytes": 4078,
+      "sha256": "713ae72a8064ec93f124a8201a6278b697741187532e68de7f5172c52cc5dc8b"
+    },
+    "motion": {
+      "bytes": 629819,
+      "sha256": "31487c099ac68d5dc647d89638074302f7878e238bf39ccaf0317ccc078acfe2",
+      "duration_seconds": 6,
+      "loop": true
+    }
+  },
+  "acceptance": {
+    "structured_scene_written": true,
+    "persistent_model_written_before_derivatives": true,
+    "successful_reopen": true,
+    "hero_pass_present": true,
+    "depth_pass_present": true,
+    "object_id_pass_present": true,
+    "motion_derivative_present": true,
+    "recovery_receipt_present": true,
+    "complete_packaged_handoff_present": true,
+    "hash_linked_provenance": true
+  },
+  "outcome": {
+    "scene_derivative": "passed",
+    "original_image_recovery": "unresolved",
+    "capability_promotion": "not_requested; remain Foundation pending richer bounded scene benchmark"
+  }
+}
