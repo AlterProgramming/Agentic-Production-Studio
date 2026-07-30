@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "studio.capability-manifest",
+  "capability_id": "visual-generation.model-first.v1",
+  "title": "Model-First Visual Generation",
+  "canonical_doctrine": {
+    "status": "active",
+    "authority": "AlterProgramming/Agent-Command-Center:memory/registry.json",
+    "rule": "A generated image is a view of a retained scene, not the terminal artifact."
+  },
+  "availability": {
+    "status": "source_available_not_session_injected",
+    "meaning": "The doctrine is durable, but a new assistant session does not receive the runtime merely by loading canonical memory.",
+    "global_tool_registered": false,
+    "automatic_session_bootstrap": false,
+    "must_not_claim": [
+      "Do not claim model-first completion after only generating or editing a flat image.",
+      "Do not claim that canonical memory grants access to SceneForge, AvatarForge, prior container files, or prior session artifacts.",
+      "Do not claim cross-session executable availability without a successful runtime discovery and execution receipt."
+    ]
+  },
+  "discovery": {
+    "bootstrap": "capabilities/model-first-visual-generation/SESSION_BOOTSTRAP.md",
+    "doctrine": "05_MODEL_FIRST_VISUAL_DOCTRINE.md",
+    "current_first_party_entrypoint": "tools/scene_from_image.py",
+    "benchmark_receipt": "benchmarks/model-first-byte-reconstruction/receipt.json"
+  },
+  "entrypoints": [
+    {
+      "id": "image-to-retained-scene",
+      "status": "available",
+      "runtime": "python",
+      "command": "python3 tools/scene_from_image.py INPUT_IMAGE --out OUTPUT_DIR/scene/scene.glb --title TITLE",
+      "outputs": [
+        "scene/scene.glb",
+        "scene/scene.scene.json"
+      ],
+      "boundary": "This entrypoint retains an image as a modeled scene surface with named geometry, camera, lights, and animation. It is not the complete unrestricted SceneForge runtime."
+    },
+    {
+      "id": "full-sceneforge-avatarforge-runtime",
+      "status": "packaged_not_globally_deployed",
+      "runtime": "python_and_browser",
+      "boundary": "The richer character, recovery, motion, speech, textile, and scene pipeline has implementation evidence, but it is not installed as a universal ChatGPT tool or automatically materialized into new sessions."
+    }
+  ],
+  "session_requirements": [
+    "Retrieve this manifest before claiming capability availability.",
+    "Confirm a usable execution environment and materialize the named first-party source.",
+    "Write the retained scene or model before producing the accepted final render.",
+    "Reopen and validate the persisted asset.",
+    "Produce a hash-linked receipt and at least one motion, alternate-view, or interactive derivative for a full model-first claim."
+  ],
+  "acceptance": {
+    "minimum_model_first": [
+      "structured scene specification exists",
+      "persistent model or scene exists before final render",
+      "persisted asset reopens successfully",
+      "render provenance resolves to the persisted asset"
+    ],
+    "full_capability": [
+      "beauty render",
+      "depth or object-ID pass",
+      "motion or interactive derivative",
+      "validation and recovery receipt",
+      "packaged reusable source assets"
+    ]
+  },
+  "fallback_policy": {
+    "flat_image": "A flat image may be delivered only as an explicitly labeled lightweight result or source/reference stage.",
+    "missing_runtime": "State that the executable runtime is unavailable in the session. Do not relabel a flat image as a modeled scene."
+  }
+}

@@ -24,7 +24,7 @@
 | Managed model deployment | Conditional | Private endpoint or repeatable job workflow | Deployment and rollback test | Infrastructure and security scope must be explicit |
 | Agentic research-to-deliverable workflows | Active | Sourced brief, production plan, package, and evidence ledger | End-to-end case study | Research boundaries and source quality required |
 | Lightweight technical integration | Active | Import, scene assembly, export automation, handoff | Target-platform integration test | Not a substitute for full product engineering |
-| Model-first scene generation | Foundation | Persistent modeled scene, hero render, render passes, motion or interactive derivatives | Reproducible brief-to-scene benchmark with reopen validation, recovery receipt, and packaged handoff | Multi-character staging and unrestricted world synthesis remain outside the first bounded package |
+| Model-first scene generation | Foundation | Persistent modeled scene, hero render, render passes, motion or interactive derivatives | Reproducible brief-to-scene benchmark with reopen validation, recovery receipt, and packaged handoff | Doctrine is canonical, but the complete runtime is not yet injected into arbitrary assistant sessions; availability must be discovered and proven per session |
 | White-label agency production | Development | Confidential overflow sprint | NDA-ready process and partner benchmark | Requires trust, responsiveness, and consistent capacity |
 | Surgical builder planning | Foundation | Exact write-set preview with preconditions and postconditions | Builder regression suite and one real benchmark receipt | Plans must remain narrow and inspectable |
 | Guarded metadata mutation | Foundation | Exact text and JSON changes without broad rewrites | Stale-state rejection tests | Requires explicit expected current values |
@@ -92,3 +92,18 @@
 - Motion, alternate-view, relighting, and interactive derivatives
 - Geometry, texture, rig, scene, and render recovery gates
 - Hash-linked provenance from modeled scene to every derivative
+
+## Executable availability is separate from doctrine
+
+`visual-generation.model-first.v1` is a canonical production doctrine. That does not make its runtime globally available to every assistant session.
+
+A session may claim the capability only after it:
+
+1. retrieves `capabilities/model-first-visual-generation/capability.json`;
+2. materializes a listed first-party entrypoint;
+3. executes it successfully;
+4. writes the retained model before the accepted render;
+5. reopens and validates the retained asset; and
+6. records a completion receipt.
+
+A session that only calls a flat-image generator has not executed Model-first scene generation. See `capabilities/model-first-visual-generation/SESSION_BOOTSTRAP.md`.
