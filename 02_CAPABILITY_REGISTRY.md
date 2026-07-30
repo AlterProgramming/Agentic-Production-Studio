@@ -24,6 +24,7 @@
 | Managed model deployment | Conditional | Private endpoint or repeatable job workflow | Deployment and rollback test | Infrastructure and security scope must be explicit |
 | Agentic research-to-deliverable workflows | Active | Sourced brief, production plan, package, and evidence ledger | End-to-end case study | Research boundaries and source quality required |
 | Lightweight technical integration | Active | Import, scene assembly, export automation, handoff | Target-platform integration test | Not a substitute for full product engineering |
+| Model-first scene generation | Foundation | Persistent modeled scene, hero render, render passes, motion or interactive derivatives | Reproducible brief-to-scene benchmark with reopen validation, recovery receipt, and packaged handoff | Multi-character staging and unrestricted world synthesis remain outside the first bounded package |
 | White-label agency production | Development | Confidential overflow sprint | NDA-ready process and partner benchmark | Requires trust, responsiveness, and consistent capacity |
 | Surgical builder planning | Foundation | Exact write-set preview with preconditions and postconditions | Builder regression suite and one real benchmark receipt | Plans must remain narrow and inspectable |
 | Guarded metadata mutation | Foundation | Exact text and JSON changes without broad rewrites | Stale-state rejection tests | Requires explicit expected current values |
@@ -81,3 +82,13 @@
 - Drift verification
 - Registered domain-specific operations
 - Anchor-aware deterministic image normalization
+
+### G. Model-First Visual Systems
+- Prompt or brief to structured scene specification
+- Persistent scene and reusable model creation before final rendering
+- AvatarForge character, rig, pose, movement, and speech integration
+- SceneForge environment, prop, camera, and lighting assembly
+- Beauty, depth, normal, mask, and object-ID render passes
+- Motion, alternate-view, relighting, and interactive derivatives
+- Geometry, texture, rig, scene, and render recovery gates
+- Hash-linked provenance from modeled scene to every derivative

@@ -9,11 +9,22 @@ The studio does not sell generic "AI art." It sells bounded production outcomes:
 - Original raster and pixel assets
 - Sprite animation and multi-frame effects
 - Static-image-plus-effect motion systems
+- Model-first scenes with retained geometry, cameras, lighting, render passes, and experiential derivatives
 - Godot-ready delivery packages
 - Interactive visual prototypes
 - Creative-model evaluation and deployment packs
 - Provenance, manifests, QA, and technical handoff
 - Surgical, evidence-producing build plans for narrow asset and metadata changes
+
+## Canonical visual-generation doctrine
+
+Meaningful visual generation defaults to a retained model or scene before the final image is rendered:
+
+```text
+intent -> structured scene -> reusable model -> validation/recovery -> rendered image -> motion and interaction
+```
+
+A generated image is therefore a view of a retained scene, not the terminal artifact. Flat image-only generation is an explicit lightweight exception when continuity, alternate views, movement, speech, relighting, simulation, and interaction are not expected. See `05_MODEL_FIRST_VISUAL_DOCTRINE.md`.
 
 ## Initial market focus
 
@@ -38,6 +49,8 @@ Only sell packages that meet all five conditions:
 4. Delivery can be completed in five production days.
 5. Source files, runtime files, QA evidence, and manifests can be packaged together.
 
+For a model-first package, the retained scene/model and its recovery state are part of the source deliverable, not optional implementation debris.
+
 ## Surgical production substrate
 
 The repository now includes an executable builder foundation for controlled production changes:
@@ -50,7 +63,7 @@ python3 tools/studio_builder.py verify <receipt.json>
 
 A builder plan declares its exact write boundary, current-state preconditions, deterministic operations, and postconditions. Dry runs show the write set and text diffs. Successful application produces a receipt with the plan hash and before/after file hashes. Domain operators use the same contract; the first implemented asset operator normalizes an image onto an exact transparent canvas using explicit source and target anchors.
 
-This substrate is intentionally below individual service packages. Future palette, animation alignment, preview, Godot, and package builders should register as operations rather than becoming isolated scripts.
+This substrate is intentionally below individual service packages. Future palette, animation alignment, preview, Godot, model-first scene, and package builders should register as operations rather than becoming isolated scripts.
 
 ## Initial service packages
 
@@ -62,25 +75,27 @@ This substrate is intentionally below individual service packages. Future palett
 6. Creative Model Evaluation Pack
 7. White-Label Production Sprint
 
+Model-first scene generation remains a Foundation capability until its bounded package benchmark and recovery evidence pass.
+
 ## Studio structure
 
 ### Creative Production Pod
 Owns visual design, raster production, animation, VFX, compositing, cleanup, and final visual quality.
 
 ### Technical Integration Pod
-Owns Godot packaging, imports, pivots, sprite resources, file optimization, delivery validation, and handoff.
+Owns Godot packaging, imports, pivots, sprite resources, scene/model packaging, file optimization, delivery validation, and handoff.
 
 ### Research and Model Operations Pod
 Owns research, model comparison, adapter configuration, evaluation, deployment recommendations, and provenance capture.
 
 ### Production Control
-Owns scope, schedule, checkpoints, approvals, manifests, change control, and final package completeness.
+Owns scope, schedule, checkpoints, approvals, manifests, change control, model-first acceptance evidence, and final package completeness.
 
 ## Default one-week cadence
 
 - **Day 0:** Intake, qualification, source audit, scope lock
 - **Day 1:** Brief, motion design, technical specification, first style proof
-- **Day 2:** Core asset production
+- **Day 2:** Core asset and retained-scene production
 - **Day 3:** Animation, effects, variants, first integrated build
 - **Day 4:** Cleanup, integration, revision, packaging
 - **Day 5:** QA, capture, manifest, handoff, acceptance review
@@ -101,6 +116,7 @@ Owns scope, schedule, checkpoints, approvals, manifests, change control, and fin
 - `02_CAPABILITY_REGISTRY.md` — capabilities, readiness, evidence, and constraints
 - `03_SERVICE_CATALOG.md` — commercial service menu
 - `04_LAUNCH_ROADMAP.md` — sequence for proving and launching packages
+- `05_MODEL_FIRST_VISUAL_DOCTRINE.md` — retained-scene default, boundaries, delivery contract, and quality gates
 - `builder/` — machine-readable builder capability and plan contracts
 - `studio_builder/` — deterministic builder engine and registered domain operations
 - `tools/` — command-line validation and builder entrypoints
@@ -115,4 +131,4 @@ Owns scope, schedule, checkpoints, approvals, manifests, change control, and fin
 
 ## Current initialization status
 
-The studio is initialized at **Operating Model v0.2 — Builder Foundation**. Commercial package definitions and workflow documents remain in internal proof, but the repository now has an executable substrate for previewable, guarded, transactionally applied changes with receipts and drift verification. The next evidence gate is to run the builder against the real Storm source, retain the receipt, and add palette, sequence-alignment, Godot-resource, and deterministic package operators.
+The studio is initialized at **Operating Model v0.3 — Model-First Visual Foundation**. The surgical builder foundation remains available for previewable, guarded, transactionally applied changes with receipts and drift verification. Model-first scene generation is now canonically registered as a Foundation capability; its next evidence gate is a reproducible bounded benchmark retaining the modeled scene, beauty/depth/object-ID passes, motion or interactive derivatives, corruption recovery evidence, and a complete packaged handoff.
