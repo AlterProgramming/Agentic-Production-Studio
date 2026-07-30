@@ -1,83 +1,89 @@
 # Model-First Visual Generation — Session Bootstrap
 
-This document exists because canonical memory and executable capability are different things.
-
-Loading `visual-generation.model-first.v1` from the Agent Command Center tells a session what the governing visual doctrine is. It does **not** install SceneForge, AvatarForge, prior container files, or prior session artifacts.
+Canonical memory and executable capability are separate. Loading `visual-generation.model-first.v1` establishes the governing rule; a session may claim the ability only after discovering and invoking the first-party runtime.
 
 ## Required startup sequence
 
-When a request may require model-first visual generation:
+When a request may require retained visual continuity:
 
 1. Retrieve `capabilities/model-first-visual-generation/capability.json`.
-2. Read `availability.status` and inspect the session's actual tools.
-3. Confirm that the session can execute first-party source locally.
-4. Materialize the required repository files before promising execution.
-5. Run a bounded entrypoint and retain its execution receipt.
-6. Verify that a persistent scene/model was written before the accepted render.
-7. Reopen the retained asset and run the listed validation gates.
-8. Only then claim model-first completion.
-
-## Tool-routing rule
-
-A platform image generator may be used as a source-image, texture, concept, or reconstruction stage when platform instructions require it. It must not silently become the terminal artifact when the accepted request requires retained scene continuity.
-
-```text
-prompt
-  -> optional source/concept image
-  -> structured scene specification
-  -> persistent model or scene
-  -> reopen validation and recovery
-  -> final render
-  -> motion / alternate-view / interactive derivative
-```
-
-## Current first-party executable path
-
-The public studio repository currently exposes a bounded image-to-scene builder:
+2. Request `GET https://api.brightengine.live/v1/capabilities/model-first`.
+3. Require all of the following descriptor values:
+   - `capability_id = visual-generation.model-first.v1`
+   - `status = active`
+   - `execution = first_party_local`
+   - `external_providers = false`
+4. Resolve a request-bound Forge capability containing:
+   - `forge:model-first:execute`
+   - `forge:model-first:read`
+5. Write the request as canonical JSON. The exact bytes must match the capability's `request_sha256` claim.
+6. Invoke the runtime with the session client:
 
 ```bash
-python3 tools/scene_from_image.py INPUT_IMAGE \
-  --out OUTPUT_DIR/scene/scene.glb \
-  --title "Scene title"
+node capabilities/model-first-visual-generation/runtime/invoke.mjs \
+  --request REQUEST.json \
+  --token-file CAPABILITY.token \
+  --out OUTPUT_DIR
 ```
 
-This creates a retained GLB with named geometry, an embedded source image, camera, lighting, animation, and a scene sidecar. It proves that the image is no longer only a flat terminal file.
+7. Verify `OUTPUT_DIR/session-receipt.json` and the downloaded `receipt.json`.
+8. Only claim completion when the receipt proves:
+   - a retained GLB was written before the render;
+   - the GLB reopened successfully;
+   - validation passed;
+   - the hero render hashes back to the same run;
+   - recovery state was retained;
+   - a motion or interactive derivative exists.
 
-The richer AvatarForge/SceneForge runtime—character rigs, recovery, poses, locomotion, speech coordination, and textile simulation—must be separately materialized until it is deployed as a stable first-party service or installed tool.
-
-## Fail-closed behavior
-
-A session must stop and disclose the boundary when any of these are true:
-
-- no local execution environment is available;
-- the named first-party source cannot be materialized;
-- only a flat image exists;
-- the scene/model was not written before the final render;
-- the persisted model cannot be reopened;
-- provenance cannot link the render back to the persisted model;
-- the session is relying on another conversation's inaccessible container state.
-
-The correct statement is:
-
-> The model-first doctrine is loaded, but the executable runtime is not available in this session. The flat image is only a lightweight output or source stage, not a retained modeled scene.
-
-## Completion receipt
-
-A full claim requires a receipt containing at least:
+## Request contract
 
 ```json
 {
-  "capability_id": "visual-generation.model-first.v1",
-  "runtime_entrypoint": "...",
-  "persistent_scene_written_before_render": true,
-  "scene_path": "scene/scene.glb",
-  "scene_sha256": "...",
-  "reopened": true,
-  "validation": "pass",
-  "hero_render": "renders/hero.png",
-  "derivative": "motion/orbit.mp4",
-  "recovery_receipt": "scene/recovery.json"
+  "prompt": "A presenter in a cool technology exhibit",
+  "title": "Exhibit scene",
+  "style": "cinematic studio",
+  "source_image_base64": "optional PNG or JPEG bytes",
+  "source_image_mime": "image/png",
+  "metadata": {}
 }
 ```
 
-Without that evidence, the session may describe intent or doctrine, but not executable model-first completion.
+`source_image_base64` is optional. When omitted, BrightEngine creates a provider-free local concept texture. When supplied, the image may come from an allowed source stage, including a platform image generator, but it is embedded into a retained scene and is not treated as the terminal artifact.
+
+## Output package
+
+A successful run materializes:
+
+```text
+scene/scene.glb
+scene/scene.json
+scene/manifest.json
+scene/recovery.json
+renders/hero.png
+renders/depth.png
+renders/object_mask.png
+motion/orbit.json
+preview/index.html
+receipt.json
+session-receipt.json
+```
+
+## Fail-closed routing
+
+A session must not silently fall back to a flat image when model-first completion was requested. It must disclose the narrower result when:
+
+- capability discovery fails;
+- the endpoint is not marked `first_party_local`;
+- a request-bound token cannot be resolved;
+- execution or artifact retrieval fails;
+- the GLB was not written before rendering;
+- reopen validation fails;
+- the receipt or hashes do not reconcile.
+
+The permitted fallback statement is:
+
+> The model-first doctrine is loaded, but the deployed runtime could not be invoked in this session. Any flat image is only a labeled source or lightweight output, not a retained modeled scene.
+
+## Completion boundary
+
+The session client is a materialization and verification layer. BrightEngine owns signed execution and artifact access. Agentic Production Studio owns the capability contract and production doctrine. Agent Command Center owns startup routing. A memory entry, an `image_gen` result, or inaccessible state from another conversation cannot satisfy this boundary.
