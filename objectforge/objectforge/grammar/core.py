@@ -29,6 +29,8 @@ class GrammarAssetBuilder:
     variant: str
     root_name: str
     dimensions: dict[str, float]
+    capability_id: str = "objectforge.grammar-driven-detailed-assets.v1"
+    functional_metadata: dict[str, Any] = field(default_factory=dict)
     materials: dict[str, tuple[RuntimeMaterial, Any]] = field(default_factory=material_library)
     parts: list[PartRecord] = field(default_factory=list)
     operations: list[BuildOperation] = field(default_factory=list)
@@ -102,7 +104,7 @@ class GrammarAssetBuilder:
         semantic: dict[str, dict[str, Any]] = {}
         for part in self.parts:
             semantic.setdefault(part.semantic_part, {"nodes": [], "material": part.material})["nodes"].append(part.node_name)
-        return {"schema_version": "1.0", "asset_type": self.family, "variant": self.variant, "root": self.root_name, "semantic_parts": semantic, "articulations": [item.id for item in self.articulations], "grammar_driven": True}
+        return {"schema_version": "1.0", "asset_type": self.family, "variant": self.variant, "root": self.root_name, "semantic_parts": semantic, "articulations": [item.id for item in self.articulations], "grammar_driven": True, "capability_id": self.capability_id, "functional_goals": self.functional_metadata.get("requirements", []), "selected_architecture": self.functional_metadata.get("selected_architecture")}
 
     def physics_contract(self) -> dict[str, Any]:
         return {"schema_version": "1.0", "asset": "object/object.glb", "units": "meter-kilogram-second", "gravity": [0, -9.81, 0], "bodies": self.bodies, "constraints": [{"id": item.id, "type": "hinge", "node": item.node, "parent": item.parent_body, "child": item.child_body, "axis": list(item.axis), "limits_degrees": list(item.limits_degrees), "damping": item.damping} for item in self.articulations], "interaction": self.interaction, "external_providers": False}
