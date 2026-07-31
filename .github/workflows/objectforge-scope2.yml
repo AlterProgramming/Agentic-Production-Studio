@@ -1,0 +1,33 @@
+name: Validate ObjectForge Scope 2
+
+on:
+  pull_request:
+    paths:
+      - 'objectforge/**'
+      - '.github/workflows/objectforge-scope2.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  scope2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -e 'objectforge[test]'
+      - run: pytest -q objectforge/tests
+      - run: python -m objectforge.scope2 --output /tmp/objectforge-scope2
+      - run: test -s /tmp/objectforge-scope2/scope2-index.json
+      - run: test -s /tmp/objectforge-scope2/directional-energy/object/object.glb
+      - run: test -s /tmp/objectforge-scope2/protected-transport/object/object.glb
+      - run: test -s /tmp/objectforge-scope2/elevated-service/object/object.glb
+      - run: test -s /tmp/objectforge-scope2/visible-organization/object/object.glb
+      - run: python -m objectforge.scope1 --output /tmp/objectforge-scope1-regression
+      - run: test -s /tmp/objectforge-scope1-regression/scope1-index.json
+      - run: python -m objectforge.task_lamp --output /tmp/objectforge-scope0-regression
+      - run: test -s /tmp/objectforge-scope0-regression/object/object.glb

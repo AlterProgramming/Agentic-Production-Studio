@@ -94,7 +94,25 @@ def patch_runtime_glb(data: bytes, *, builder: GrammarAssetBuilder, construction
             node.setdefault("extras", {})["semantic_part"] = semantic_lookup[node["name"]]
     root_index = node_by_name.get(builder.root_name)
     if root_index is not None:
-        document["nodes"][root_index].setdefault("extras", {})["objectforge"] = {"family": builder.family, "variant": builder.variant, "physics_contract": "../behavior/physics.json", "semantic_contract": "semantic-parts.json" if not showcase else "../object/semantic-parts.json"}
-    document.setdefault("asset", {}).setdefault("extras", {})["objectforge"] = {"schema_version": "1.0", "capability_id": "objectforge.grammar-driven-detailed-assets.v1", "construction_sha256": construction_hash, "family": builder.family, "variant": builder.variant, "canonical_asset": not showcase, "showcase_asset": showcase, "external_finished_model_provider": False}
+        document["nodes"][root_index].setdefault("extras", {})["objectforge"] = {
+            "family": builder.family,
+            "variant": builder.variant,
+            "physics_contract": "../behavior/physics.json",
+            "semantic_contract": "semantic-parts.json" if not showcase else "../object/semantic-parts.json",
+            "functional_plan": "../construction/functional-plan.json",
+            "selected_architecture": builder.functional_metadata.get("selected_architecture"),
+        }
+    document.setdefault("asset", {}).setdefault("extras", {})["objectforge"] = {
+        "schema_version": "1.0",
+        "capability_id": builder.capability_id,
+        "construction_sha256": construction_hash,
+        "family": builder.family,
+        "variant": builder.variant,
+        "canonical_asset": not showcase,
+        "showcase_asset": showcase,
+        "external_finished_model_provider": False,
+        "functional_requirements": builder.functional_metadata.get("requirements", []),
+        "selected_architecture": builder.functional_metadata.get("selected_architecture"),
+    }
     document["buffers"][0]["byteLength"] = len(binary)
     return pack_glb(document, binary)

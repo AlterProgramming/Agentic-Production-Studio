@@ -57,6 +57,16 @@ manifest.json
 
 See `SCOPE_1_GRAMMAR_DRIVEN_ASSETS.md`.
 
+## Scope 2 — Goal-directed functional construction
+
+Scope 2 accepts functional goals and constraints without a named object class, compares eight bounded architecture alternatives, and composes the selected result from shared construction grammars. The fixed benchmark builds four standalone assets from requirements for directional energy, protected transport, elevated service, and visible portable organization.
+
+```bash
+python -m objectforge.scope2 --output ./objectforge-scope2
+```
+
+Each delivery retains the brief, architecture scores, selected functional plan, requirement coverage, GLBs, viewer, physics, recovery alternatives, and validation receipts. See `SCOPE_2_FUNCTIONAL_CONSTRUCTION.md`.
+
 ## Test
 
 ```bash
