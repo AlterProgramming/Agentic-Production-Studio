@@ -1,8 +1,8 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "kind": "studio.capability",
-  "capability_id": "objectforge.goal-directed-functional-construction.v1",
-  "title": "ObjectForge goal-directed functional construction",
+  "capability_id": "objectforge.goal-directed-functional-construction.v2",
+  "title": "ObjectForge goal-directed functional construction with close-inspection completion",
   "status": "foundation_benchmark_passed",
   "execution": "first_party_local",
   "external_finished_model_generation_providers": false,
@@ -25,15 +25,20 @@
     "manifest.json"
   ],
   "completion_gates": [
-    "planner compares at least three architectures",
+    "planner compares at least eight bounded architectures",
     "selected architecture covers every mandatory requirement",
     "brief does not contain an object class",
     "construction uses registered first-party grammars",
     "canonical GLB reopens with embedded PBR textures",
     "functional recovery compares at least two repairs",
     "prior construction checkpoint remains preserved",
+    "asset contains at least 48 inspectable components",
+    "asset contains at least 14 semantic part classes and six material classes",
+    "secondary and tertiary detail passes an independent close-inspection gate",
+    "underside or back surfaces and functional affordances are completed",
     "all derivatives originate from the retained model",
     "no external finished-model generator supplies geometry"
   ],
-  "benchmark": "ObjectForge Scope 2 four functional briefs"
+  "benchmark": "ObjectForge Scope 2 refined four-functional-brief benchmark",
+  "supersedes": "objectforge.goal-directed-functional-construction.v1"
 }
