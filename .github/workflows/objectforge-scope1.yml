@@ -1,0 +1,35 @@
+name: Validate ObjectForge Scope 1
+
+on:
+  pull_request:
+    paths:
+      - 'objectforge/**'
+      - '.github/workflows/objectforge-scope1.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'objectforge/**'
+      - '.github/workflows/objectforge-scope1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  scope1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -e 'objectforge[test]'
+      - run: pytest -q objectforge/tests
+      - run: python -m objectforge.scope1 --output /tmp/objectforge-scope1
+      - run: test -s /tmp/objectforge-scope1/scope1-index.json
+      - run: test -s /tmp/objectforge-scope1/lamp/industrial/object/object.glb
+      - run: test -s /tmp/objectforge-scope1/case/tool/object/object.glb
+      - run: test -s /tmp/objectforge-scope1/table/metal_frame/object/object.glb
+      - run: python -m objectforge.task_lamp --output /tmp/objectforge-scope0-regression
+      - run: test -s /tmp/objectforge-scope0-regression/object/object.glb
