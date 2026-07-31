@@ -40,8 +40,8 @@ def evaluate_functional_plan(plan: FunctionalPlan) -> FunctionalEvaluation:
 
 def evaluate_functional_builder(builder: GrammarAssetBuilder, plan: FunctionalPlan) -> FunctionalEvaluation:
     failures: list[str] = []
-    if builder.capability_id != "objectforge.goal-directed-functional-construction.v1":
-        failures.append("builder does not advertise Scope 2 capability")
+    if builder.capability_id != "objectforge.goal-directed-functional-construction.v2":
+        failures.append("builder does not advertise active Scope 2 revision")
     if builder.functional_metadata.get("selected_architecture") != plan.selected_architecture.architecture_id:
         failures.append("builder architecture differs from planner decision")
     comparisons = builder.recovery.get("alternative_comparison", [])
