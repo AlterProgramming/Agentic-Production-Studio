@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "objectforge"
-version = "0.2.0"
+version = "0.3.0"
 description = "First-party procedural construction of detailed standalone GLB assets"
 requires-python = ">=3.11"
 dependencies = [
