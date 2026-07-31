@@ -1,75 +1,55 @@
 # ObjectForge
 
-ObjectForge develops complete runtime-ready objects from declared constructive matter and reusable functional grammars. It does not call an external 3D-generation provider or replace construction state with downloaded finished meshes.
+ObjectForge creates retained, runtime-ready 3D objects through first-party procedural construction. The canonical output is a standalone GLB with embedded PBR materials and textures, semantic parts, behavior and physics contracts, recovery evidence, and a separate showcase model plus inspection viewer.
 
-The canonical deliverable is a standalone GLB with embedded procedural PBR textures, semantic parts, retained behavior, physics contracts, recovery evidence, and a separate showcase GLB plus inspection viewer.
+It does not call an external finished-model generator or replace the construction history with a downloaded mesh.
 
-## Scope 0 — Detailed task lamp
+## Scope 0 — Detailed standalone task lamp
 
-Scope 0 established the geometry kernel and delivery contract with one close-inspectable articulated task lamp:
+Scope 0 established the geometry kernel, retained behavior, PBR delivery, recovery, and standalone-viewer contract.
 
 ```bash
 python -m objectforge.task_lamp --output ./objectforge-task-lamp
 ```
 
-See `SCOPE_0_TASK_LAMP.md`.
+## Scope 1 — Reusable construction grammars
 
-## Scope 1 — Grammar-driven detailed assets
-
-Scope 1 introduces shared support, shell, articulation, repetition, joinery, surface-detail, and material grammars. It builds nine assets across three families:
-
-- lamps: compact, domestic, industrial;
-- cases: electronics, presentation, tool;
-- tables: four-leg, metal-frame, pedestal.
+Scope 1 introduced reusable support, shell, articulation, repetition, joinery, detail, and material grammars across nine assets in three bounded families.
 
 ```bash
 python -m objectforge.scope1 --output ./objectforge-scope1
 ```
 
-Build one variant:
-
-```bash
-python -m objectforge.scope1 --output ./tool-case --family case --variant tool
-```
-
 ## Scope 2 Revision 2 — Goal-directed functional construction
 
-Scope 2 accepts functional goals and constraints without a named object class, compares eight bounded architecture alternatives, and composes the selected result from shared construction grammars.
+Scope 2 accepts functional goals and constraints without a named object class, compares eight bounded architecture alternatives, and constructs the selected architecture from shared grammars.
 
-Revision 2 supersedes the first Scope 2 visual benchmark. Functional coverage alone no longer qualifies an object. Proportions, joinery, controls, secondary detail, material differentiation, and underside or back completion must pass an independent close-inspection gate.
+Revision 2 adds an independent close-inspection gate. Functional coverage alone no longer qualifies an object: proportions, joinery, controls, secondary detail, material differentiation, and underside or back completion must also pass.
 
 ```bash
 python -m objectforge.scope2 --output ./objectforge-scope2
 ```
 
-Each asset package contains:
+## Scope 3 — Procedural design language
 
-```text
-object/
-  object.glb
-  semantic-parts.json
-  materials.json
-behavior/
-  physics.json
-  animations.json
-  interactions.json
-showcase/
-  object-showcase.glb
-  viewer/index.html
-construction/
-  functional-brief.json
-  functional-plan.json
-  candidate-comparison.json
-  operations.jsonl
-evaluation/
-  requirement-coverage.json
-recovery/
-  receipt.json
-validation.json
-manifest.json
+Scope 3 keeps the functional architecture fixed while applying persistent product DNA across multiple object purposes. Design languages control material roles, proportion and detail scale, seam and fastener strategy, handles, controls, labels, vents, interaction signaling, and modeled signature motifs.
+
+The fixed benchmark applies two languages—Field Service and Precision Lab—to the same four functional briefs, producing eight canonical GLBs.
+
+```bash
+python -m objectforge.scope3 --output ./objectforge-scope3
 ```
 
-See `SCOPE_2_FUNCTIONAL_CONSTRUCTION.md`.
+Render retained-model comparison previews:
+
+```bash
+pip install -e '.[preview]'
+python -m objectforge.preview_scope3 \
+  --input ./objectforge-scope3 \
+  --output ./objectforge-scope3-previews
+```
+
+See `SCOPE_3_PROCEDURAL_DESIGN_LANGUAGE.md`.
 
 ## Test
 
