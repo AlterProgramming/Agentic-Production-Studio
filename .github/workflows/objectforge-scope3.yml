@@ -1,0 +1,39 @@
+name: Validate ObjectForge Scope 3
+
+on:
+  pull_request:
+    paths:
+      - 'objectforge/**'
+      - '.github/workflows/objectforge-scope3.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  scope3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -e 'objectforge[test]'
+      - run: pytest -q objectforge/tests
+      - run: python -m objectforge.scope3 --output /tmp/objectforge-scope3
+      - run: test -s /tmp/objectforge-scope3/scope3-index.json
+      - run: test -s /tmp/objectforge-scope3/field_service/directional-energy/object/object.glb
+      - run: test -s /tmp/objectforge-scope3/field_service/protected-transport/object/object.glb
+      - run: test -s /tmp/objectforge-scope3/field_service/elevated-service/object/object.glb
+      - run: test -s /tmp/objectforge-scope3/field_service/visible-organization/object/object.glb
+      - run: test -s /tmp/objectforge-scope3/precision_lab/directional-energy/object/object.glb
+      - run: test -s /tmp/objectforge-scope3/precision_lab/protected-transport/object/object.glb
+      - run: test -s /tmp/objectforge-scope3/precision_lab/elevated-service/object/object.glb
+      - run: test -s /tmp/objectforge-scope3/precision_lab/visible-organization/object/object.glb
+      - run: python -m objectforge.scope2 --output /tmp/objectforge-scope2-regression
+      - run: test -s /tmp/objectforge-scope2-regression/scope2-index.json
+      - run: python -m objectforge.scope1 --output /tmp/objectforge-scope1-regression
+      - run: test -s /tmp/objectforge-scope1-regression/scope1-index.json
+      - run: python -m objectforge.task_lamp --output /tmp/objectforge-scope0-regression
+      - run: test -s /tmp/objectforge-scope0-regression/object/object.glb

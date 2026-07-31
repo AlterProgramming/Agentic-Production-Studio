@@ -1,0 +1,39 @@
+{
+  "benchmark": "ObjectForge Scope 3 two-language by four-brief matrix",
+  "benchmark_result": "passed",
+  "canonical_format": "model/gltf-binary",
+  "capability_id": "objectforge.procedural-design-language.v1",
+  "completion_gates": [
+    "two or more explicit design languages",
+    "same functional architecture retained across paired language variants",
+    "paired canonical GLBs are structurally distinct",
+    "each language has one stable cross-object fingerprint",
+    "at least ten modeled language motifs per asset",
+    "at least five visible material roles per asset",
+    "design language is embedded in retained GLB metadata",
+    "Scope 0 through Scope 2 regressions remain green",
+    "no external finished-model generator supplies geometry"
+  ],
+  "entrypoint": "python -m objectforge.scope3 --output <directory>",
+  "execution": "first_party_local",
+  "external_finished_model_generation_providers": false,
+  "input_contract": {
+    "object_class": null,
+    "required": [
+      "functional brief",
+      "design language"
+    ]
+  },
+  "kind": "studio.capability",
+  "outputs": [
+    "<language>/<brief>/object/object.glb",
+    "<language>/<brief>/showcase/object-showcase.glb",
+    "<language>/<brief>/design/design-language.json",
+    "<language>/<brief>/design/application-receipt.json",
+    "<language>/<brief>/evaluation/design-language.json",
+    "scope3-index.json"
+  ],
+  "schema_version": "1.0",
+  "status": "foundation_benchmark_passed",
+  "title": "ObjectForge procedural design language"
+}
