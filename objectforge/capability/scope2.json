@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0",
+  "kind": "studio.capability",
+  "capability_id": "objectforge.goal-directed-functional-construction.v1",
+  "title": "ObjectForge goal-directed functional construction",
+  "status": "foundation_benchmark_passed",
+  "execution": "first_party_local",
+  "external_finished_model_generation_providers": false,
+  "entrypoint": "python -m objectforge.scope2 --output <directory>",
+  "canonical_format": "model/gltf-binary",
+  "input_contract": {
+    "object_class": null,
+    "required": ["intent", "functional requirements", "constraints"]
+  },
+  "outputs": [
+    "object/object.glb",
+    "showcase/object-showcase.glb",
+    "construction/functional-brief.json",
+    "construction/functional-plan.json",
+    "construction/candidate-comparison.json",
+    "evaluation/requirement-coverage.json",
+    "behavior/physics.json",
+    "recovery/receipt.json",
+    "validation.json",
+    "manifest.json"
+  ],
+  "completion_gates": [
+    "planner compares at least three architectures",
+    "selected architecture covers every mandatory requirement",
+    "brief does not contain an object class",
+    "construction uses registered first-party grammars",
+    "canonical GLB reopens with embedded PBR textures",
+    "functional recovery compares at least two repairs",
+    "prior construction checkpoint remains preserved",
+    "all derivatives originate from the retained model",
+    "no external finished-model generator supplies geometry"
+  ],
+  "benchmark": "ObjectForge Scope 2 four functional briefs"
+}
