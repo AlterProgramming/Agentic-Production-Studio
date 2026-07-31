@@ -5,8 +5,27 @@
       "asset_id": "scope2-directional-energy",
       "brief_id": "directional-energy",
       "candidate_count": 8,
-      "canonical_sha256": "2dca94a4e3efa9ed08ab537d279c48057bc1e2a870867b1e02c7cb34da2c4024",
-      "geometry_components": 33,
+      "canonical_sha256": "8d9cd259aadfbbc361f15ea3942ee02020bdeeabee055cfb9ff366af28f3a502",
+      "close_inspection": {
+        "control_or_affordance_components": 16,
+        "detail_components": 52,
+        "detail_ratio": 0.7123,
+        "geometry_components": 73,
+        "material_classes": 10,
+        "refinement_receipts": 1,
+        "semantic_part_classes": 29,
+        "underside_or_back_components": 7
+      },
+      "geometry_components": 73,
+      "glb": {
+        "animation_count": 1,
+        "embedded_image_count": 20,
+        "external_uris": [],
+        "material_count": 10,
+        "mesh_count": 73,
+        "node_count": 78,
+        "reopened": true
+      },
       "passed": true,
       "path": "directional-energy",
       "selected_architecture": "articulated_emitter"
@@ -15,8 +34,27 @@
       "asset_id": "scope2-protected-transport",
       "brief_id": "protected-transport",
       "candidate_count": 8,
-      "canonical_sha256": "f6b3b24708f5b22e1e0d619fb9341445fecc0b607b8579c44d338b6015231254",
-      "geometry_components": 49,
+      "canonical_sha256": "ccc9d8701fa5936be147613b918257a57d598b16d4204780eb6cde5e07d3973c",
+      "close_inspection": {
+        "control_or_affordance_components": 30,
+        "detail_components": 59,
+        "detail_ratio": 0.6344,
+        "geometry_components": 93,
+        "material_classes": 8,
+        "refinement_receipts": 1,
+        "semantic_part_classes": 30,
+        "underside_or_back_components": 8
+      },
+      "geometry_components": 93,
+      "glb": {
+        "animation_count": 1,
+        "embedded_image_count": 16,
+        "external_uris": [],
+        "material_count": 8,
+        "mesh_count": 93,
+        "node_count": 97,
+        "reopened": true
+      },
       "passed": true,
       "path": "protected-transport",
       "selected_architecture": "hinged_protective_shell"
@@ -25,8 +63,27 @@
       "asset_id": "scope2-elevated-service",
       "brief_id": "elevated-service",
       "candidate_count": 8,
-      "canonical_sha256": "432c5e3b567f1be6744e5c3a62791fd28ecfd9e522157be625c154ee99e33ae2",
-      "geometry_components": 37,
+      "canonical_sha256": "9172645089cc28e054eef628e3b270cd87f1cefdcc3f0ad19f690075a03ff2f5",
+      "close_inspection": {
+        "control_or_affordance_components": 23,
+        "detail_components": 64,
+        "detail_ratio": 0.8205,
+        "geometry_components": 78,
+        "material_classes": 8,
+        "refinement_receipts": 1,
+        "semantic_part_classes": 25,
+        "underside_or_back_components": 4
+      },
+      "geometry_components": 78,
+      "glb": {
+        "animation_count": 0,
+        "embedded_image_count": 16,
+        "external_uris": [],
+        "material_count": 8,
+        "mesh_count": 78,
+        "node_count": 80,
+        "reopened": true
+      },
       "passed": true,
       "path": "elevated-service",
       "selected_architecture": "four_leg_service_station"
@@ -35,19 +92,48 @@
       "asset_id": "scope2-visible-organization",
       "brief_id": "visible-organization",
       "candidate_count": 8,
-      "canonical_sha256": "7ab99af26dec694cb5d175829bfad04451fcaf9470bc4bf53d54d9d96b6938d3",
-      "geometry_components": 39,
+      "canonical_sha256": "111e038ee94d1aa9402e52b2d2f8cd0b18d1c5af55a2b106bd702753f4ad0a64",
+      "close_inspection": {
+        "control_or_affordance_components": 40,
+        "detail_components": 61,
+        "detail_ratio": 0.8026,
+        "geometry_components": 76,
+        "material_classes": 8,
+        "refinement_receipts": 1,
+        "semantic_part_classes": 23,
+        "underside_or_back_components": 5
+      },
+      "geometry_components": 76,
+      "glb": {
+        "animation_count": 0,
+        "embedded_image_count": 16,
+        "external_uris": [],
+        "material_count": 8,
+        "mesh_count": 76,
+        "node_count": 78,
+        "reopened": true
+      },
       "passed": true,
       "path": "visible-organization",
       "selected_architecture": "portable_slot_organizer"
     }
   ],
-  "benchmark_id": "objectforge-scope2-functional-construction",
+  "benchmark_id": "objectforge-scope2-functional-construction-refined",
   "briefs_without_object_class": true,
   "candidate_comparisons_per_brief": 8,
   "distinct_selected_architectures": 4,
   "external_finished_model_provider": false,
+  "quality_gate": {
+    "minimum_components": 48,
+    "minimum_detail_components": 18,
+    "minimum_material_classes": 6,
+    "minimum_semantic_part_classes": 14,
+    "requires_close_inspection_receipt": true,
+    "requires_underside_or_back_completion": true
+  },
+  "reason_for_revision": "The first Scope 2 planning benchmark passed functional checks but did not meet the visual and construction-detail threshold established by Scopes 0 and 1.",
   "result": "passed",
-  "schema_version": "1.0",
-  "scope0_scope1_regression_required": true
+  "schema_version": "2.0",
+  "scope0_scope1_regression_required": true,
+  "supersedes_benchmark": "objectforge-scope2-functional-construction"
 }
