@@ -14,7 +14,14 @@ def test_scope2_plans_without_object_classes_and_compares_alternatives() -> None
     assert all(plan.brief.to_dict()["object_class"] is None for plan in plans)
     assert len({plan.selected_architecture.architecture_id for plan in plans}) == 4
     assert all(len(plan.candidates) >= 8 for plan in plans)
-    assert all(not next(item for item in plan.candidates if item.architecture_id == plan.selected_architecture.architecture_id).missing_mandatory for plan in plans)
+    assert all(
+        not next(
+            item
+            for item in plan.candidates
+            if item.architecture_id == plan.selected_architecture.architecture_id
+        ).missing_mandatory
+        for plan in plans
+    )
 
 
 def test_each_functional_brief_builds_standalone_goal_trace(tmp_path: Path) -> None:
@@ -24,8 +31,11 @@ def test_each_functional_brief_builds_standalone_goal_trace(tmp_path: Path) -> N
         manifest = build_functional_asset(planner.plan(brief), root)
         assert manifest["validation"]["passed"] is True
         assert manifest["object_class_input"] is None
-        assert manifest["validation"]["builder"]["geometry_components"] >= 28
-        assert (root / "object/object.glb").stat().st_size > 100_000
+        assert manifest["validation"]["builder"]["geometry_components"] >= 48
+        assert manifest["validation"]["close_inspection"]["detail_components"] >= 18
+        assert manifest["validation"]["close_inspection"]["material_classes"] >= 6
+        assert manifest["validation"]["close_inspection"]["refinement_receipts"] == 1
+        assert (root / "object/object.glb").stat().st_size > 250_000
         assert (root / "showcase/object-showcase.glb").stat().st_size > 100_000
         coverage = json.loads((root / "evaluation/requirement-coverage.json").read_text())
         assert coverage["all_mandatory_covered"] is True
@@ -37,6 +47,7 @@ def test_each_functional_brief_builds_standalone_goal_trace(tmp_path: Path) -> N
 def test_scope2_builds_four_distinct_goal_directed_assets(tmp_path: Path) -> None:
     index = build_scope2(tmp_path / "scope2")
     assert index["status"] == "passed"
+    assert index["capability_id"] == "objectforge.goal-directed-functional-construction.v2"
     assert len(index["assets"]) == 4
     assert index["briefs_without_object_class"] is True
     assert index["distinct_selected_architectures"] == 4
