@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "benchmark_id": "objectforge-task-lamp-scope0",
+  "result": "pass",
+  "canonical_model": {
+    "geometry_components": 51,
+    "nodes": 57,
+    "pbr_materials": 7,
+    "embedded_texture_images": 14,
+    "animation_clips": 1,
+    "punctual_lighting": true,
+    "external_texture_uris": 0
+  },
+  "behavior": {
+    "hinges": 3,
+    "rigid_body_records": 4,
+    "collision_contract": true
+  },
+  "recovery": {
+    "forced_unstable_reach_rejected": true,
+    "source_checkpoint_preserved": true,
+    "bounded_retry_passed": true
+  },
+  "external_model_generation_provider": false
+}
