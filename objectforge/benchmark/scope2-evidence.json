@@ -1,0 +1,53 @@
+{
+  "asset_count": 4,
+  "assets": [
+    {
+      "asset_id": "scope2-directional-energy",
+      "brief_id": "directional-energy",
+      "candidate_count": 8,
+      "canonical_sha256": "2dca94a4e3efa9ed08ab537d279c48057bc1e2a870867b1e02c7cb34da2c4024",
+      "geometry_components": 33,
+      "passed": true,
+      "path": "directional-energy",
+      "selected_architecture": "articulated_emitter"
+    },
+    {
+      "asset_id": "scope2-protected-transport",
+      "brief_id": "protected-transport",
+      "candidate_count": 8,
+      "canonical_sha256": "f6b3b24708f5b22e1e0d619fb9341445fecc0b607b8579c44d338b6015231254",
+      "geometry_components": 49,
+      "passed": true,
+      "path": "protected-transport",
+      "selected_architecture": "hinged_protective_shell"
+    },
+    {
+      "asset_id": "scope2-elevated-service",
+      "brief_id": "elevated-service",
+      "candidate_count": 8,
+      "canonical_sha256": "432c5e3b567f1be6744e5c3a62791fd28ecfd9e522157be625c154ee99e33ae2",
+      "geometry_components": 37,
+      "passed": true,
+      "path": "elevated-service",
+      "selected_architecture": "four_leg_service_station"
+    },
+    {
+      "asset_id": "scope2-visible-organization",
+      "brief_id": "visible-organization",
+      "candidate_count": 8,
+      "canonical_sha256": "7ab99af26dec694cb5d175829bfad04451fcaf9470bc4bf53d54d9d96b6938d3",
+      "geometry_components": 39,
+      "passed": true,
+      "path": "visible-organization",
+      "selected_architecture": "portable_slot_organizer"
+    }
+  ],
+  "benchmark_id": "objectforge-scope2-functional-construction",
+  "briefs_without_object_class": true,
+  "candidate_comparisons_per_brief": 8,
+  "distinct_selected_architectures": 4,
+  "external_finished_model_provider": false,
+  "result": "passed",
+  "schema_version": "1.0",
+  "scope0_scope1_regression_required": true
+}
