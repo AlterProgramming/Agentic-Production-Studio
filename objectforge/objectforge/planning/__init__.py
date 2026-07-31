@@ -1,0 +1,1 @@
+"""ObjectForge object planning contracts."""
