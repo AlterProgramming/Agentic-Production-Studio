@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "kind": "studio.capability",
+  "capability_id": "object-generation.procedural-detailed.v1",
+  "title": "ObjectForge detailed procedural object generation",
+  "status": "foundation_benchmark_passed",
+  "execution": "first_party_local",
+  "external_model_generation_providers": false,
+  "entrypoint": "python -m objectforge.task_lamp --output <directory>",
+  "canonical_format": "model/gltf-binary",
+  "outputs": [
+    "object/object.glb",
+    "showcase/object-showcase.glb",
+    "object/semantic-parts.json",
+    "object/materials.json",
+    "behavior/physics.json",
+    "behavior/animations.json",
+    "behavior/interactions.json",
+    "construction/operations.jsonl",
+    "recovery/receipt.json",
+    "validation.json",
+    "manifest.json"
+  ],
+  "completion_gates": [
+    "retained GLB reopens structurally",
+    "secondary and tertiary geometry remains visible under close inspection",
+    "procedural PBR textures are embedded rather than externally linked",
+    "movable nodes retain pivots, limits and animation",
+    "physics and collision metadata are retained",
+    "failed construction edits are rejected and recoverable",
+    "canonical object and showcase scene remain separate",
+    "no external 3D model generator supplies the asset"
+  ],
+  "benchmark": "ObjectForge Scope 0 articulated task lamp"
+}
