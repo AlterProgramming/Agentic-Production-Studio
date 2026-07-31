@@ -1,0 +1,26 @@
+name: Validate ObjectForge Scope 0
+
+on:
+  pull_request:
+    paths:
+      - 'objectforge/**'
+      - '.github/workflows/objectforge-scope0.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  scope0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -e 'objectforge[test]'
+      - run: pytest -q objectforge/tests
+      - run: python -m objectforge.task_lamp --output /tmp/objectforge-task-lamp
+      - run: test -s /tmp/objectforge-task-lamp/object/object.glb
+      - run: test -s /tmp/objectforge-task-lamp/showcase/object-showcase.glb

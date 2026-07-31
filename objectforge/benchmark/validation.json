@@ -1,0 +1,19 @@
+{
+  "animation_count": 1,
+  "embedded_image_count": 14,
+  "external_uris": [],
+  "geometry_count": 51,
+  "lights_extension": true,
+  "material_count": 7,
+  "node_count": 57,
+  "passed": true,
+  "reopened_scene": true,
+  "required_nodes_present": [
+    "BulbEmitter",
+    "LampRoot",
+    "LowerArmPivot",
+    "ShadePivot",
+    "ShadeShell",
+    "UpperArmPivot"
+  ]
+}
