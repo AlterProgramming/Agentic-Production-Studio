@@ -1,0 +1,49 @@
+{
+  "articulated_assets": 6,
+  "asset_count": 9,
+  "benchmark_id": "objectforge-scope1-grammar-assets",
+  "canonical_sha256": {
+    "case/electronics": "30e01a3fe2681058e12bb36ebc05f78ecbc35a539a81a645624ae1e3b5acffd5",
+    "case/presentation": "7f55b14e7d3a88cc18a9aaafc7b2bc46f52d4034484efe0203869cbe0e7b8e2a",
+    "case/tool": "030d31377ca5cb93f8b450eda1803a0bf5fe1913d7d17bd4391221c0192ae01c",
+    "lamp/compact": "297ef0bab4f6dba8084d41b6225fa5a470dc9d334c0f9b66b621c67c2366a7e8",
+    "lamp/domestic": "e9eb48aad33aa46bffe6a4439db60fa69899c7e9c1c0210620a2c7b9ba656d8c",
+    "lamp/industrial": "2ef626bde7251b6b319a1c7e6e5713c12c59d170d1c716e6e1abf80cae7ca15c",
+    "table/four_leg": "5e0be57ec38bf05ac928144e1c653763c11815fbd0ac551ff1ddc00b270b6947",
+    "table/metal_frame": "24206dab2bb9320bc2cab34edd3ac5fd0e412baba17268584ffc4954c6d44179",
+    "table/pedestal": "cf1757c96c1d5fd2f2f9a59052ca6174453fb847a16d21073ae20f1c112d823a"
+  },
+  "distinct_signatures": 9,
+  "external_finished_model_provider": false,
+  "families": ["case", "lamp", "table"],
+  "geometry_components": {
+    "case/electronics": 49,
+    "case/presentation": 43,
+    "case/tool": 53,
+    "lamp/compact": 34,
+    "lamp/domestic": 32,
+    "lamp/industrial": 52,
+    "table/four_leg": 34,
+    "table/metal_frame": 37,
+    "table/pedestal": 25
+  },
+  "result": "passed",
+  "schema_version": "1.0",
+  "scope0_regression_passed": true,
+  "semantic_part_classes": {
+    "case/electronics": 18,
+    "case/presentation": 18,
+    "case/tool": 18,
+    "lamp/compact": 19,
+    "lamp/domestic": 19,
+    "lamp/industrial": 19,
+    "table/four_leg": 8,
+    "table/metal_frame": 10,
+    "table/pedestal": 9
+  },
+  "variants": {
+    "case": ["electronics", "presentation", "tool"],
+    "lamp": ["compact", "domestic", "industrial"],
+    "table": ["four_leg", "metal_frame", "pedestal"]
+  }
+}
