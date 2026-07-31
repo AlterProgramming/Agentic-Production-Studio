@@ -1,0 +1,28 @@
+{
+  "construction_sha256": "947ea070c7620d0ac7b11979d488a761754ae301e284fff58445fe77e31f1508",
+  "external_provider": false,
+  "forced_failure": {
+    "finding": "unstable upper-arm reach",
+    "metrics": {
+      "center_of_mass_x": 1.225,
+      "center_of_mass_z": 0.0027,
+      "stable": false,
+      "support_radius": 1.18,
+      "tipping_margin": -0.045
+    },
+    "operation": 4
+  },
+  "rollback": {
+    "preserved_prior_state": true,
+    "replacement_metrics": {
+      "center_of_mass_x": 0.3464,
+      "center_of_mass_z": 0.0036,
+      "stable": true,
+      "support_radius": 1.18,
+      "tipping_margin": 0.8336
+    }
+  },
+  "schema_version": "1.0",
+  "source_overwritten": false,
+  "status": "recovered"
+}
