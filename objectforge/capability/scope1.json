@@ -1,0 +1,27 @@
+{
+  "benchmark": "ObjectForge Scope 1 grammar-driven detailed assets",
+  "canonical_format": "model/gltf-binary",
+  "capability_id": "objectforge.grammar-driven-detailed-assets.v1",
+  "completion_gates": [
+    "nine standalone canonical GLBs reopen",
+    "three families each retain three distinct variants",
+    "shared grammar implementations are reused",
+    "movable assets retain animation and physics contracts",
+    "family-specific failed edits rollback and recover",
+    "Scope 0 remains green",
+    "no external finished-model provider supplies geometry"
+  ],
+  "entrypoint": "python -m objectforge.scope1 --output <directory>",
+  "execution": "first_party_local",
+  "external_finished_model_providers": false,
+  "families": {
+    "case": ["electronics", "presentation", "tool"],
+    "lamp": ["compact", "domestic", "industrial"],
+    "table": ["four_leg", "metal_frame", "pedestal"]
+  },
+  "kind": "studio.capability",
+  "schema_version": "1.0",
+  "shared_grammars": ["support", "shell", "articulation", "repetition", "joinery", "detail", "material"],
+  "status": "foundation_benchmark_passed",
+  "title": "ObjectForge grammar-driven detailed asset generation"
+}
