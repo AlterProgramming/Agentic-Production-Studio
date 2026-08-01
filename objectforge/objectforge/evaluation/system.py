@@ -62,7 +62,7 @@ def evaluate_system_plan(plan: SystemPlan) -> SystemEvaluation:
             failures.append(f"connection {connection.connection_id} does not cross object boundaries")
 
     connected_objects = {item.object_id: set() for item in plan.objects}
-    used_standards: dict[str, int] = {}
+    connection_count_by_standard: dict[str, int] = {}
     for connection in plan.connections:
         a = endpoint_by_id.get(connection.endpoint_a)
         b = endpoint_by_id.get(connection.endpoint_b)
@@ -70,12 +70,22 @@ def evaluate_system_plan(plan: SystemPlan) -> SystemEvaluation:
             continue
         connected_objects[a.object_id].add(b.object_id)
         connected_objects[b.object_id].add(a.object_id)
-        used_standards[a.standard_id] = used_standards.get(a.standard_id, 0) + 1
+        if a.standard_id == b.standard_id:
+            connection_count_by_standard[a.standard_id] = connection_count_by_standard.get(a.standard_id, 0) + 1
+
+    standard_objects: dict[str, set[str]] = {}
+    for endpoint in plan.endpoints:
+        standard_objects.setdefault(endpoint.standard_id, set()).add(endpoint.object_id)
+    reusable_standards = {
+        standard_id: sorted(objects)
+        for standard_id, objects in standard_objects.items()
+        if len(objects) >= 2 and connection_count_by_standard.get(standard_id, 0) >= 1
+    }
+
     orphans = sorted(object_id for object_id, neighbors in connected_objects.items() if not neighbors)
     if orphans:
         failures.append(f"objects have no compatibility edges: {orphans}")
-    reusable = {key: count for key, count in used_standards.items() if count >= 2}
-    if len(reusable) < 3:
+    if len(reusable_standards) < 3:
         failures.append("fewer than three interface standards are reused across objects")
 
     for workflow in plan.workflows:
@@ -99,7 +109,9 @@ def evaluate_system_plan(plan: SystemPlan) -> SystemEvaluation:
             "topology_candidate_count": len(plan.topology_candidates),
             "selected_topology": plan.selected_topology,
             "interface_standard_count": len(plan.standards),
-            "reused_interface_standard_count": len(reusable),
+            "reused_interface_standard_count": len(reusable_standards),
+            "reused_interface_standards": reusable_standards,
+            "connection_count_by_standard": connection_count_by_standard,
             "endpoint_count": len(plan.endpoints),
             "connection_count": len(plan.connections),
             "active_connection_count": sum(1 for item in plan.connections if item.active_in_layout),
