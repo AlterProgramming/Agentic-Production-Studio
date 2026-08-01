@@ -271,6 +271,17 @@ def _build_power_module(role: ObjectRole) -> GrammarAssetBuilder:
         for row, z in enumerate((-0.09, 0.09)):
             cell = cylinder_y(0.048, 0.24, sections=48)
             builder.add_part(f"EnergyCell{index+1}{row+1}", f"energy_cell_{index+1}_{row+1}", builder.root_name, "energy.cell", "MoldedBlue", cell, translation([x, 0.24, z]))
+    for index, z in enumerate((-0.125, 0.125)):
+        cradle = rounded_box((0.50, 0.045, 0.070), radius=0.015, segments=4)
+        builder.add_part(
+            f"ThermalIsolationCradle{index+1}",
+            f"thermal_isolation_cradle_{index+1}",
+            builder.root_name,
+            "energy.thermal_isolation_cradle",
+            "CarbonInsert",
+            cradle,
+            translation([0, 0.105, z]),
+        )
     busbar = rounded_box((0.46, 0.035, 0.12), radius=0.012, segments=4)
     builder.add_part("PowerBusbar", "power_busbar", builder.root_name, "energy.busbar", "BrushedSteel", busbar, translation([0, 0.37, 0]))
     for index, x in enumerate((-0.15, -0.05, 0.05, 0.15)):
@@ -293,8 +304,8 @@ def _build_power_module(role: ObjectRole) -> GrammarAssetBuilder:
     builder.op("planner.try_alternative", "power_module_key", "Reject a visually marked but physically reversible power module.", {"alternative": "color_only_orientation"}, status="rejected")
     builder.op("planner.compare_repairs", "power_module_key", "Select physical keying over a color-only instruction.", {"selected": "add_physical_key_and_bus polarity"})
     builder.op("rollback", "checkpoint.power_module_shell", "Preserve the completed module shell while adding the keyed interface.", {"preserved_prior_state": True})
-    builder.op("functional.verify", role.object_id, "Verify portable power, service access, status signaling, and docking readiness.", {"covered_capabilities": list(role.capabilities)})
-    builder.op("refinement.verify_close_inspection", role.object_id, "Verify cells, busbar, breaker, service door, vents, guards, handle, and underside.", {"detail_groups": ["cells", "busbar", "breaker", "service_door", "vents", "guards"]})
+    builder.op("functional.verify", role.object_id, "Verify portable power, service access, status signaling, thermal isolation, and docking readiness.", {"covered_capabilities": list(role.capabilities)})
+    builder.op("refinement.verify_close_inspection", role.object_id, "Verify cells, thermal isolation cradles, busbar, breaker, service door, vents, guards, handle, and underside.", {"detail_groups": ["cells", "thermal_isolation", "busbar", "breaker", "service_door", "vents", "guards"]})
     return builder
 
 
