@@ -10,7 +10,7 @@ from objectforge.scope5 import build_scope5_plan
 from objectforge.systems.planner import benchmark_system_brief, default_system_planner
 
 
-_ACTORS = (
+ACTORS = (
     {
         "actor_id": "human_operator",
         "kind": "human",
@@ -40,18 +40,23 @@ _ACTORS = (
     },
 )
 
+PAYLOAD_KG = {
+    "service_hub": 28.0,
+    "work_emitter": 4.0,
+    "protected_carrier": 8.0,
+    "instrument_caddy": 5.0,
+    "power_module": 6.0,
+    "analysis_module": 5.0,
+}
+
 
 def _rotate_y(point: tuple[float, float, float], degrees: float) -> tuple[float, float, float]:
     angle = math.radians(degrees)
     x, y, z = point
-    return (
-        x * math.cos(angle) + z * math.sin(angle),
-        y,
-        -x * math.sin(angle) + z * math.cos(angle),
-    )
+    return x * math.cos(angle) + z * math.sin(angle), y, -x * math.sin(angle) + z * math.cos(angle)
 
 
-def _world_endpoint(scope4: Any, endpoint_id: str) -> list[float]:
+def _endpoint_world(scope4: Any, endpoint_id: str) -> list[float]:
     endpoint = next(item for item in scope4.endpoints if item.endpoint_id == endpoint_id)
     offset = _rotate_y(endpoint.local_position_m, scope4.object_yaw_degrees[endpoint.object_id])
     origin = scope4.layout_m[endpoint.object_id]
@@ -59,42 +64,33 @@ def _world_endpoint(scope4: Any, endpoint_id: str) -> list[float]:
 
 
 def _tasks(scope4: Any) -> list[dict[str, Any]]:
-    endpoint_map = {item.endpoint_id: item for item in scope4.endpoints}
-    payloads = {
-        "service_hub": 28.0,
-        "work_emitter": 4.0,
-        "protected_carrier": 8.0,
-        "instrument_caddy": 5.0,
-        "power_module": 6.0,
-        "analysis_module": 5.0,
-    }
+    endpoints = {item.endpoint_id: item for item in scope4.endpoints}
     tasks: list[dict[str, Any]] = [
         {
             "task_id": "position_service_hub",
             "workflow": "deploy_and_operate",
             "object_ids": ["service_hub"],
-            "target_m": list(scope4.layout_m["service_hub"]),
+            "target_m": [scope4.layout_m["service_hub"][0], 0.72, scope4.layout_m["service_hub"][2]],
             "required_reach_m": 0.65,
-            "payload_kg": payloads["service_hub"],
+            "payload_kg": PAYLOAD_KG["service_hub"],
             "clearance_m": 0.90,
             "dexterity": "coarse",
             "critical": True,
         }
     ]
     for connection in scope4.connections:
-        endpoint_a = endpoint_map[connection.endpoint_a]
-        endpoint_b = endpoint_map[connection.endpoint_b]
+        endpoint_a = endpoints[connection.endpoint_a]
+        endpoint_b = endpoints[connection.endpoint_b]
         moving_object = endpoint_b.object_id if endpoint_b.object_id != "service_hub" else endpoint_a.object_id
-        target = _world_endpoint(scope4, connection.endpoint_a)
         tasks.append(
             {
                 "task_id": f"mate_{connection.connection_id}",
                 "workflow": "deploy_and_operate" if connection.active_in_layout else "stow_and_transport",
                 "object_ids": [endpoint_a.object_id, endpoint_b.object_id],
                 "connection_id": connection.connection_id,
-                "target_m": target,
+                "target_m": _endpoint_world(scope4, connection.endpoint_a),
                 "required_reach_m": 0.55 if connection.mode in {"mechanical", "module", "transport"} else 0.42,
-                "payload_kg": payloads.get(moving_object, 1.0),
+                "payload_kg": PAYLOAD_KG.get(moving_object, 1.0),
                 "clearance_m": 0.84 if connection.active_in_layout else 0.80,
                 "dexterity": "connector_and_latch",
                 "critical": True,
@@ -107,7 +103,7 @@ def _tasks(scope4: Any) -> list[dict[str, Any]]:
             "object_ids": ["protected_carrier"],
             "target_m": [scope4.layout_m["protected_carrier"][0], 0.82, scope4.layout_m["protected_carrier"][2]],
             "required_reach_m": 0.72,
-            "payload_kg": 8.0,
+            "payload_kg": PAYLOAD_KG["protected_carrier"],
             "clearance_m": 0.82,
             "dexterity": "connector_and_latch",
             "critical": True,
@@ -117,24 +113,19 @@ def _tasks(scope4: Any) -> list[dict[str, Any]]:
 
 
 def _actor_result(actor: dict[str, Any], task: dict[str, Any]) -> dict[str, Any]:
-    target_height = task["target_m"][1]
-    height_ok = actor["vertical_range_m"][0] <= target_height <= actor["vertical_range_m"][1]
-    reach_ok = task["required_reach_m"] <= actor["maximum_reach_m"]
-    payload_ok = task["payload_kg"] <= actor["maximum_payload_kg"]
-    clearance_ok = task["clearance_m"] >= actor["minimum_clearance_m"]
-    dexterity_ok = task["dexterity"] == "coarse" or actor["dexterity"] in {"fine", task["dexterity"]}
-    passed = height_ok and reach_ok and payload_ok and clearance_ok and dexterity_ok
+    height = task["target_m"][1]
+    checks = {
+        "height": actor["vertical_range_m"][0] <= height <= actor["vertical_range_m"][1],
+        "reach": task["required_reach_m"] <= actor["maximum_reach_m"],
+        "payload": task["payload_kg"] <= actor["maximum_payload_kg"],
+        "clearance": task["clearance_m"] >= actor["minimum_clearance_m"],
+        "dexterity": task["dexterity"] == "coarse" or actor["dexterity"] in {"fine", task["dexterity"]},
+    }
     return {
         "actor_id": actor["actor_id"],
-        "passed": passed,
-        "checks": {
-            "height": height_ok,
-            "reach": reach_ok,
-            "payload": payload_ok,
-            "clearance": clearance_ok,
-            "dexterity": dexterity_ok,
-        },
-        "margin": {
+        "passed": all(checks.values()),
+        "checks": checks,
+        "margins": {
             "reach_m": round(actor["maximum_reach_m"] - task["required_reach_m"], 3),
             "payload_kg": round(actor["maximum_payload_kg"] - task["payload_kg"], 3),
             "clearance_m": round(task["clearance_m"] - actor["minimum_clearance_m"], 3),
@@ -143,39 +134,38 @@ def _actor_result(actor: dict[str, Any], task: dict[str, Any]) -> dict[str, Any]
 
 
 def _reachability(scope4: Any) -> list[dict[str, Any]]:
-    results: list[dict[str, Any]] = []
+    matrix = []
     for task in _tasks(scope4):
-        actor_results = [_actor_result(actor, task) for actor in _ACTORS]
+        actor_results = [_actor_result(actor, task) for actor in ACTORS]
         routes = [item["actor_id"] for item in actor_results if item["passed"]]
-        results.append({**task, "actor_results": actor_results, "valid_actor_routes": routes, "passed": bool(routes)})
-    return results
+        matrix.append({**task, "actor_results": actor_results, "valid_actor_routes": routes, "passed": bool(routes)})
+    return matrix
 
 
 def _load_cases(scope4: Any) -> list[dict[str, Any]]:
     standards = {item.standard_id: item for item in scope4.standards}
-    cases = [
+    definitions = (
         ("rail_static_load", "ofx_rail_240_v1", "maximum_static_load_kg", 12.0),
         ("bus_peak_current", "ofx_bus_24d_v1", "maximum_current_a", 6.5),
         ("module_bay_mass", "ofx_module_bay_360_v1", "maximum_module_mass_kg", 6.0),
         ("transport_stack_mass", "ofx_stack_480_v1", "maximum_stack_mass_kg", 5.0),
-    ]
-    results = []
-    for case_id, standard_id, capacity_key, demand in cases:
+    )
+    cases = []
+    for case_id, standard_id, capacity_key, demand in definitions:
         capacity = float(standards[standard_id].payload_contract[capacity_key])
-        utilization = demand / capacity
-        results.append(
+        cases.append(
             {
                 "case_id": case_id,
                 "standard_id": standard_id,
                 "capacity_key": capacity_key,
                 "demand": demand,
                 "capacity": capacity,
-                "utilization": round(utilization, 4),
+                "utilization": round(demand / capacity, 4),
                 "reserve": round(capacity - demand, 4),
-                "passed": utilization <= 1.0,
+                "passed": demand <= capacity,
             }
         )
-    results.append(
+    cases.append(
         {
             "case_id": "service_hub_work_surface",
             "standard_id": None,
@@ -187,15 +177,15 @@ def _load_cases(scope4: Any) -> list[dict[str, Any]]:
             "passed": True,
         }
     )
-    return results
+    return cases
 
 
 def _failure_scenarios() -> list[dict[str, Any]]:
     return [
         {
             "scenario_id": "bus_overcurrent",
-            "injected_fault": "24 V bus demand exceeds current contract",
-            "detection": "electronic current limit and status telemetry",
+            "fault": "24 V bus demand exceeds contract",
+            "detection": "current limit and status telemetry",
             "safe_state": "isolate_power_bus",
             "recovery": "inspect load, clear fault, current-limited restart",
             "maximum_detection_latency_s": 0.05,
@@ -203,7 +193,7 @@ def _failure_scenarios() -> list[dict[str, Any]]:
         },
         {
             "scenario_id": "partial_rail_latch",
-            "injected_fault": "rail module stops before full latch engagement",
+            "fault": "module stops before full latch engagement",
             "detection": "retention switch and seating gauge disagreement",
             "safe_state": "block_operation_and_unload_module",
             "recovery": "remove obstruction and repeat gauged insertion",
@@ -212,7 +202,7 @@ def _failure_scenarios() -> list[dict[str, Any]]:
         },
         {
             "scenario_id": "carrier_latch_jam",
-            "injected_fault": "transport closure cannot reach retained state",
+            "fault": "transport closure cannot reach retained state",
             "detection": "closure force and latch-state mismatch",
             "safe_state": "remain_in_service_state",
             "recovery": "unload carrier and execute SVC-CARRIER",
@@ -221,8 +211,8 @@ def _failure_scenarios() -> list[dict[str, Any]]:
         },
         {
             "scenario_id": "robot_path_blocked",
-            "injected_fault": "mobile manipulator approach corridor becomes occupied",
-            "detection": "proximity stop before minimum clearance violation",
+            "fault": "manipulator approach corridor becomes occupied",
+            "detection": "proximity stop before clearance violation",
             "safe_state": "motion_halt",
             "recovery": "replan approach or hand task to human operator",
             "maximum_detection_latency_s": 0.10,
@@ -230,8 +220,8 @@ def _failure_scenarios() -> list[dict[str, Any]]:
         },
         {
             "scenario_id": "power_module_thermal_excursion",
-            "injected_fault": "module temperature exceeds operational threshold",
-            "detection": "local thermal sensor and analysis-module alarm",
+            "fault": "module exceeds operational temperature threshold",
+            "detection": "thermal sensor and analysis-module alarm",
             "safe_state": "isolate_power_module",
             "recovery": "execute SVC-POWER and verify thermal checks",
             "maximum_detection_latency_s": 0.50,
@@ -241,18 +231,18 @@ def _failure_scenarios() -> list[dict[str, Any]]:
 
 
 def _state_machine() -> dict[str, Any]:
-    transitions = [
-        ["packed", "deploying", "begin_deploy"],
-        ["deploying", "operational", "acceptance_passed"],
-        ["operational", "degraded", "recoverable_fault"],
-        ["operational", "isolated", "critical_fault"],
-        ["degraded", "operational", "fault_cleared"],
-        ["degraded", "isolated", "fault_escalated"],
-        ["isolated", "service", "lockout_confirmed"],
-        ["service", "operational", "return_to_service_passed"],
-        ["operational", "stowing", "begin_stow"],
-        ["stowing", "packed", "transport_acceptance_passed"],
-    ]
+    transitions = (
+        ("packed", "deploying", "begin_deploy"),
+        ("deploying", "operational", "acceptance_passed"),
+        ("operational", "degraded", "recoverable_fault"),
+        ("operational", "isolated", "critical_fault"),
+        ("degraded", "operational", "fault_cleared"),
+        ("degraded", "isolated", "fault_escalated"),
+        ("isolated", "service", "lockout_confirmed"),
+        ("service", "operational", "return_to_service_passed"),
+        ("operational", "stowing", "begin_stow"),
+        ("stowing", "packed", "transport_acceptance_passed"),
+    )
     states = {state for source, target, _ in transitions for state in (source, target)}
     safe_states = {"isolated", "service", "packed"}
     return {
@@ -260,7 +250,7 @@ def _state_machine() -> dict[str, Any]:
         "transitions": [{"source": source, "target": target, "event": event} for source, target, event in transitions],
         "safe_states": sorted(safe_states),
         "all_fault_paths_reach_safe_state": True,
-        "passed": bool(safe_states <= states),
+        "passed": safe_states <= states,
     }
 
 
@@ -268,20 +258,17 @@ def build_scope6_evidence() -> dict[str, Any]:
     scope4 = default_system_planner().plan(benchmark_system_brief())
     scope5 = build_scope5_plan()
     reachability = _reachability(scope4)
-    load_cases = _load_cases(scope4)
+    loads = _load_cases(scope4)
     failures = _failure_scenarios()
     state_machine = _state_machine()
-
     robot_routes = sum("mobile_manipulator" in item["valid_actor_routes"] for item in reachability)
-    human_routes = sum(
-        bool({"human_operator", "two_person_team"} & set(item["valid_actor_routes"])) for item in reachability
-    )
+    human_routes = sum(bool({"human_operator", "two_person_team"} & set(item["valid_actor_routes"])) for item in reachability)
     validation = {
         "scope5_manufacturing_plan_passed": scope5["validation"]["passed"],
         "all_critical_tasks_have_valid_actor_route": all(item["passed"] for item in reachability if item["critical"]),
         "human_routes_cover_all_tasks": human_routes == len(reachability),
         "robot_routes_cover_multiple_tasks": robot_routes >= 5,
-        "all_load_cases_within_capacity": all(item["passed"] for item in load_cases),
+        "all_load_cases_within_capacity": all(item["passed"] for item in loads),
         "all_injected_failures_reach_safe_state": all(item["passed"] for item in failures),
         "state_machine_valid": state_machine["passed"],
         "no_external_finished_model_or_simulation_provider": True,
@@ -293,17 +280,17 @@ def build_scope6_evidence() -> dict[str, Any]:
         "capability_id": "objectforge.embodied-operational-validation.v1",
         "system_id": scope4.brief.system_id,
         "scope4_plan_fingerprint": scope4.fingerprint,
-        "scope5_validation_fingerprint": scope5["scope4_plan_fingerprint"],
-        "actors": list(_ACTORS),
+        "scope5_plan_fingerprint": scope5["scope4_plan_fingerprint"],
+        "actors": list(ACTORS),
         "reachability": reachability,
-        "load_cases": load_cases,
+        "load_cases": loads,
         "failure_scenarios": failures,
         "state_machine": state_machine,
         "summary": {
             "task_count": len(reachability),
             "human_route_count": human_routes,
             "robot_route_count": robot_routes,
-            "load_case_count": len(load_cases),
+            "load_case_count": len(loads),
             "failure_scenario_count": len(failures),
         },
         "validation": validation,
