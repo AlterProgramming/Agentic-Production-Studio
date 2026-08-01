@@ -14,7 +14,7 @@ ACTORS = (
     {
         "actor_id": "human_operator",
         "kind": "human",
-        "vertical_range_m": [0.45, 1.85],
+        "vertical_range_m": [0.10, 1.85],
         "maximum_reach_m": 0.82,
         "maximum_payload_kg": 12.0,
         "minimum_clearance_m": 0.52,
@@ -23,7 +23,7 @@ ACTORS = (
     {
         "actor_id": "two_person_team",
         "kind": "human_team",
-        "vertical_range_m": [0.30, 1.90],
+        "vertical_range_m": [0.10, 1.90],
         "maximum_reach_m": 0.90,
         "maximum_payload_kg": 32.0,
         "minimum_clearance_m": 0.70,
@@ -32,7 +32,7 @@ ACTORS = (
     {
         "actor_id": "mobile_manipulator",
         "kind": "robot",
-        "vertical_range_m": [0.25, 1.65],
+        "vertical_range_m": [0.10, 1.65],
         "maximum_reach_m": 1.25,
         "maximum_payload_kg": 6.0,
         "minimum_clearance_m": 0.78,
