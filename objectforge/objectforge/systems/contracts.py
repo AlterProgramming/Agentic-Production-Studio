@@ -29,14 +29,21 @@ class InterfaceStandard:
     payload_contract: dict[str, Any]
     geometry_contract: dict[str, Any]
 
+    @property
+    def effective_compatible_polarities(self) -> tuple[tuple[str, str], ...]:
+        pairs = list(self.compatible_polarities)
+        if self.interface_kind == "power_data" and ("source", "device") not in pairs:
+            pairs.append(("source", "device"))
+        return tuple(pairs)
+
     def compatible(self, polarity_a: str, polarity_b: str) -> bool:
-        return (polarity_a, polarity_b) in self.compatible_polarities or (
-            polarity_b,
-            polarity_a,
-        ) in self.compatible_polarities
+        pairs = self.effective_compatible_polarities
+        return (polarity_a, polarity_b) in pairs or (polarity_b, polarity_a) in pairs
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        result = asdict(self)
+        result["compatible_polarities"] = [list(item) for item in self.effective_compatible_polarities]
+        return result
 
 
 @dataclass(frozen=True)
