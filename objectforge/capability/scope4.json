@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "kind": "studio.capability",
+  "capability_id": "objectforge.multi-object-coherent-systems.v1",
+  "title": "ObjectForge multi-object coherent systems",
+  "status": "foundation_benchmark_pending_ci",
+  "execution": "first_party_local",
+  "external_finished_model_generation_providers": false,
+  "entrypoint": "python -m objectforge.scope4 --output <directory>",
+  "canonical_formats": [
+    "model/gltf-binary",
+    "application/json"
+  ],
+  "input_contract": {
+    "required": [
+      "system intent",
+      "required capabilities",
+      "constraints",
+      "design language"
+    ],
+    "object_list_required_from_user": false,
+    "interface_list_required_from_user": false
+  },
+  "outputs": [
+    "scope4-index.json",
+    "<language>/system/system.glb",
+    "<language>/system/system-showcase.glb",
+    "<language>/system/system-plan.json",
+    "<language>/system/interface-standards.json",
+    "<language>/system/interface-endpoints.json",
+    "<language>/system/compatibility-matrix.json",
+    "<language>/system/workflows.json",
+    "<language>/system/layout.json",
+    "<language>/objects/<object-id>/object/object.glb",
+    "<language>/objects/<object-id>/manifest.json"
+  ],
+  "completion_gates": [
+    "planner compares at least three bounded system topologies",
+    "selected topology covers every mandatory system capability",
+    "at least six independently useful retained objects are delivered",
+    "at least three shared interface standards are reused across objects",
+    "all declared connections use matching standards and compatible polarities",
+    "no system object is orphaned from the compatibility graph",
+    "operational and transport workflows reference valid objects and connections",
+    "combined layout remains inside the declared footprint",
+    "unconnected objects do not overlap",
+    "all members share one design-language fingerprint per system variant",
+    "every member canonical GLB reopens",
+    "combined system GLB reopens with retained geometry",
+    "paired language variants retain one system plan and distinct model hashes",
+    "Scopes 0 through 3 rebuild successfully",
+    "no external finished-model generator supplies geometry"
+  ],
+  "benchmark": "Modular Observation and Service Cell under Field Service and Precision Lab design languages",
+  "boundary": [
+    "no manufacturing certification",
+    "no assembly sequencing",
+    "no cost optimization",
+    "no human or robot operational simulation",
+    "no unrestricted ecosystem invention"
+  ]
+}
