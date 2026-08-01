@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "studio.capability-manifest",
+  "capability_id": "capability.mnemonic-3d-separation.v1",
+  "title": "Mnemonic Body-Artifact 3D Separation",
+  "canonical_doctrine": {
+    "authority": "AlterProgramming/Agent-Command-Center:memory/registry.json",
+    "decision_refs": [
+      "visual-generation.model-first.v1",
+      "visual-generation.mnemonic-separation.v1"
+    ]
+  },
+  "availability": {
+    "status": "contract_and_validator_ready",
+    "generation_runtime": "pending",
+    "meaning": "The scene contract, example, and executable validator are implemented. A production body rig, garment solver, and rendering runtime are not yet claimed.",
+    "must_not_claim": [
+      "Do not claim a full mnemonic reconstruction runtime from this contract alone.",
+      "Do not claim cloth simulation, a production character rig, or recipient-tested delivery unless separate evidence exists.",
+      "Do not flatten conflicting body and artifact evidence into one canonical scene."
+    ]
+  },
+  "contract": {
+    "schema": "capabilities/mnemonic-3d-separation/scene.schema.json",
+    "validator": "python3 capabilities/mnemonic-3d-separation/validate_scene.py",
+    "example": "benchmarks/mnemonic-separation-contract/example.scene.json"
+  },
+  "required_layers": [
+    "embodied",
+    "artifacts",
+    "interactions",
+    "provenance",
+    "hypotheses"
+  ],
+  "acceptance": [
+    "Body and garment object identifiers are disjoint.",
+    "Every major object has provenance and confidence.",
+    "Interactions reference existing body and artifact objects.",
+    "At least one unresolved or alternative hypothesis is preserved when conflicts exist.",
+    "The scene declares reopen and reuse checks for pose, garment state, or camera variation."
+  ],
+  "next_runtime_gate": [
+    "produce a skinned body asset and detachable garment asset",
+    "execute one body motion with independent garment response",
+    "reopen the retained scene and render a second camera view",
+    "emit a completion receipt using the command-center evidence schema"
+  ]
+}

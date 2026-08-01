@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "repository.capability-bindings",
+  "repository": "AlterProgramming/Agentic-Production-Studio",
+  "authority": "AlterProgramming/Agent-Command-Center:capabilities/registry.json",
+  "canonical_authority": "AlterProgramming/Agent-Command-Center:memory/registry.json",
+  "bindings": [
+    {
+      "capability": "capability.integration-loop.v1",
+      "status": "required",
+      "applies_to": ["new production capabilities", "builder operations", "long-horizon visual work"]
+    },
+    {
+      "capability": "capability.completion-evidence-gate.v1",
+      "status": "required",
+      "applies_to": ["package completion", "benchmark claims", "runtime availability claims"]
+    },
+    {
+      "capability": "capability.mnemonic-3d-separation.v1",
+      "status": "contract_and_validator_ready",
+      "runtime_status": "generation_runtime_pending",
+      "implementation": "capabilities/mnemonic-3d-separation/capability.json"
+    }
+  ],
+  "canonical_decision_refs": [
+    "visual-generation.model-first.v1",
+    "visual-generation.mnemonic-separation.v1"
+  ]
+}

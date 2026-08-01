@@ -1,0 +1,42 @@
+name: Validate mnemonic 3D separation
+
+on:
+  push:
+    branches:
+      - main
+      - agent/integrate-mnemonic-3d-separation
+    paths:
+      - CAPABILITY_BINDINGS.json
+      - AGENTS.md
+      - capabilities/mnemonic-3d-separation/**
+      - benchmarks/mnemonic-separation-contract/**
+      - .github/workflows/mnemonic-3d-separation.yml
+  pull_request:
+    paths:
+      - CAPABILITY_BINDINGS.json
+      - AGENTS.md
+      - capabilities/mnemonic-3d-separation/**
+      - benchmarks/mnemonic-separation-contract/**
+      - .github/workflows/mnemonic-3d-separation.yml
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate example scene
+        run: python3 capabilities/mnemonic-3d-separation/validate_scene.py benchmarks/mnemonic-separation-contract/example.scene.json
+      - name: Run contract regression tests
+        run: python3 -m unittest discover -s capabilities/mnemonic-3d-separation/tests -p 'test_*.py' -v
+      - name: Verify binding status is honest
+        run: |
+          python3 - <<'PY'
+          import json
+          data = json.load(open('CAPABILITY_BINDINGS.json', encoding='utf-8'))
+          binding = next(item for item in data['bindings'] if item['capability'] == 'capability.mnemonic-3d-separation.v1')
+          assert binding['status'] == 'contract_and_validator_ready'
+          assert binding['runtime_status'] == 'generation_runtime_pending'
+          PY
