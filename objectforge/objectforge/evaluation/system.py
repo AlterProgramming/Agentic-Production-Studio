@@ -136,13 +136,20 @@ def evaluate_system_member(
     interface_parts = [part for part in builder.parts if part.semantic_part.startswith("system_interface.")]
     role_ops = [item for item in builder.operations if item.operator == "system.role_complete"]
     interface_ops = [item for item in builder.operations if item.operator == "system.interface.instantiate"]
+    raw_language = builder.functional_metadata.get("design_language") or {}
+    if isinstance(raw_language, dict):
+        retained_language_id = raw_language.get("language_id")
+        retained_language_fingerprint = raw_language.get("fingerprint")
+    else:
+        retained_language_id = raw_language
+        retained_language_fingerprint = builder.functional_metadata.get("design_language_fingerprint")
     if builder.capability_id != "objectforge.multi-object-coherent-systems.v1":
         failures.append("member does not advertise Scope 4 capability")
     if builder.functional_metadata.get("system_role") != role.object_id:
         failures.append("member role metadata differs from the system plan")
-    if builder.functional_metadata.get("design_language") != language_id:
+    if retained_language_id != language_id:
         failures.append("member design language differs from system language")
-    if builder.functional_metadata.get("design_language_fingerprint") != language_fingerprint:
+    if retained_language_fingerprint != language_fingerprint:
         failures.append("member design-language fingerprint differs from system language")
     if len(endpoint_metadata) != expected_endpoint_count:
         failures.append("member endpoint metadata count differs from system plan")
