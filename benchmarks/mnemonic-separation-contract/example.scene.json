@@ -1,0 +1,61 @@
+{
+  "scene_id": "mnemonic-separation-contract-example",
+  "layers": {
+    "embodied": [
+      {
+        "id": "body.subject",
+        "geometry": "subject.glb#body",
+        "rig": "subject.glb#armature",
+        "motion": "walk-cycle-01"
+      }
+    ],
+    "artifacts": [
+      {
+        "id": "garment.coat",
+        "geometry": "coat.glb",
+        "material": "wool-heavy",
+        "detachable": true
+      }
+    ],
+    "interactions": [
+      {
+        "id": "contact.shoulders",
+        "body_ref": "body.subject",
+        "artifact_ref": "garment.coat",
+        "kind": "contact_and_motion_transfer"
+      }
+    ],
+    "provenance": [
+      {
+        "object_ref": "body.subject",
+        "source_class": "embodied",
+        "confidence": 0.82,
+        "evidence": ["procedural gait memory", "pose reconstruction"]
+      },
+      {
+        "object_ref": "garment.coat",
+        "source_class": "artifact",
+        "confidence": 0.94,
+        "evidence": ["fabric texture", "smell association"]
+      }
+    ],
+    "hypotheses": [
+      {
+        "id": "hypothesis.body-dominant",
+        "mode": "body_dominant",
+        "disputed_properties": ["temperature_experience"]
+      },
+      {
+        "id": "hypothesis.unresolved",
+        "mode": "unresolved",
+        "disputed_properties": ["proximity_to_fire"]
+      }
+    ]
+  },
+  "reuse_checks": {
+    "reopen": true,
+    "alternate_pose": true,
+    "alternate_garment_state": true,
+    "alternate_camera": true
+  }
+}
