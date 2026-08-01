@@ -26,38 +26,60 @@ jobs:
         run: |
           set -o pipefail
           python -m objectforge.scope4 --output /tmp/objectforge-scope4 2>&1 | tee /tmp/objectforge-scope4-build.log
-      - name: Upload Scope 4 build diagnostics
+      - name: Upload Scope 4 build evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: objectforge-scope4-build-diagnostics
-          path: /tmp/objectforge-scope4-build.log
+          name: objectforge-scope4-build-evidence
+          path: |
+            /tmp/objectforge-scope4-build.log
+            /tmp/objectforge-scope4
           if-no-files-found: error
           retention-days: 14
       - name: Validate Scope 4 delivery matrix
+        shell: bash
         run: |
-          python - <<'PY'
+          set -o pipefail
+          python - <<'PY' 2>&1 | tee /tmp/objectforge-scope4-validation.log
           import json
           from pathlib import Path
+
           root = Path('/tmp/objectforge-scope4')
           index = json.loads((root / 'scope4-index.json').read_text())
+          print('scope4-index:', json.dumps(index, indent=2, sort_keys=True))
           assert index['status'] == 'passed', index
-          assert index['language_matrix']['canonical_object_glbs'] == 12
-          assert index['language_matrix']['canonical_system_glbs'] == 2
+          assert index['language_matrix']['canonical_object_glbs'] == 12, index['language_matrix']
+          assert index['language_matrix']['canonical_system_glbs'] == 2, index['language_matrix']
           for language in ('field_service', 'precision_lab'):
               variant = root / language
-              assert (variant / 'system/system.glb').stat().st_size > 1_000_000
-              assert (variant / 'system/system-showcase.glb').stat().st_size > 1_000_000
+              system_glb = variant / 'system/system.glb'
+              showcase_glb = variant / 'system/system-showcase.glb'
               validation = json.loads((variant / 'system/validation.json').read_text())
-              assert validation['passed'] is True, validation
               compatibility = json.loads((variant / 'system/compatibility-matrix.json').read_text())
-              assert compatibility['all_declared_connections_compatible'] is True
-              assert compatibility['orphan_object_count'] == 0
+              print(language, 'system bytes', system_glb.stat().st_size, 'showcase bytes', showcase_glb.stat().st_size)
+              print(language, 'validation', json.dumps(validation, indent=2, sort_keys=True))
+              print(language, 'compatibility', json.dumps(compatibility, indent=2, sort_keys=True))
+              assert system_glb.stat().st_size > 1_000_000, system_glb.stat().st_size
+              assert showcase_glb.stat().st_size > 1_000_000, showcase_glb.stat().st_size
+              assert validation['passed'] is True, validation
+              assert compatibility['all_declared_connections_compatible'] is True, compatibility
+              assert compatibility['orphan_object_count'] == 0, compatibility
               for object_id in ('service_hub', 'work_emitter', 'protected_carrier', 'instrument_caddy', 'power_module', 'analysis_module'):
                   member = variant / 'objects' / object_id
-                  assert (member / 'object/object.glb').stat().st_size > 200_000
-                  assert json.loads((member / 'validation.json').read_text())['passed'] is True
+                  member_glb = member / 'object/object.glb'
+                  member_validation = json.loads((member / 'validation.json').read_text())
+                  print(language, object_id, 'bytes', member_glb.stat().st_size, 'passed', member_validation['passed'])
+                  assert member_glb.stat().st_size > 200_000, (language, object_id, member_glb.stat().st_size)
+                  assert member_validation['passed'] is True, member_validation
           PY
+      - name: Upload Scope 4 validation diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: objectforge-scope4-validation-diagnostics
+          path: /tmp/objectforge-scope4-validation.log
+          if-no-files-found: warn
+          retention-days: 14
       - run: python -m objectforge.preview_scope4 --input /tmp/objectforge-scope4 --output /tmp/objectforge-scope4-previews
       - run: test -s /tmp/objectforge-scope4-previews/scope4-system-comparison.png
       - run: python -m objectforge.scope3 --output /tmp/objectforge-scope3-regression
