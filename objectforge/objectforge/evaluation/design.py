@@ -28,8 +28,11 @@ def evaluate_design_language(builder: GrammarAssetBuilder, language: DesignLangu
     role_materials = set(language.material_roles.values())
     role_coverage = sorted(materials & role_materials)
 
-    if builder.capability_id != "objectforge.procedural-design-language.v1":
-        failures.append("builder does not advertise Scope 3 capability")
+    if builder.capability_id not in {
+        "objectforge.procedural-design-language.v1",
+        "objectforge.multi-object-coherent-systems.v1",
+    }:
+        failures.append("builder does not advertise a design-language-capable ObjectForge capability")
     if metadata.get("language_id") != language.language_id:
         failures.append("retained language identity differs from requested language")
     if metadata.get("fingerprint") != language.fingerprint:
