@@ -3,9 +3,13 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import numpy as np
+import trimesh
+
 from objectforge.delivery_scope4 import build_scope4, build_system_variant
 from objectforge.design.language import get_design_language
 from objectforge.evaluation.system import evaluate_system_plan
+from objectforge.smooth_preview import _apply_pose
 from objectforge.systems.planner import benchmark_system_brief, default_system_planner
 
 
@@ -65,3 +69,13 @@ def test_scope4_builds_two_languages_with_one_system_plan(tmp_path: Path) -> Non
     assert len({item["system_glb_sha256"] for item in variants}) == 2
     for role_id in variants[0]["object_hashes"]:
         assert variants[0]["object_hashes"][role_id] != variants[1]["object_hashes"][role_id]
+
+
+def test_pose_preserves_transform_only_scene_nodes() -> None:
+    scene = trimesh.Scene()
+    scene.graph.update(frame_from=scene.graph.base_frame, frame_to="camera_mount", matrix=np.eye(4))
+
+    _apply_pose(scene, {"camera_mount": ("y", 15.0)})
+
+    assert scene.graph["camera_mount"][1] is None
+    assert scene.dump(concatenate=False) == []
