@@ -1,6 +1,23 @@
 # Agentic Production Studio Agent Instructions
 
-Read `CAPABILITY_BINDINGS.json` before significant visual-production work.
+## Session zero: initialize in Agent Command Center
+
+Before reading task implementation files, changing source, dispatching long-horizon work, or making a completion claim, read `.agent/command-center.json` and initialize through `AlterProgramming/Agent-Command-Center`.
+
+Preferred local command:
+
+```bash
+python3 "$COMMAND_CENTER_ROOT/scripts/session_bootstrap.py" \
+  --session-id <stable-session-id> \
+  --repository AlterProgramming/Agentic-Production-Studio \
+  --scope visual-production \
+  --text "<task summary>" \
+  --output <handoff-or-receipt-path>
+```
+
+When Command Center is not checked out locally, use connected repository tools to read its canonical, capability, and session registries from `main`, apply the same resolution semantics, and retain an equivalent `assistant.command-center-bootstrap-receipt` in the handoff. Bootstrap is fail-closed.
+
+After initialization, read `CAPABILITY_BINDINGS.json` before significant visual-production work.
 
 For mnemonic or memory-informed reconstruction:
 
