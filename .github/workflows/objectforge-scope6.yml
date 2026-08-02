@@ -1,0 +1,57 @@
+name: Validate ObjectForge Scope 6
+
+on:
+  pull_request:
+    paths:
+      - 'objectforge/**'
+      - '.github/workflows/objectforge-scope6.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  scope6:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -e 'objectforge[test,preview]'
+      - run: pytest -q objectforge/tests/test_scope6.py
+      - run: python -m objectforge.scope6 --output /tmp/objectforge-scope6
+      - name: Validate Scope 6 evidence
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path('/tmp/objectforge-scope6')
+          index = json.loads((root / 'scope6-index.json').read_text())
+          assert index['status'] == 'passed', index
+          assert index['task_count'] == 11, index
+          assert index['human_route_count'] == index['task_count'], index
+          assert index['robot_route_count'] >= 5, index
+          assert index['load_case_count'] >= 5, index
+          assert index['failure_scenario_count'] >= 5, index
+          for name in ('operational-validation.json', 'reachability-matrix.json', 'load-cases.json', 'failure-injection.json', 'state-machine.json'):
+              assert (root / name).stat().st_size > 100, name
+          PY
+      - run: python -m objectforge.scope5 --output /tmp/objectforge-scope5-regression
+      - run: test "$(python -c "import json; print(json.load(open('/tmp/objectforge-scope5-regression/scope5-index.json'))['status'])")" = passed
+      - run: python -m objectforge.scope4 --output /tmp/objectforge-scope4-regression
+      - run: test "$(python -c "import json; print(json.load(open('/tmp/objectforge-scope4-regression/scope4-index.json'))['status'])")" = passed
+      - name: Package Scope 6 evidence
+        run: |
+          cd /tmp
+          zip -qr objectforge-scope6-delivery.zip objectforge-scope6
+      - uses: actions/upload-artifact@v4
+        with:
+          name: objectforge-scope6-delivery
+          path: |
+            /tmp/objectforge-scope6
+            /tmp/objectforge-scope6-delivery.zip
+          if-no-files-found: error
+          retention-days: 14
