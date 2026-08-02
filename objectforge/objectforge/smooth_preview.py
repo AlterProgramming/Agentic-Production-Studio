@@ -39,7 +39,10 @@ def _apply_pose(scene: trimesh.Scene, pose: PoseMap | None) -> None:
             rotation = trimesh.transformations.rotation_matrix(
                 math.radians(float(degrees)), _axis_vector(axis), point=pivot
             )
-            scene.graph.update(frame_to=node, matrix=rotation @ transform, geometry=geometry)
+            update = {"frame_to": node, "matrix": rotation @ transform}
+            if geometry is not None:
+                update["geometry"] = geometry
+            scene.graph.update(**update)
 
 
 def _normalize_scene_graph(scene: trimesh.Scene) -> None:

@@ -73,7 +73,7 @@ def test_scope4_builds_two_languages_with_one_system_plan(tmp_path: Path) -> Non
 
 def test_scope4_preview_normalizes_geometryless_scene_nodes() -> None:
     pytest.importorskip("cv2")
-    from objectforge.smooth_preview import _normalize_scene_graph
+    from objectforge.smooth_preview import _apply_pose, _normalize_scene_graph
 
     scene = trimesh.Scene(trimesh.creation.box())
     scene.graph.update(frame_to="group_only", matrix=np.eye(4), geometry=None)
@@ -82,6 +82,11 @@ def test_scope4_preview_normalizes_geometryless_scene_nodes() -> None:
     assert scene.graph.transforms.node_data["group_only"]["geometry"] is None
 
     _normalize_scene_graph(scene)
+
+    assert "geometry" not in scene.graph.transforms.edge_data[("world", "group_only")]
+    assert "geometry" not in scene.graph.transforms.node_data["group_only"]
+
+    _apply_pose(scene, {"group_only": ("x", -30.0)})
 
     assert "geometry" not in scene.graph.transforms.edge_data[("world", "group_only")]
     assert "geometry" not in scene.graph.transforms.node_data["group_only"]
