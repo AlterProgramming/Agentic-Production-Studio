@@ -20,7 +20,10 @@ jobs:
           python-version: '3.12'
           cache: pip
       - run: pip install -e 'objectforge[test,preview]'
-      - run: pytest -q objectforge/tests/test_scope4.py::test_scope4_plan_covers_system_goals_and_shared_interfaces
+      - run: |
+          pytest -q \
+            objectforge/tests/test_scope4.py::test_scope4_plan_covers_system_goals_and_shared_interfaces \
+            objectforge/tests/test_scope4.py::test_pose_preserves_transform_only_scene_nodes
       - name: Build Scope 4 and retain traceback
         shell: bash
         run: |
