@@ -42,9 +42,19 @@ def _apply_pose(scene: trimesh.Scene, pose: PoseMap | None) -> None:
             scene.graph.update(frame_to=node, matrix=rotation @ transform, geometry=geometry)
 
 
+def _normalize_scene_graph(scene: trimesh.Scene) -> None:
+    """Remove null geometry references that break Trimesh graph hashing."""
+    transforms = scene.graph.transforms
+    for records in (transforms.edge_data, transforms.node_data):
+        for record in records.values():
+            if record.get("geometry") is None:
+                record.pop("geometry", None)
+
+
 def _scene_meshes(path: Path, pose: PoseMap | None) -> list[trimesh.Trimesh]:
     loaded = trimesh.load(path, force="scene", process=False)
     scene = loaded if isinstance(loaded, trimesh.Scene) else trimesh.Scene(loaded)
+    _normalize_scene_graph(scene)
     _apply_pose(scene, pose)
     meshes = [mesh for mesh in scene.dump(concatenate=False) if isinstance(mesh, trimesh.Trimesh)]
     if not meshes:
