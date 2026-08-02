@@ -4,13 +4,13 @@ import json
 from pathlib import Path
 
 import numpy as np
+import pytest
 import trimesh
 
 from objectforge.delivery_scope4 import build_scope4, build_system_variant
 from objectforge.design.language import get_design_language
 from objectforge.evaluation.system import evaluate_system_plan
 from objectforge.systems.planner import benchmark_system_brief, default_system_planner
-from objectforge.smooth_preview import _normalize_scene_graph
 
 
 def test_scope4_plan_covers_system_goals_and_shared_interfaces() -> None:
@@ -72,6 +72,9 @@ def test_scope4_builds_two_languages_with_one_system_plan(tmp_path: Path) -> Non
 
 
 def test_scope4_preview_normalizes_geometryless_scene_nodes() -> None:
+    pytest.importorskip("cv2")
+    from objectforge.smooth_preview import _normalize_scene_graph
+
     scene = trimesh.Scene(trimesh.creation.box())
     scene.graph.update(frame_to="group_only", matrix=np.eye(4), geometry=None)
 
