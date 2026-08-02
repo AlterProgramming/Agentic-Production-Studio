@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "assistant.command-center-session-binding",
+  "repository": "AlterProgramming/Agentic-Production-Studio",
+  "required": true,
+  "fail_closed": true,
+  "authority": {
+    "repository": "AlterProgramming/Agent-Command-Center",
+    "branch": "main",
+    "canonical_state": "memory/registry.json",
+    "capability_registry": "capabilities/registry.json",
+    "session_registry": "sessions/registry.json",
+    "bootstrap_script": "scripts/session_bootstrap.py"
+  },
+  "local_bootstrap": {
+    "command": "python3 $COMMAND_CENTER_ROOT/scripts/session_bootstrap.py --session-id SESSION_ID --repository AlterProgramming/Agentic-Production-Studio --scope visual-production --text TASK_SUMMARY --output RECEIPT_PATH",
+    "requires_command_center_root": true
+  },
+  "connector_bootstrap": {
+    "required_reads": [
+      "AlterProgramming/Agent-Command-Center:memory/registry.json@main",
+      "AlterProgramming/Agent-Command-Center:capabilities/registry.json@main",
+      "AlterProgramming/Agent-Command-Center:sessions/registry.json@main"
+    ],
+    "rule": "Apply Command Center resolution semantics and retain an equivalent receipt before reading task implementation files or mutating repository state."
+  },
+  "receipt": {
+    "kind": "assistant.command-center-bootstrap-receipt",
+    "initialized_field": "initialized_in_command_center",
+    "required_value": true,
+    "retain_in_handoff": true
+  },
+  "prohibited": [
+    "Beginning visual-production implementation before Command Center initialization",
+    "Treating CAPABILITY_BINDINGS.json alone as session initialization",
+    "Using a stale copied registry when connected access to Command Center main exists",
+    "Making completion claims without retaining the bootstrap and completion receipts"
+  ]
+}
