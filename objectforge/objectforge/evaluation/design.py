@@ -16,7 +16,14 @@ class DesignEvaluation:
 
 def evaluate_design_language(builder: GrammarAssetBuilder, language: DesignLanguage) -> DesignEvaluation:
     failures: list[str] = []
-    metadata = builder.functional_metadata.get("design_language") or {}
+    raw_metadata = builder.functional_metadata.get("design_language") or {}
+    if isinstance(raw_metadata, str):
+        metadata = {
+            "language_id": raw_metadata,
+            "fingerprint": builder.functional_metadata.get("design_language_fingerprint"),
+        }
+    else:
+        metadata = raw_metadata
     motifs = [
         part
         for part in builder.parts
@@ -28,8 +35,11 @@ def evaluate_design_language(builder: GrammarAssetBuilder, language: DesignLangu
     role_materials = set(language.material_roles.values())
     role_coverage = sorted(materials & role_materials)
 
-    if builder.capability_id != "objectforge.procedural-design-language.v1":
-        failures.append("builder does not advertise Scope 3 capability")
+    if builder.capability_id not in {
+        "objectforge.procedural-design-language.v1",
+        "objectforge.multi-object-coherent-systems.v1",
+    }:
+        failures.append("builder does not advertise a design-language-capable ObjectForge capability")
     if metadata.get("language_id") != language.language_id:
         failures.append("retained language identity differs from requested language")
     if metadata.get("fingerprint") != language.fingerprint:
@@ -40,7 +50,10 @@ def evaluate_design_language(builder: GrammarAssetBuilder, language: DesignLangu
         failures.append("fewer than five design-language material roles are visible")
     if len(operations) != 1 or len(verified) != 1:
         failures.append("design-language application or verification receipt missing")
-    if not builder.functional_metadata.get("selected_architecture"):
+    selected_architecture = builder.functional_metadata.get("selected_architecture")
+    if not selected_architecture and builder.capability_id == "objectforge.multi-object-coherent-systems.v1":
+        selected_architecture = builder.variant
+    if not selected_architecture:
         failures.append("functional architecture identity was lost")
 
     signature = {
