@@ -112,12 +112,22 @@ def main() -> int:
         fail(".gitkeep must be a zero-byte regular file")
 
     launch_text = (root / own_launch).read_text(encoding="utf-8")
-    if own_packet not in launch_text or value["branch"] not in launch_text:
-        fail("launch prompt does not bind its own packet and branch")
-    forbidden_markers = value.get("forbidden_launch_markers", [])
-    found = [marker for marker in forbidden_markers if marker and marker in launch_text]
-    if found:
-        fail(f"launch prompt leaks unassigned markers: {found}")
+    if own_packet not in launch_text or own_contract not in launch_text or value["branch"] not in launch_text:
+        fail("launch prompt does not bind its own packet, contract, and branch")
+
+    experiment_id = re.escape(value["experiment_id"])
+    packet_pattern = re.compile(
+        rf"benchmarks/progressive-design/experiments/{experiment_id}/packets/[A-Za-z0-9-]+\.(?:md|json)"
+    )
+    launch_packets = set(packet_pattern.findall(launch_text))
+    allowed_launch_packets = {own_packet, own_contract}
+    if launch_packets - allowed_launch_packets:
+        fail("launch prompt references an unassigned packet")
+
+    branch_pattern = re.compile(rf"agent/progressive-design-{experiment_id}-[A-Za-z0-9-]+")
+    launch_branches = set(branch_pattern.findall(launch_text))
+    if launch_branches - {value["branch"]}:
+        fail("launch prompt references an unassigned implementation branch")
 
     policy = value["contamination_policy"]
     if policy.get("exclusion_only_references_count_as_contamination") is not False:
