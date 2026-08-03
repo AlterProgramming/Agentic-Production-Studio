@@ -1,5 +1,11 @@
-# Blind observations
+# INVALIDATED — NO BLIND OBSERVATIONS
 
-Four randomized candidate packets were prepared after implementation and screenshot capture. Independent evaluator execution was not available in the coordinator environment, so no category scores or preference observations have been recorded.
+Do not evaluate the randomized candidate packets.
 
-Do not infer a winner from condition order, coordinator commentary, or the existence of the sealed mapping.
+The implementation stage used one shared reasoning context for A–D, creating material cross-condition leakage. The experiment was framed as independent alternatives, so later blind scoring cannot repair the invalid execution boundary.
+
+No ranking, preference, or qualitative observation from these artifacts is admissible as benchmark evidence.
+
+Sequential evolution remains a separate research question, but this run cannot be retroactively converted into that benchmark because inheritance was not declared or controlled.
+
+See `../INVALIDATED.md`.
