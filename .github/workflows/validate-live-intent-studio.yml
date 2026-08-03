@@ -10,6 +10,7 @@ on:
       - tools/studio_console.py
       - tools/openai_reference_recreation_adapter.py
       - tools/openai_video_shot_adapter.py
+      - tools/local_video_shot_adapter.py
       - tools/video_project.py
       - contracts/intent-event.schema.json
       - contracts/video-project.schema.json
@@ -27,6 +28,7 @@ on:
       - tools/studio_console.py
       - tools/openai_reference_recreation_adapter.py
       - tools/openai_video_shot_adapter.py
+      - tools/local_video_shot_adapter.py
       - tools/video_project.py
       - contracts/intent-event.schema.json
       - contracts/video-project.schema.json
@@ -61,6 +63,7 @@ jobs:
           tools/studio_console.py
           tools/openai_reference_recreation_adapter.py
           tools/openai_video_shot_adapter.py
+          tools/local_video_shot_adapter.py
           tools/video_project.py
       - run: python3 -m json.tool contracts/intent-event.schema.json >/dev/null
       - run: python3 -m json.tool contracts/video-project.schema.json >/dev/null
