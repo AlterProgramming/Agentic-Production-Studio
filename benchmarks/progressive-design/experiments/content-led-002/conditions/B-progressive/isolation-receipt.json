@@ -1,0 +1,22 @@
+{
+  "experiment_id": "content-led-002",
+  "condition_id": "B",
+  "assigned_branch": "agent/progressive-design-content-led-002-B-progressive",
+  "frozen_setup_commit": "supplied externally at launch",
+  "source_empty_at_initialization": true,
+  "source_initial_entries": [
+    {
+      "name": ".gitkeep",
+      "size_bytes": 0
+    }
+  ],
+  "existing_implementation_provided": false,
+  "starter_design_provided": false,
+  "shared_code": false,
+  "prior_output_exposure": false,
+  "another_condition_directory_inspected": false,
+  "implementation_budget": "one bounded implementation pass",
+  "environment_differences": [],
+  "changed_paths": [],
+  "validation_limitations": []
+}

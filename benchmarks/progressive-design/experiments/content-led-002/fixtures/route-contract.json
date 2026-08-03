@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "routes": [
+    {"path":"/","id":"overview","required_content":["mission overview","learning-path decision","current selection state","entry points to all required routes"]},
+    {"path":"/mission","id":"mission","required_content":["chronological milestones","milestone detail interaction","links to related people, spacecraft, artifacts"]},
+    {"path":"/people","id":"people","required_content":["all three crew members","role and responsibility","links to related mission events"]},
+    {"path":"/spacecraft","id":"spacecraft","required_content":["Saturn V","Columbia","Eagle","functional relationships"]},
+    {"path":"/artifacts","id":"artifacts","required_content":["all frozen artifacts","artifact detail interaction","source acknowledgement"]}
+  ],
+  "states": [
+    {"id":"path-none","requirement":"No learning path is selected; all three choices remain understandable and actionable."},
+    {"id":"path-selected","requirement":"One choice is visibly and programmatically selected, its recommended sequence is available, and the visitor can continue."},
+    {"id":"path-changed","requirement":"Changing the selection updates the recommended sequence without losing route access."},
+    {"id":"path-cleared","requirement":"The visitor can return to the unselected state."},
+    {"id":"milestone-detail-open","requirement":"A mission milestone exposes its full summary and related records; close and focus behavior are defined."},
+    {"id":"artifact-detail-open","requirement":"An artifact exposes description and connected mission events; close and focus behavior are defined."},
+    {"id":"reduced-motion","requirement":"The experience remains understandable and complete with reduced motion requested."}
+  ],
+  "mobile_sensitive_interaction": {
+    "interaction": "learning-path selection and detail disclosure",
+    "requirements": ["usable at 320 CSS px viewport width","touch targets at least 44 by 44 CSS px where applicable","no horizontal page overflow","selected and expanded states remain visible without hover","focus is not obscured"]
+  },
+  "link_behavior": {
+    "internal": "Required routes must work when loaded directly and through in-product navigation.",
+    "external": "Source links may open external NASA resources and must be distinguishable. The implementation must remain complete if those resources are unavailable."
+  }
+}

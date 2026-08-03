@@ -1,0 +1,18 @@
+Work in `AlterProgramming/Agentic-Production-Studio`.
+
+Use this frozen setup commit:
+
+<FROZEN_SETUP_COMMIT_SHA>
+
+Create this branch directly from that commit:
+
+agent/progressive-design-content-led-002-A-control
+
+Read only these two assignment files first:
+
+benchmarks/progressive-design/experiments/content-led-002/packets/A-control.md
+benchmarks/progressive-design/experiments/content-led-002/packets/A-control.json
+
+Run the preflight command contained in the packet contract. After it passes, read only the contract's allowlisted paths, complete the assigned implementation and evidence, commit, push, open or update the assigned pull request, report, and stop.
+
+Treat contamination as actual operative material outside this assignment, not generic exclusion wording or validation metadata. If preflight fails, report the concrete repository failure.

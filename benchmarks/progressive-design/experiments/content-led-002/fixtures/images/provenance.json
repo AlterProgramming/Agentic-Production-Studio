@@ -1,0 +1,177 @@
+{
+  "version": "1.0",
+  "approval": "All six binaries are approved immutable benchmark inputs.",
+  "authorship": "Original factual diagrams created during Session 0 setup for this experiment.",
+  "license": "Setup-authored diagrams are committed for unrestricted use within this benchmark and its evidence.",
+  "nasa_boundary": "No NASA insignia, logotype, or mission patch is included. NASA is cited as the factual source and no endorsement is implied.",
+  "media_guideline_source": {
+    "id": "nasa-media-guidelines",
+    "title": "NASA Images and Media Usage Guidelines",
+    "publisher": "NASA",
+    "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+  },
+  "images": [
+    {
+      "filename": "01-mission-trajectory.png",
+      "title": "Mission trajectory",
+      "alt": "Diagram showing Earth launch, translunar flight, lunar operations, and return flight. Not to scale.",
+      "mime_type": "image/png",
+      "width": 1000,
+      "height": 643,
+      "sha256": "103167201b1ececbf0b3fe4b39bca27b7ea017d1b672e3667c43807f44d716a8",
+      "source_method": "setup-authored factual diagram",
+      "factual_sources": [
+        {
+          "id": "nasa-mission-overview",
+          "title": "Apollo 11 Mission Overview",
+          "publisher": "NASA",
+          "url": "https://www.nasa.gov/history/apollo-11-mission-overview/"
+        }
+      ],
+      "transformations": "Original vector-like raster drawing produced for the freeze; no source photograph was copied.",
+      "approved": true
+    },
+    {
+      "filename": "02-launch-stack.png",
+      "title": "Launch and spacecraft stack",
+      "alt": "Diagram grouping the Saturn V stages, Columbia command and service module, and Eagle lunar module.",
+      "mime_type": "image/png",
+      "width": 1000,
+      "height": 643,
+      "sha256": "e6316e9479376773c79fbb6b2730ff505efc871fa306202cc9ddaeb165beec1f",
+      "source_method": "setup-authored factual diagram",
+      "factual_sources": [
+        {
+          "id": "nasa-mission-overview",
+          "title": "Apollo 11 Mission Overview",
+          "publisher": "NASA",
+          "url": "https://www.nasa.gov/history/apollo-11-mission-overview/"
+        },
+        {
+          "id": "nasa-saturn-step",
+          "title": "Saturn V Step-by-Step",
+          "publisher": "NASA History",
+          "url": "https://www.nasa.gov/wp-content/uploads/static/history/afj/pdf/saturn-V-step-by-step.pdf"
+        },
+        {
+          "id": "nasa-launch",
+          "title": "Apollo 11 Launch",
+          "publisher": "NASA Science",
+          "url": "https://science.nasa.gov/resource/apollo-11-launch/"
+        }
+      ],
+      "transformations": "Original vector-like raster drawing produced for the freeze; no source photograph was copied.",
+      "approved": true
+    },
+    {
+      "filename": "03-lunar-orbit-operations.png",
+      "title": "Lunar orbit operations",
+      "alt": "Diagram showing Columbia remaining in lunar orbit while Eagle descends and later returns.",
+      "mime_type": "image/png",
+      "width": 1000,
+      "height": 643,
+      "sha256": "564383cf84d75eb6ea5bec940c5483b2172e65848bd1930ea26a8f0cfa2e4832",
+      "source_method": "setup-authored factual diagram",
+      "factual_sources": [
+        {
+          "id": "nasa-mission-overview",
+          "title": "Apollo 11 Mission Overview",
+          "publisher": "NASA",
+          "url": "https://www.nasa.gov/history/apollo-11-mission-overview/"
+        },
+        {
+          "id": "nasa-eagle-land",
+          "title": "The Eagle Prepares to Land",
+          "publisher": "NASA Science",
+          "url": "https://science.nasa.gov/resource/the-eagle-prepares-to-land/"
+        },
+        {
+          "id": "nasa-eagle-return",
+          "title": "Eagle’s Return",
+          "publisher": "NASA Science",
+          "url": "https://science.nasa.gov/resource/eagles-return/"
+        }
+      ],
+      "transformations": "Original vector-like raster drawing produced for the freeze; no source photograph was copied.",
+      "approved": true
+    },
+    {
+      "filename": "04-landing-sequence.png",
+      "title": "Descent and landing sequence",
+      "alt": "Simplified sequence showing Eagle moving through powered descent, approach, final descent, and landing.",
+      "mime_type": "image/png",
+      "width": 1000,
+      "height": 643,
+      "sha256": "dada1e5f2abeac3a26ed890da041e61fcf9e46cdc3cc59d46c074ac4bb8c9bcb",
+      "source_method": "setup-authored factual diagram",
+      "factual_sources": [
+        {
+          "id": "nasa-mission-overview",
+          "title": "Apollo 11 Mission Overview",
+          "publisher": "NASA",
+          "url": "https://www.nasa.gov/history/apollo-11-mission-overview/"
+        },
+        {
+          "id": "nasa-surface-journal",
+          "title": "Apollo 11 Lunar Surface Journal — Mission Overview",
+          "publisher": "NASA History",
+          "url": "https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11ov.html"
+        }
+      ],
+      "transformations": "Original vector-like raster drawing produced for the freeze; no source photograph was copied.",
+      "approved": true
+    },
+    {
+      "filename": "05-surface-activity.png",
+      "title": "Surface activity",
+      "alt": "Diagram listing exit and mobility, documentation, sample collection, and experiment deployment.",
+      "mime_type": "image/png",
+      "width": 400,
+      "height": 258,
+      "sha256": "2744564f0e6d02a317187d618660b66a198d92807db08e210b42e8193f3698e9",
+      "source_method": "setup-authored factual diagram",
+      "factual_sources": [
+        {
+          "id": "nasa-mission-overview",
+          "title": "Apollo 11 Mission Overview",
+          "publisher": "NASA",
+          "url": "https://www.nasa.gov/history/apollo-11-mission-overview/"
+        },
+        {
+          "id": "nasa-surface-journal",
+          "title": "Apollo 11 Lunar Surface Journal — Mission Overview",
+          "publisher": "NASA History",
+          "url": "https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11ov.html"
+        }
+      ],
+      "transformations": "Original vector-like raster drawing produced for the freeze; palette-optimized and resized for durable repository storage; no source photograph was copied.",
+      "approved": true
+    },
+    {
+      "filename": "06-return-recovery.png",
+      "title": "Return and recovery",
+      "alt": "Diagram showing lunar ascent, rendezvous, trans-Earth flight, re-entry, and Pacific splashdown.",
+      "mime_type": "image/png",
+      "width": 400,
+      "height": 258,
+      "sha256": "a7534863b4c91a20e09d82fcb9992b179d9d10f42fdfffb4917d86011c17bc67",
+      "source_method": "setup-authored factual diagram",
+      "factual_sources": [
+        {
+          "id": "nasa-mission-overview",
+          "title": "Apollo 11 Mission Overview",
+          "publisher": "NASA",
+          "url": "https://www.nasa.gov/history/apollo-11-mission-overview/"
+        },
+        {
+          "id": "nasa-eagle-return",
+          "title": "Eagle’s Return",
+          "publisher": "NASA Science",
+          "url": "https://science.nasa.gov/resource/eagles-return/"
+        }
+      ],
+      "transformations": "Original vector-like raster drawing produced for the freeze; palette-optimized and resized for durable repository storage; no source photograph was copied.",
+      "approved": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "version": "1.0",
+  "experiment_id": "content-led-002",
+  "verified_at": "2026-08-03T23:20:00Z",
+  "expected_only_entry": {"name":".gitkeep","type":"file","size_bytes":0},
+  "sources": [
+    {"path":"conditions/A-control/source","empty_implementation_state":true},
+    {"path":"conditions/B-progressive/source","empty_implementation_state":true},
+    {"path":"conditions/C-spatial/source","empty_implementation_state":true},
+    {"path":"conditions/D-reconciled/source","empty_implementation_state":true}
+  ]
+}
