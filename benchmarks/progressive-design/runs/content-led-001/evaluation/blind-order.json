@@ -1,4 +1,6 @@
 {
-  "order": [],
-  "mapping_sealed": true
+  "order": ["01", "02", "03", "04"],
+  "mapping_sealed": true,
+  "candidate_artifacts_prepared": true,
+  "evaluation_started": false
 }
