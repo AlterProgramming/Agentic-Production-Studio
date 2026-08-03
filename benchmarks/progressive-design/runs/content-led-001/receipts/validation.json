@@ -1,4 +1,6 @@
 {
+  "status": "invalidated",
+  "admissible_as_benchmark_evidence": false,
   "schema_validation": "manifest structure checked against committed schema-required fields; external jsonschema package not required",
   "json_parse": true,
   "brief_hash_verified": true,
@@ -23,11 +25,18 @@
     "reduced_motion_media": true,
     "library_of_congress_links_present": true
   },
+  "invalidation_reasons": [
+    "All four conditions were implemented sequentially inside one shared reasoning context.",
+    "Material cross-condition leakage prevents credible independent-condition comparison.",
+    "No independent blind evaluator session was used."
+  ],
   "limitations": [
-    "Independent workers were unavailable. All four conditions were implemented sequentially in one coordinator reasoning context, so the run does not satisfy uncontaminated causal-benchmark isolation.",
+    "The run is invalidated and excluded from all benchmark conclusions regardless of the implementation checks that passed.",
     "The execution environment blocked loopback HTTP navigation. Chromium rendered route-specific standalone documents, but refresh-safe production server routing was not validated.",
     "Approved Library of Congress image binaries were unavailable. Item links, captions, alt text, and credits were retained; non-documentary tonal fields were used rather than fabricated photographs.",
-    "External Library of Congress destinations were counted but not followed during browser validation.",
-    "No independent blind evaluator was available; no winner is declared."
-  ]
+    "External Library of Congress destinations were counted but not followed during browser validation."
+  ],
+  "reuse_prohibited": true,
+  "replacement_required": true,
+  "invalidation_record": "../INVALIDATED.md"
 }
