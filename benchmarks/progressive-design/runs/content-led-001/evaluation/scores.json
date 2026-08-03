@@ -1,4 +1,8 @@
 {
+  "status": "invalidated",
   "evaluations": [],
-  "overall_preference": null
+  "overall_preference": null,
+  "scoring_prohibited": true,
+  "admissible_as_benchmark_evidence": false,
+  "reason": "A-D were implemented sequentially in one shared reasoning context while framed as independent conditions. Blind scoring cannot repair the leakage."
 }
