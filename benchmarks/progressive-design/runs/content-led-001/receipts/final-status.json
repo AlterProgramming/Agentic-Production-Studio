@@ -1,13 +1,21 @@
 {
+  "status": "invalidated",
+  "admissible_as_benchmark_evidence": false,
+  "count_toward_validation_sequence": false,
+  "winner_declared": false,
   "conditions_implemented": ["A", "B", "C", "D"],
   "screenshots_captured": 16,
   "contact_sheets_created": 4,
   "candidate_packets_created": 4,
   "browser_engine": "Chromium",
   "independent_workers": false,
+  "shared_reasoning_context": true,
+  "material_cross_condition_leakage": true,
   "causal_benchmark_valid": false,
   "independent_evaluator": false,
-  "winner_declared": false,
+  "reuse_prohibited": true,
+  "replacement_must_start_from_new_frozen_setup": true,
   "branch": "agent/progressive-design-content-led-001",
-  "pull_request": 22
+  "pull_request": 22,
+  "invalidation_record": "../INVALIDATED.md"
 }
