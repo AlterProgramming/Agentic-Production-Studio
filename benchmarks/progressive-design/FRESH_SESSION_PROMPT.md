@@ -1,195 +1,77 @@
-# Single-Condition Fresh-Session Prompt
+# Single-Condition Fresh-Session Contract
 
-Use this prompt only for one condition implementation session.
+Use this contract for one implementation role only. The operative role is defined exclusively by the sealed packet named in the launch message.
 
-This session owns exactly one condition. It does not coordinate, launch, summon, simulate, implement, inspect, integrate, or evaluate any other condition.
+## Launch Inputs
 
-The user manually launches the other benchmark sessions. See `MANUAL_SESSION_ORCHESTRATION.md` for the complete relay.
+A valid launch message contains only:
 
----
+- the repository;
+- one full 40-character frozen setup commit SHA;
+- one assigned branch;
+- one sealed packet path.
 
-You are implementing one isolated Progressive Design benchmark condition from a blank state.
+It must not summarize unassigned instruction stacks, enumerate sibling packets, or reproduce material that the assigned session is forbidden to inspect.
 
-## Assigned Role
+## Contamination Test
 
-You will receive one assigned condition: A, B, C, or D.
+Stop only when this conversation contains operative material outside the assigned packet, such as:
 
-Complete only that condition. Do not create work for another condition in this session. Do not claim that you launched or delegated to independent agents or sessions.
+- the contents of another sealed packet;
+- source, renders, evidence, evaluation, ranking, or conclusions from an unassigned implementation;
+- instructions assigning this session more than one implementation role;
+- implementation-specific corrections learned from an unassigned output.
 
-## Inputs
+The following do **not** constitute contamination:
 
-You will receive:
+- a generic statement that unassigned material is forbidden;
+- an allowlist or write boundary;
+- the existence of other directories in the repository;
+- names appearing only in validation metadata or exclusion rules.
 
-1. One frozen product brief and immutable content fixtures.
-2. One sealed condition prompt.
-3. A route, state, evidence, and implementation-budget contract.
-4. The exact frozen base commit.
-5. One assigned branch, source directory, and evidence directory.
+Do not infer contamination merely because the benchmark has multiple sealed roles. Judge only material actually supplied to the current conversation.
 
-You will not receive an existing site, starter design, component library, visual reference implementation, prior condition source, or another condition's renders.
+## Required Preflight
 
-The sealed condition prompt is the only design instruction for this session. Condition A must not read the Progressive Design doctrine. Conditions B–D may read only the doctrine layers explicitly assigned by their packet.
+Before design work:
 
-## Objective
+1. Resolve the supplied frozen setup commit SHA.
+2. Create the assigned branch directly from that commit.
+3. Read the assigned Markdown packet and its adjacent machine contract.
+4. Run:
 
-Create the strongest complete product experience supported by the frozen material under the assigned condition.
+   ```bash
+   python3 tools/validate_progressive_design_packet.py \
+     --root . \
+     --contract <assigned-packet-json>
+   ```
 
-The frozen brief—not a prior interface—is the foundation. Preserve all required facts, copy, data, functionality, routes, states, constraints, and approved assets. Do not invent sections, filler, fake data, decorative complexity, or explanatory design rationale.
+5. Read only paths listed by the validated contract.
+6. Confirm that the assigned source directory contains only a zero-byte `.gitkeep`.
+7. Confirm that the changed-path boundary is the assigned condition directory.
 
-Originate the information architecture, composition, interaction model, responsive behavior, and visual expression from the blank state.
+If any preflight check fails, report that concrete failure. Do not substitute a speculative contamination claim.
 
-## Blank-State Contract
+## Implementation
 
-Begin from the exact frozen base commit on the assigned branch.
+Use only the assigned packet and its allowed shared inputs. Originate one complete implementation from the blank source state. Do not modify frozen inputs or inspect unassigned outputs.
 
-Confirm that the assigned source directory is empty before writing implementation code.
-
-Do not:
-
-- reconstruct or imitate a prior implementation;
-- inspect another condition branch or directory;
-- assume an existing hierarchy, grid, page composition, component system, or visual identity;
-- treat another condition as a draft to improve;
-- inherit CSS, components, scripts, generated assets, layout templates, tokens, or starter code;
-- change the frozen brief or shared fixtures;
-- preserve arbitrary visual decisions that are not present in the frozen inputs.
-
-What remains constant across conditions is the product problem and evidence contract—not the design solution.
-
-## Write Boundary
-
-Write only inside the assigned condition directory:
-
-```text
-benchmarks/progressive-design/runs/<experiment-id>/conditions/<assigned-condition>/
-```
-
-Implementation belongs in `source/`. Evidence and receipts belong in `evidence/` or the assigned condition root when required by the manifest.
-
-Do not modify:
-
-- `FROZEN_BRIEF.md`;
-- shared fixtures;
-- the doctrine;
-- another condition directory;
-- comparisons;
-- evaluation files;
-- candidate mappings;
-- coordinator receipts outside the assigned boundary.
-
-Before committing, inspect the changed paths and reject any write outside the assigned boundary.
-
-## Isolation Receipt
-
-Record:
-
-- frozen base commit;
-- assigned branch;
-- assigned condition;
-- whether the source directory was empty at initialization;
-- initial source-directory entries;
-- whether any implementation code was shared;
-- whether any prior condition output was seen;
-- whether another condition directory was inspected;
-- actual implementation budget used;
-- unavoidable environmental differences;
-- changed-path list;
-- real validation limitations.
-
-## Condition Behavior
-
-Use only the assigned sealed packet. The summary below identifies the intended boundary but does not replace that packet.
-
-### Condition A — Control
-
-Use ordinary strong product-design judgment. Produce a polished, responsive, credible implementation. Do not read or use the Progressive Design doctrine.
-
-### Condition B — Progressive
-
-Apply only Progressive Design: integrity, composition, system, identity, interaction, authorship, and critique/elevation.
-
-### Condition C — Spatial
-
-Apply Progressive Design plus Spatial Intelligence and the private construction layer. Do not use Visitor-Facing Reconciliation.
-
-### Condition D — Reconciled
-
-Apply the complete assigned stack from a blank state. Condition D is not a revision of C and must not inspect C.
-
-## Required Process
-
-1. Verify the frozen base commit and assigned branch.
-2. Read and hash the frozen brief.
-3. Confirm the assigned source directory begins empty.
-4. Confirm the write boundary.
-5. Extract the required facts, actions, routes, states, constraints, and assets.
-6. Originate and implement only the assigned condition.
-7. Render the required desktop and mobile evidence.
-8. Validate routes, links, state, overflow, keyboard focus, contrast, legibility, and reduced motion.
-9. State the actual validation boundary. Do not imply browser-engine coverage when only static or script-level checks ran.
-10. Produce the evidence index and isolation receipt.
-11. Inspect changed paths and commit only the assigned condition files.
-12. Stop at the handoff boundary.
-
-## Required Evidence
-
-Produce:
-
-- complete runnable source;
-- desktop primary-page render;
-- desktop secondary-page render;
-- mobile primary-page render;
-- mobile interaction-state render;
-- route and link validation;
-- application-state validation;
-- responsive overflow check;
-- keyboard and focus check;
-- contrast and legibility review;
-- reduced-motion review;
-- frozen-content fidelity note;
-- blank-state and isolation receipt;
-- actual validation limitations.
-
-## Public-Surface Restrictions
-
-Do not expose benchmark language, condition names, internal reasoning, agent instructions, verification notes, hierarchy labels, design-system terminology, alignment guides, breakpoint indicators, debug controls, publishing notes, implementation status, or evaluator information in the production interface.
-
-A private debug layer may exist only when the assigned condition permits it. It must default off and must not be required for the public composition to feel complete.
+Produce all evidence required by the assigned evidence contract. State the real validation boundary; do not claim browser coverage from static checks.
 
 ## Completion
 
-This session is complete only when one assigned implementation, its evidence, validations, limitations, fidelity note, isolation receipt, and commit exist.
+Commit and push only assigned-condition paths. Open or update the assigned pull request.
 
-Do not compare conditions. Do not prepare blind evaluation. Do not declare a winner.
+Report:
 
-End by providing:
-
-- assigned condition;
+- assigned role;
 - branch;
-- commit SHA;
+- implementation commit SHA;
+- frozen setup commit SHA;
 - frozen brief hash;
 - changed paths;
-- validation coverage and limitations;
-- confirmation that no other condition was inspected or implemented;
-- a copyable instruction telling the user which role to launch next, without attempting to launch it yourself.
+- tests and evidence paths;
+- validation limitations;
+- any genuine blocker.
 
----
-
-## Session Launch Fields
-
-```text
-Experiment ID:
-Task family: content-led | transactional | expressive
-Assigned condition: A | B | C | D
-Frozen base commit:
-Assigned branch:
-Frozen brief path:
-Frozen brief SHA-256:
-Condition source path:
-Condition evidence path:
-Source directory confirmed empty: yes | no
-Implementation budget:
-Required routes/states:
-Required evidence:
-Known environment limitations:
-```
+Do not compare implementations, predict outcomes, prepare blind evaluation, or provide another implementation role's prompt.
