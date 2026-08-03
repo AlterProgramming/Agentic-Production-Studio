@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "project_id": "ff7-intermission-orb-presence-local",
+  "output_root": "video-runs",
+  "rate_policy": {
+    "requests_per_minute": 120,
+    "burst": 1,
+    "max_retries": 1,
+    "base_backoff_seconds": 0,
+    "max_backoff_seconds": 0
+  },
+  "shots": [
+    {
+      "shot_id": "orb-presence",
+      "title": "Orb Presence",
+      "prompt": "A restrained cinematic close portrait in Midgar: Yuffie in her Moogle cape calmly presents a hovering green materia orb above her raised finger. The world breathes through subtle industrial haze and distant light, while her identity and expression remain stable.",
+      "reference_image": "selected_best.png",
+      "model": "local-runtime",
+      "seconds": 8,
+      "size": "1280x720",
+      "preserve": [
+        "Yuffie's facial identity and calm confidence",
+        "Moogle cape hood, red pom-pom, and button geometry",
+        "orange glove and materia-to-fingertip relationship",
+        "Final Fantasy VII Remake INTERmission visual language"
+      ],
+      "motion": [
+        "slow controlled camera push-in",
+        "near-static face and body",
+        "subtle scarf and cape secondary motion",
+        "materia hover, internal energy swirl, and restrained glow pulse",
+        "soft Midgar haze and distant industrial light flicker"
+      ],
+      "avoid": [
+        "face morphing or identity drift",
+        "generic anime flattening",
+        "large body gestures",
+        "random background replacement",
+        "materia trajectory jumps",
+        "dashboard or interface imagery"
+      ],
+      "candidates": 3,
+      "repair_budget": 3,
+      "target_score": 0.9
+    }
+  ]
+}
