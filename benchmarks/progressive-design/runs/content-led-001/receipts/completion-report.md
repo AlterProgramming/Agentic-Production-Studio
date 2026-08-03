@@ -1,15 +1,24 @@
-# Completion report
+# INVALIDATED COMPLETION REPORT
 
-- Subject: Central California Migrant Camp Voices, 1940–1941.
-- Benchmark branch: `agent/progressive-design-content-led-001`.
-- Experiment directory: `benchmarks/progressive-design/runs/content-led-001`.
-- Frozen-brief SHA-256: `d1d682cef832eb874cf4a578b8d734e4097dd67e30038393dda111d32a01b5a1`.
-- All four source directories began empty.
-- Conditions A, B, C, and D were implemented and rendered.
-- Independent workers were not available; the implementations were produced sequentially in one coordinator context, invalidating uncontaminated causal isolation.
-- Chromium evidence produced per condition: desktop primary, desktop secondary, mobile primary, and mobile interaction state.
-- Routes, no-results state, filter state, overflow, focus visibility, and reduced-motion media were exercised.
-- Approved image binaries remained unavailable; source links, captions, alt text, and credits were preserved without fabricated documentary photography.
-- Randomized candidate packets and a sealed mapping were prepared.
-- No independent blind evaluator was available and no winner is declared.
-- Generated source and full-resolution screenshot packages remain outside Git as conversation artifacts.
+This run completed implementation and screenshot generation but failed the benchmark's core isolation requirement. It is therefore invalidated rather than completed.
+
+## Binding disposition
+
+- experiment: `content-led-001`
+- branch: `agent/progressive-design-content-led-001`
+- pull request: `#22`
+- status: **invalidated**
+- admissible evidence: **none**
+- winner: **none**
+- count toward validation sequence: **no**
+- reuse in future runs: **prohibited**
+
+## Cause
+
+A, B, C, and D were all implemented sequentially in the same reasoning context. This created too much leakage to believe that the conditions were independently produced. No independent blind evaluator session was used.
+
+## Future-session instruction
+
+Do not continue from this branch or inspect its implementation artifacts when executing a replacement. Start from the Progressive Design doctrine branch or its merged successor, create a newly frozen setup state, and use one fresh session per role under the manual relay.
+
+See `../INVALIDATED.md`.
