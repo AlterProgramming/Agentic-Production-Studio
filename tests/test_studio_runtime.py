@@ -25,7 +25,7 @@ class FakeBuilder:
         }
 
 
-def wait_for(run, timeout: float = 2.0) -> None:
+def wait_for(run, timeout: float = 5.0) -> None:
     deadline = time.time() + timeout
     while run.status in {"queued", "running"} and time.time() < deadline:
         time.sleep(0.01)
@@ -65,6 +65,46 @@ def test_builder_preview_emits_semantic_result(tmp_path: Path) -> None:
         "run.accepted", "intent.interpreted", "operation.evaluated", "artifact.committed"
     ]
     assert run.result["summary"]["changed_files"] == 1
+
+
+def test_sceneforge_subprocess_events_and_artifacts_are_relayed(tmp_path: Path) -> None:
+    data_directory = tmp_path / "data"
+    data_directory.mkdir()
+    runner = tmp_path / "runner.mjs"
+    runner.write_text(
+        """
+import { mkdir, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+const args = process.argv.slice(2);
+const dataDirectory = args[args.indexOf('--data-directory') + 1];
+const studioRunId = args[args.indexOf('--studio-run-id') + 1];
+const hero = path.join(dataDirectory, 'model-first', 'mf-test', 'renders', 'hero.png');
+await mkdir(path.dirname(hero), { recursive: true });
+await writeFile(hero, Buffer.from('png'));
+process.stdout.write(JSON.stringify({
+  schema_version: '1.0', kind: 'studio.intent-event', event_id: 'event-1',
+  run_id: studioRunId, sequence: 1, type: 'run.completed', phase: 'result',
+  message: 'runtime complete', progress: 1, confidence: 1,
+  payload: { result: { run_id: 'mf-test', status: 'completed' }, artifacts: { hero } },
+  emitted_at: new Date().toISOString()
+}) + '\\n');
+""".strip()
+        + "\n",
+        encoding="utf-8",
+    )
+    service = StudioService(
+        ui_root=tmp_path,
+        allowed_roots=[tmp_path],
+        sceneforge_runner=runner,
+        sceneforge_data_directory=data_directory,
+        builder_factory=FakeBuilder,
+    )
+    run = service.create_run({"mode": "sceneforge", "request": {"prompt": "impact frame"}})
+    wait_for(run)
+    assert run.status == "completed"
+    assert run.result == {"run_id": "mf-test", "status": "completed"}
+    assert run.artifacts["hero"].read_bytes() == b"png"
+    assert [event.type for event in run.events.snapshot()] == ["run.completed"]
 
 
 def test_workspace_escape_is_rejected_by_worker(tmp_path: Path) -> None:
