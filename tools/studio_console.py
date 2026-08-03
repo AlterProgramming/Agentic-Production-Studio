@@ -40,6 +40,18 @@ def main() -> int:
         "--recreation-output-directory",
         help="Directory where reference-recreation jobs and candidate artifacts are retained",
     )
+    parser.add_argument(
+        "--video-generator-command",
+        help="Quoted command implementing the JSON-over-stdio video generation and repair contract",
+    )
+    parser.add_argument(
+        "--video-evaluator-command",
+        help="Optional quoted command implementing the video temporal evaluator contract",
+    )
+    parser.add_argument(
+        "--video-output-directory",
+        help="Directory where video projects, candidates, repairs, and state are retained",
+    )
     args = parser.parse_args()
 
     service = StudioService(
@@ -50,6 +62,9 @@ def main() -> int:
         image_generator_command=parse_command(args.image_generator_command),
         image_evaluator_command=parse_command(args.image_evaluator_command),
         recreation_output_directory=args.recreation_output_directory,
+        video_generator_command=parse_command(args.video_generator_command),
+        video_evaluator_command=parse_command(args.video_evaluator_command),
+        video_output_directory=args.video_output_directory,
     )
     server = create_server(service, args.host, args.port)
     print(f"Production Studio intent console: http://{args.host}:{args.port}")
