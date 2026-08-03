@@ -2,7 +2,7 @@
 
 from .events import EventBuffer, IntentEvent
 from .recreation import RatePolicy, RecreationConfig, RecreationPipeline
-from .server import StudioService, create_server
+from .server import create_server
 from .video import (
     CommandVideoEvaluator,
     CommandVideoGenerator,
@@ -11,6 +11,7 @@ from .video import (
     VideoProjectPipeline,
     VideoRatePolicy,
 )
+from .video_service import StudioService
 
 __all__ = [
     "CommandVideoEvaluator",
