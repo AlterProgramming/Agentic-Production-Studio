@@ -2,200 +2,102 @@
 
 ## Environment Constraint
 
-A ChatGPT session can execute only one benchmark role reliably. It cannot spawn independent external sessions, preserve causal isolation while implementing several conditions sequentially, or perform a blind evaluation after seeing condition identities.
+A valid independent one-shot run is a chain of sealed fresh sessions. The user launches each role manually. No session may implement more than one condition or claim that it launched another session.
 
-The benchmark therefore uses a manual relay. The user launches each fresh session and gives it only the packet required for that role.
+## Session Chain
 
-A run is not one session. A run is a chain of sealed sessions.
+1. Setup and Freeze
+2. One fresh implementation session per sealed condition
+3. Integration and Blind Packaging
+4. Blind Evaluation
+5. Mapping and Synthesis
 
-## Required Session Chain
+Every implementation branch descends from the same full 40-character frozen setup commit SHA.
 
-### Session 0 — Setup and Freeze
+## Setup and Freeze Gate
 
-Purpose: define and freeze the product problem.
+Setup is complete only after all of the following are true:
 
-This session may:
+- the experiment files exist on a repository branch;
+- the setup branch is ahead of its doctrine base;
+- the frozen brief, fixtures, image binaries, provenance, contracts, packets, and receipts are committed;
+- every packet has an adjacent machine-readable contract and minimal launch prompt;
+- `tools/validate_progressive_design_packet.py` passes for every packet;
+- every assigned source directory contains only a zero-byte `.gitkeep`;
+- all frozen-input hashes verify;
+- the final setup commit SHA is recorded in the setup PR and completion report;
+- a setup PR is open or updated.
 
-- select the bounded task;
-- collect lawful source material;
-- create `FROZEN_BRIEF.md` and immutable fixtures;
-- initialize the experiment workspace;
-- verify that all four condition source directories are empty;
-- create four sealed condition packets;
-- commit the setup record.
+A branch that is identical to its doctrine base is not setup-complete.
 
-This session must not:
+Use the commit SHA itself as the immutable anchor. Do not invent or require a tag unless that tag has actually been created and independently verified.
 
-- implement any condition;
-- inspect or predict a condition's future design;
-- create a shared starter implementation;
-- evaluate likely winners.
+## Sealed Packet Contract
 
-Output:
+Each implementation session receives only:
 
-- a frozen benchmark branch or commit SHA;
-- four launch prompts;
-- the exact branch name for each condition session.
+- one frozen setup commit SHA;
+- one assigned branch;
+- one assigned packet path;
+- the content of its minimal launch prompt.
 
-### Session 1 — Condition A
+The packet contract contains the complete read allowlist and write boundary. Launch prompts must not enumerate unassigned conditions, summarize their doctrine, reproduce their packet paths, or list their branch names.
 
-Purpose: implement the ordinary high-quality control.
+## Contamination Semantics
 
-Input is limited to:
+Actual contamination means the session received operative material outside its assignment:
 
-- the frozen benchmark commit;
-- Condition A packet;
-- immutable fixtures;
-- its assigned branch and directory.
+- another packet's contents;
+- another implementation's source, renders, evidence, comparison, ranking, or conclusion;
+- instructions assigning multiple implementation roles;
+- corrections derived from another implementation.
 
-This session must not read the doctrine or any other condition directory.
+Exclusion-only references are not operative exposure. Generic phrases such as “do not inspect unassigned material,” machine allowlists, and repository directory names do not invalidate a session.
 
-Recommended branch:
+When a preflight fails, report the failed repository fact—missing packet, unresolved commit, nonempty source, invalid hash, or write-boundary mismatch. Do not call a repository setup failure “conversation contamination.”
 
-`agent/<experiment-id>-A-control`
+## Implementation Session Boundary
 
-### Session 2 — Condition B
+An implementation session:
 
-Purpose: implement Progressive Design.
+- reads its packet and only the allowed paths;
+- confirms its source state is blank;
+- creates exactly one implementation;
+- writes only to its assigned condition directory;
+- builds, tests, and produces equivalent evidence;
+- commits, pushes, opens or updates its PR, reports, and stops.
 
-Input is limited to:
+It must not compare candidates, infer likely results, inspect unassigned branches, or prepare evaluation material.
 
-- the same frozen benchmark commit;
-- Condition B packet;
-- immutable fixtures;
-- its assigned branch and directory.
+## Integration Boundary
 
-This session must not inspect Conditions A, C, or D.
+A separate integration session verifies:
 
-Recommended branch:
+- identical frozen ancestor;
+- changed-path isolation;
+- immutable shared inputs;
+- evidence equivalence;
+- randomized candidate labels;
+- sealed candidate mapping.
 
-`agent/<experiment-id>-B-progressive`
+It does not score or rank.
 
-### Session 3 — Condition C
+## Evaluation Boundary
 
-Purpose: implement Progressive Design plus Spatial Intelligence.
-
-Input is limited to its sealed packet and the same frozen inputs.
-
-Recommended branch:
-
-`agent/<experiment-id>-C-spatial`
-
-### Session 4 — Condition D
-
-Purpose: implement the complete reconciled stack from a blank state.
-
-Condition D is not a revision of C. It receives no C source or renders.
-
-Recommended branch:
-
-`agent/<experiment-id>-D-reconciled`
-
-### Session 5 — Integration and Blind Packaging
-
-Purpose: combine completed condition artifacts without judging them.
-
-This session may:
-
-- verify each condition branch descended from the same frozen commit;
-- verify write-boundary isolation;
-- integrate the four condition directories;
-- collect equivalent evidence;
-- assign randomized candidate labels;
-- create evaluator-facing comparison packets;
-- seal the candidate-to-condition mapping.
-
-This session must not score, rank, or describe a preferred design.
-
-Recommended integration branch:
-
-`agent/<experiment-id>-integration`
-
-### Session 6 — Blind Evaluation
-
-Purpose: evaluate candidate artifacts without condition knowledge.
-
-This fresh session receives only:
-
-- randomized candidate artifacts;
-- the frozen product brief or a neutral task summary;
-- the evaluation rubric;
-- validation limitations that affect interpretation.
-
-It must not receive:
-
-- condition prompts;
-- source branches or directories;
-- candidate mapping;
-- doctrine descriptions;
-- prior commentary;
-- expected hypotheses.
-
-It returns scores, observations, and overall preference using candidate labels only.
-
-### Session 7 — Mapping and Synthesis
-
-Purpose: combine the sealed mapping with the blind evaluation.
-
-This session may:
-
-- reveal candidate identities after evaluation is complete;
-- record the ranking by condition;
-- analyze which layer changed structure and surface quality;
-- update the experiment decision record;
-- compare the result with prior experiments;
-- determine the next test under the stopping rule.
-
-It must not alter condition implementations after seeing the evaluation.
-
-## Branch Contract
-
-All four condition branches must start from the identical frozen setup commit.
-
-Each condition branch may write only inside:
-
-`benchmarks/progressive-design/runs/<experiment-id>/conditions/<assigned-condition>/`
-
-Evidence may also be written within that condition's evidence directory.
-
-No condition branch may modify:
-
-- `FROZEN_BRIEF.md`;
-- shared fixtures;
-- another condition directory;
-- the doctrine;
-- evaluation files;
-- sealed mappings.
-
-The integration session must verify changed paths before accepting each condition branch.
-
-## Manual Launch Contract
-
-The user is the scheduler. After one session finishes, it must provide a single copyable launch prompt for the next required session.
-
-A session must never claim that it launched, summoned, delegated to, or ran another independent session.
-
-When its role is complete, it stops at the handoff boundary.
+A fresh blind evaluator receives randomized candidate artifacts, a neutral task summary, the rubric, and validation limitations. It does not receive condition identities, packets, branches, doctrine summaries, expected hypotheses, or prior commentary.
 
 ## Validity Labels
 
-Use these labels consistently:
-
-- `setup_complete`: frozen inputs and sealed packets exist;
-- `condition_complete`: one assigned implementation and its evidence exist;
-- `integration_complete`: all conditions are combined and blinded;
-- `evaluation_complete`: blind candidate scores exist;
-- `benchmark_complete`: mapping and synthesis are recorded;
-- `calibration_only`: conditions shared a reasoning context or evaluation was not blind;
-- `causal_isolation_valid`: all four conditions ran in separate fresh sessions from the same frozen commit.
-
-Do not call a run a completed causal benchmark before the final two conditions are true:
-
-- `causal_isolation_valid: true`;
-- `evaluation_complete: true`.
+- `setup_complete`: all setup gates above passed;
+- `condition_complete`: one isolated implementation and evidence committed;
+- `integration_complete`: candidate packets and sealed mapping committed;
+- `evaluation_complete`: blind scores and observations committed;
+- `benchmark_complete`: mapping and synthesis committed;
+- `calibration_only`: implementation roles shared operative reasoning context or evaluation was not blind;
+- `causal_isolation_valid`: all implementation roles ran in separate fresh sessions from the same frozen commit.
 
 ## Recovery
 
-If one condition fails, rerun only that condition from the original frozen commit in a fresh session. Do not expose it to successful sibling outputs.
+If one implementation fails, rerun only that role from the original frozen commit in a new session.
 
-If shared fixtures change, invalidate all completed conditions and create a new experiment version. Do not silently update the brief beneath existing implementations.
+If any shared fixture changes, create a new frozen setup commit and invalidate implementations based on the prior commit. Never silently mutate frozen inputs.
