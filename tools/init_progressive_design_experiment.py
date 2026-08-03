@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Initialize an isolated four-condition Progressive Design experiment."""
+"""Initialize an isolated four-condition Progressive Design experiment from blank source states."""
 
 from __future__ import annotations
 
@@ -30,7 +30,8 @@ REQUIRED_EVIDENCE = (
     "keyboard-focus-check",
     "contrast-legibility-review",
     "reduced-motion-review",
-    "content-preservation-note",
+    "frozen-content-fidelity-note",
+    "blank-state-isolation-receipt",
 )
 
 
@@ -92,22 +93,29 @@ def main() -> int:
         evidence = condition_root / "evidence"
         source.mkdir(parents=True)
         evidence.mkdir(parents=True)
+
+        source_entries = list(source.iterdir())
+        if source_entries:
+            raise SystemExit(f"Condition source was not empty at initialization: {source}")
+
         prompt_path = condition_root / "PROMPT.md"
         prompt_path.write_text(
             f"# Condition {condition_id} — {name}\n\n"
-            "Use the repository's `benchmarks/progressive-design/FRESH_SESSION_PROMPT.md` "
-            "with this condition assignment.\n",
+            "Begin from the empty `source/` directory. Use the repository's "
+            "`benchmarks/progressive-design/FRESH_SESSION_PROMPT.md` with this condition assignment.\n",
             encoding="utf-8",
         )
-        write_json(
-            condition_root / "isolation-receipt.json",
-            {
-                "shared_code": False,
-                "prior_output_exposure": False,
-                "implementation_budget": args.budget,
-                "environment_differences": [],
-            },
-        )
+        receipt = {
+            "source_empty_at_initialization": True,
+            "source_initial_entries": [],
+            "existing_implementation_provided": False,
+            "starter_design_provided": False,
+            "shared_code": False,
+            "prior_output_exposure": False,
+            "implementation_budget": args.budget,
+            "environment_differences": [],
+        }
+        write_json(condition_root / "isolation-receipt.json", receipt)
         condition_entries.append(
             {
                 "id": condition_id,
@@ -116,6 +124,7 @@ def main() -> int:
                 "evidence_path": str(evidence.relative_to(run_dir)),
                 "prompt_path": str(prompt_path.relative_to(run_dir)),
                 "isolation_receipt": {
+                    "source_empty_at_initialization": True,
                     "shared_code": False,
                     "prior_output_exposure": False,
                     "implementation_budget": args.budget,
@@ -130,10 +139,16 @@ def main() -> int:
     (run_dir / "evaluation" / "decision.md").write_text("# Experiment decision\n", encoding="utf-8")
 
     manifest = {
-        "version": "1.0",
+        "version": "1.1",
         "experiment_id": args.experiment_id,
         "task_family": args.family,
         "title": args.title,
+        "blank_state": {
+            "existing_implementation_provided": False,
+            "starter_design_provided": False,
+            "prior_condition_source_allowed": False,
+            "shared_visual_system_allowed": False,
+        },
         "frozen_brief": {
             "path": "FROZEN_BRIEF.md",
             "sha256": sha256(frozen_brief),
@@ -162,6 +177,8 @@ def main() -> int:
             "experiment_id": args.experiment_id,
             "created_at": datetime.now(timezone.utc).isoformat(),
             "frozen_brief_sha256": manifest["frozen_brief"]["sha256"],
+            "blank_state": True,
+            "condition_sources_empty": True,
             "conditions": [condition_id for condition_id, _, _ in CONDITIONS],
         },
     )
