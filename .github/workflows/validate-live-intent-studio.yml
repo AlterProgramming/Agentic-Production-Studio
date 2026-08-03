@@ -1,0 +1,35 @@
+name: Validate live intent studio
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - studio_runtime/**
+      - studio_console/**
+      - tools/studio_console.py
+      - contracts/intent-event.schema.json
+      - tests/test_studio_runtime.py
+      - .github/workflows/validate-live-intent-studio.yml
+  pull_request:
+    paths:
+      - studio_runtime/**
+      - studio_console/**
+      - tools/studio_console.py
+      - contracts/intent-event.schema.json
+      - tests/test_studio_runtime.py
+      - .github/workflows/validate-live-intent-studio.yml
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 -m pip install pytest
+      - run: python3 -m py_compile studio_runtime/events.py studio_runtime/server.py tools/studio_console.py
+      - run: python3 -m json.tool contracts/intent-event.schema.json >/dev/null
+      - run: pytest -q tests/test_studio_runtime.py
