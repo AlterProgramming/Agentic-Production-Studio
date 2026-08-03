@@ -3,13 +3,31 @@
   "json_parse": true,
   "brief_hash_verified": true,
   "source_directories_empty_verified": true,
-  "browser_engine": false,
-  "static": false,
-  "application_state": false,
+  "browser_engine": true,
+  "static": true,
+  "application_state": true,
+  "conditions_rendered": ["A", "B", "C", "D"],
+  "evidence_rendered_per_condition": [
+    "desktop-primary",
+    "desktop-secondary",
+    "mobile-primary",
+    "mobile-interaction"
+  ],
+  "checks": {
+    "required_routes_rendered": true,
+    "no_results_state": true,
+    "mobile_filter_open_state": true,
+    "desktop_overflow": true,
+    "mobile_overflow": true,
+    "keyboard_focus_visible": true,
+    "reduced_motion_media": true,
+    "library_of_congress_links_present": true
+  },
   "limitations": [
-    "No condition source exists yet.",
-    "No browser render or browser-engine validation has run.",
-    "Image binaries are not yet vendored.",
-    "Independent worker execution is unavailable in this coordinator context."
+    "Independent workers were unavailable. All four conditions were implemented sequentially in one coordinator reasoning context, so the run does not satisfy uncontaminated causal-benchmark isolation.",
+    "The execution environment blocked loopback HTTP navigation. Chromium rendered route-specific standalone documents, but refresh-safe production server routing was not validated.",
+    "Approved Library of Congress image binaries were unavailable. Item links, captions, alt text, and credits were retained; non-documentary tonal fields were used rather than fabricated photographs.",
+    "External Library of Congress destinations were counted but not followed during browser validation.",
+    "No independent blind evaluator was available; no winner is declared."
   ]
 }
