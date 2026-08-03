@@ -8,6 +8,7 @@
     "version",
     "experiment_id",
     "task_family",
+    "blank_state",
     "frozen_brief",
     "conditions",
     "required_evidence",
@@ -16,7 +17,7 @@
   ],
   "properties": {
     "version": {
-      "const": "1.0"
+      "const": "1.1"
     },
     "experiment_id": {
       "type": "string",
@@ -28,6 +29,22 @@
     "title": {
       "type": "string",
       "minLength": 1
+    },
+    "blank_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "existing_implementation_provided",
+        "starter_design_provided",
+        "prior_condition_source_allowed",
+        "shared_visual_system_allowed"
+      ],
+      "properties": {
+        "existing_implementation_provided": {"const": false},
+        "starter_design_provided": {"const": false},
+        "prior_condition_source_allowed": {"const": false},
+        "shared_visual_system_allowed": {"const": false}
+      }
     },
     "frozen_brief": {
       "type": "object",
@@ -58,8 +75,14 @@
           "isolation_receipt": {
             "type": "object",
             "additionalProperties": false,
-            "required": ["shared_code", "prior_output_exposure", "implementation_budget"],
+            "required": [
+              "source_empty_at_initialization",
+              "shared_code",
+              "prior_output_exposure",
+              "implementation_budget"
+            ],
             "properties": {
+              "source_empty_at_initialization": {"const": true},
               "shared_code": {"const": false},
               "prior_output_exposure": {"const": false},
               "implementation_budget": {"type": "string", "minLength": 1}
@@ -100,7 +123,7 @@
     },
     "required_evidence": {
       "type": "array",
-      "minItems": 10,
+      "minItems": 11,
       "uniqueItems": true,
       "items": {
         "enum": [
@@ -115,7 +138,8 @@
           "keyboard-focus-check",
           "contrast-legibility-review",
           "reduced-motion-review",
-          "content-preservation-note"
+          "frozen-content-fidelity-note",
+          "blank-state-isolation-receipt"
         ]
       }
     },
