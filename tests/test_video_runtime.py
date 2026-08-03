@@ -1,17 +1,26 @@
 from __future__ import annotations
 
 import sys
+import time
 from pathlib import Path
 
 from studio_runtime.events import EventBuffer
 from studio_runtime.video import (CommandVideoEvaluator, CommandVideoGenerator, ShotSpec,
                                   VideoProjectConfig, VideoProjectPipeline, VideoRatePolicy)
+from studio_runtime.video_service import StudioService
 
 
 class FakeTime:
     def __init__(self): self.value = 0.0
     def clock(self): return self.value
     def sleep(self, seconds): self.value += seconds
+
+
+def wait_for(run, timeout: float = 8.0) -> None:
+    deadline = time.time() + timeout
+    while run.status in {"queued", "running"} and time.time() < deadline:
+        time.sleep(0.01)
+    assert run.status not in {"queued", "running"}
 
 
 def write_generator(path: Path, rate_limit_once: bool = False) -> None:
@@ -102,3 +111,40 @@ def test_resume_retains_completed_shots(tmp_path: Path) -> None:
     result = pipeline.run(resumed, events)
     assert result["shots"]["shot"]["status"] == "completed"
     assert "video.shot.resumed" in [event.type for event in events.snapshot()]
+
+
+def test_studio_service_streams_video_project_and_retains_artifacts(tmp_path: Path) -> None:
+    ref = tmp_path / "ref.png"; ref.write_bytes(b"png")
+    generator = tmp_path / "generator.py"; evaluator = tmp_path / "evaluator.py"
+    write_generator(generator); write_evaluator(evaluator)
+    output = tmp_path / "video-output"
+    service = StudioService(
+        ui_root=tmp_path,
+        allowed_roots=[tmp_path],
+        video_generator_command=[sys.executable, str(generator)],
+        video_evaluator_command=[sys.executable, str(evaluator)],
+        video_output_directory=output,
+    )
+    run = service.create_run({
+        "mode": "video_project",
+        "request": {
+            "project_id": "service-project",
+            "rate_policy": {"requests_per_minute": 120, "burst": 1, "max_retries": 0},
+            "shots": [{
+                "shot_id": "shot",
+                "title": "Shot",
+                "prompt": "controlled motion",
+                "reference_image": str(ref),
+                "candidates": 1,
+                "repair_budget": 0,
+                "target_score": 0.1,
+            }],
+        },
+    })
+    wait_for(run)
+    assert run.status == "completed"
+    assert run.artifacts["hero"].is_file()
+    assert run.artifacts["state"].is_file()
+    assert "video_path" not in run.result["shots"]["shot"]["best"]
+    assert run.result["shots"]["shot"]["best"]["artifact_key"] == "best-shot"
+    assert [event.type for event in run.events.snapshot()][-1] == "run.completed"
