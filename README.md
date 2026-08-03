@@ -65,6 +65,25 @@ A builder plan declares its exact write boundary, current-state preconditions, d
 
 This substrate is intentionally below individual service packages. Future palette, animation alignment, preview, Godot, model-first scene, and package builders should register as operations rather than becoming isolated scripts.
 
+## Live intent studio
+
+Run the loopback studio surface against the real builder preview path:
+
+```bash
+python3 tools/studio_console.py --allow-root /path/to/workspace
+```
+
+To make the same surface execute the BrightEngine retained-scene runtime, also supply the matching SceneForge runner and its local data directory:
+
+```bash
+python3 tools/studio_console.py \
+  --allow-root /path/to/workspace \
+  --sceneforge-runner /path/to/BrightEngine-Forge/agent-api/sceneforge-studio-runner.mjs \
+  --sceneforge-data-directory /path/to/local-data
+```
+
+Open `http://127.0.0.1:8765`. The console streams semantic intent events over Server-Sent Events while the actual runtime works, then exposes the resulting retained artifacts. See `docs/live-intent-studio.md` for boundaries and integration details.
+
 ## Initial service packages
 
 1. LiveOps Asset Drop
@@ -119,6 +138,8 @@ Owns scope, schedule, checkpoints, approvals, manifests, change control, model-f
 - `05_MODEL_FIRST_VISUAL_DOCTRINE.md` — retained-scene default, boundaries, delivery contract, and quality gates
 - `builder/` — machine-readable builder capability and plan contracts
 - `studio_builder/` — deterministic builder engine and registered domain operations
+- `studio_runtime/` — semantic event stream and local execution service
+- `studio_console/` — human-facing live work surface
 - `tools/` — command-line validation and builder entrypoints
 - `benchmarks/` — internal production reference workspaces
 - `packages/` — complete one-week package definitions
