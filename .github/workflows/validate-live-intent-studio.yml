@@ -29,6 +29,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
       - run: python3 -m pip install pytest
       - run: python3 -m py_compile studio_runtime/events.py studio_runtime/server.py tools/studio_console.py
       - run: python3 -m json.tool contracts/intent-event.schema.json >/dev/null
