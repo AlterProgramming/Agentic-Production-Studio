@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brightengine.live/contracts/studio-intent-event.schema.json",
+  "title": "Studio Intent Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "event_id",
+    "run_id",
+    "sequence",
+    "type",
+    "phase",
+    "message",
+    "payload",
+    "emitted_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "kind": {"const": "studio.intent-event"},
+    "event_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "sequence": {"type": "integer", "minimum": 1},
+    "type": {"type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"},
+    "phase": {"type": "string", "minLength": 1},
+    "message": {"type": "string", "minLength": 1},
+    "progress": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "payload": {"type": "object"},
+    "emitted_at": {"type": "string", "format": "date-time"}
+  }
+}
