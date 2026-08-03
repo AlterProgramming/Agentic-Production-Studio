@@ -53,7 +53,7 @@ For a model-first package, the retained scene/model and its recovery state are p
 
 ## Surgical production substrate
 
-The repository now includes an executable builder foundation for controlled production changes:
+The repository includes an executable builder foundation for controlled production changes:
 
 ```bash
 python3 tools/studio_builder.py plan <plan.json>
@@ -82,7 +82,17 @@ python3 tools/studio_console.py \
   --sceneforge-data-directory /path/to/local-data
 ```
 
-Open `http://127.0.0.1:8765`. The console streams semantic intent events over Server-Sent Events while the actual runtime works, then exposes the resulting retained artifacts. See `docs/live-intent-studio.md` for boundaries and integration details.
+To run bounded iterative image recreation against a real provider adapter:
+
+```bash
+python3 tools/studio_console.py \
+  --allow-root /path/to/references \
+  --recreation-output-directory /path/to/recreation-runs \
+  --image-generator-command 'python3 tools/openai_reference_recreation_adapter.py' \
+  --image-evaluator-command 'python3 tools/openai_reference_recreation_adapter.py'
+```
+
+Open `http://127.0.0.1:8765`. The console streams semantic intent events over Server-Sent Events while the actual runtime works, then exposes retained artifacts. Reference recreation adds request-budget enforcement, token-bucket pacing, bounded provider retries, semantic scoring, best-parent promotion, and resumable state. See `docs/live-intent-studio.md` and `docs/reference-recreation.md`.
 
 ## Initial service packages
 
@@ -138,9 +148,9 @@ Owns scope, schedule, checkpoints, approvals, manifests, change control, model-f
 - `05_MODEL_FIRST_VISUAL_DOCTRINE.md` — retained-scene default, boundaries, delivery contract, and quality gates
 - `builder/` — machine-readable builder capability and plan contracts
 - `studio_builder/` — deterministic builder engine and registered domain operations
-- `studio_runtime/` — semantic event stream and local execution service
+- `studio_runtime/` — semantic event stream, reference-recreation orchestration, and local execution service
 - `studio_console/` — human-facing live work surface
-- `tools/` — command-line validation and builder entrypoints
+- `tools/` — command-line validation, builder entrypoints, and provider adapters
 - `benchmarks/` — internal production reference workspaces
 - `packages/` — complete one-week package definitions
 - `operations/` — intake, production, delivery, builder, and change-control procedures
@@ -152,4 +162,4 @@ Owns scope, schedule, checkpoints, approvals, manifests, change control, model-f
 
 ## Current initialization status
 
-The studio is initialized at **Operating Model v0.3 — Model-First Visual Foundation**. The surgical builder foundation remains available for previewable, guarded, transactionally applied changes with receipts and drift verification. Model-first scene generation is now canonically registered as a Foundation capability; its next evidence gate is a reproducible bounded benchmark retaining the modeled scene, beauty/depth/object-ID passes, motion or interactive derivatives, corruption recovery evidence, and a complete packaged handoff.
+The studio is initialized at **Operating Model v0.3 — Model-First Visual Foundation**. The surgical builder foundation remains available for previewable, guarded, transactionally applied changes with receipts and drift verification. Model-first scene generation is canonically registered as a Foundation capability. The live intent runtime now also supports bounded, retained reference-recreation experiments whose provider calls, semantic evaluations, rate waits, retries, lineage, and stopping decisions are inspectable and reproducible.
