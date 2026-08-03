@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "experiment_id": "content-led-002",
+  "condition_id": "D",
+  "condition_name": "reconciled",
+  "packet_markdown": "benchmarks/progressive-design/experiments/content-led-002/packets/D-reconciled.md",
+  "launch_prompt": "benchmarks/progressive-design/experiments/content-led-002/launch/D-reconciled.txt",
+  "branch": "agent/progressive-design-content-led-002-D-reconciled",
+  "source_path": "benchmarks/progressive-design/experiments/content-led-002/conditions/D-reconciled/source",
+  "evidence_path": "benchmarks/progressive-design/experiments/content-led-002/conditions/D-reconciled/evidence",
+  "allowed_read_paths": [
+    "benchmarks/progressive-design/experiments/content-led-002/FROZEN_BRIEF.md",
+    "benchmarks/progressive-design/experiments/content-led-002/ACCESSIBILITY_RESPONSIVE.md",
+    "benchmarks/progressive-design/experiments/content-led-002/IMPLEMENTATION_BUDGET.md",
+    "benchmarks/progressive-design/experiments/content-led-002/EVIDENCE_REQUIREMENTS.md",
+    "benchmarks/progressive-design/experiments/content-led-002/experiment.json",
+    "benchmarks/progressive-design/experiments/content-led-002/fixtures/content/site-copy.json",
+    "benchmarks/progressive-design/experiments/content-led-002/fixtures/content/mission.json",
+    "benchmarks/progressive-design/experiments/content-led-002/fixtures/route-contract.json",
+    "benchmarks/progressive-design/experiments/content-led-002/fixtures/images/provenance.json",
+    "benchmarks/progressive-design/experiments/content-led-002/fixtures/images/01-mission-trajectory.png",
+    "benchmarks/progressive-design/experiments/content-led-002/fixtures/images/02-launch-stack.png",
+    "benchmarks/progressive-design/experiments/content-led-002/fixtures/images/03-lunar-orbit-operations.png",
+    "benchmarks/progressive-design/experiments/content-led-002/fixtures/images/04-landing-sequence.png",
+    "benchmarks/progressive-design/experiments/content-led-002/fixtures/images/05-surface-activity.png",
+    "benchmarks/progressive-design/experiments/content-led-002/fixtures/images/06-return-recovery.png",
+    "benchmarks/progressive-design/experiments/content-led-002/receipts/hashes.json",
+    "benchmarks/progressive-design/experiments/content-led-002/receipts/source-empty.json",
+    "tools/validate_progressive_design_packet.py",
+    "benchmarks/progressive-design/experiments/content-led-002/packets/D-reconciled.md",
+    "benchmarks/progressive-design/experiments/content-led-002/packets/D-reconciled.json",
+    "benchmarks/progressive-design/experiments/content-led-002/launch/D-reconciled.txt",
+    "benchmarks/progressive-design/experiments/content-led-002/conditions/D-reconciled/source/.gitkeep",
+    "benchmarks/progressive-design/experiments/content-led-002/conditions/D-reconciled/isolation-receipt.json",
+    "benchmarks/progressive-design/experiments/content-led-002/COMPLETION_REPORT.md",
+    "benchmarks/progressive-design/experiments/content-led-002/receipts/initialization.json"
+  ],
+  "allowed_write_prefixes": [
+    "benchmarks/progressive-design/experiments/content-led-002/conditions/D-reconciled"
+  ],
+  "frozen_brief_path": "benchmarks/progressive-design/experiments/content-led-002/FROZEN_BRIEF.md",
+  "frozen_brief_sha256": "dc5904b8e3a21eb6b28f476285398e8b27071fd67a0fdebb9442756b6188a1b2",
+  "contamination_policy": {
+    "abort_on_operative_unassigned_material": true,
+    "exclusion_only_references_count_as_contamination": false
+  }
+}

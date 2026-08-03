@@ -1,0 +1,26 @@
+{
+  "version": "1.1",
+  "experiment_id": "content-led-002",
+  "task_family": "content-led",
+  "title": "Apollo 11 Learning Paths",
+  "blank_state": {
+    "existing_implementation_provided": false,
+    "starter_design_provided": false,
+    "prior_condition_source_allowed": false,
+    "shared_visual_system_allowed": false
+  },
+  "frozen_brief": {
+    "path": "FROZEN_BRIEF.md",
+    "sha256": "dc5904b8e3a21eb6b28f476285398e8b27071fd67a0fdebb9442756b6188a1b2",
+    "frozen_at": "2026-08-03T23:20:00Z"
+  },
+  "conditions": [
+    {"id":"A","name":"control","source_path":"conditions/A-control/source","evidence_path":"conditions/A-control/evidence","prompt_path":"packets/A-control.md","isolation_receipt":{"source_empty_at_initialization":true,"shared_code":false,"prior_output_exposure":false,"implementation_budget":"one bounded implementation pass"}},
+    {"id":"B","name":"progressive","source_path":"conditions/B-progressive/source","evidence_path":"conditions/B-progressive/evidence","prompt_path":"packets/B-progressive.md","isolation_receipt":{"source_empty_at_initialization":true,"shared_code":false,"prior_output_exposure":false,"implementation_budget":"one bounded implementation pass"}},
+    {"id":"C","name":"spatial","source_path":"conditions/C-spatial/source","evidence_path":"conditions/C-spatial/evidence","prompt_path":"packets/C-spatial.md","isolation_receipt":{"source_empty_at_initialization":true,"shared_code":false,"prior_output_exposure":false,"implementation_budget":"one bounded implementation pass"}},
+    {"id":"D","name":"reconciled","source_path":"conditions/D-reconciled/source","evidence_path":"conditions/D-reconciled/evidence","prompt_path":"packets/D-reconciled.md","isolation_receipt":{"source_empty_at_initialization":true,"shared_code":false,"prior_output_exposure":false,"implementation_budget":"one bounded implementation pass"}}
+  ],
+  "required_evidence": ["desktop-primary","desktop-secondary","mobile-primary","mobile-interaction","route-validation","link-validation","application-state-validation","responsive-overflow-check","keyboard-focus-check","contrast-legibility-review","reduced-motion-review","frozen-content-fidelity-note","blank-state-isolation-receipt"],
+  "evaluation": {"blind_order_path":"evaluation/blind-order.json","scores_path":"evaluation/scores.json","observations_path":"evaluation/observations.md","decision_path":"evaluation/decision.md","overall_preference_separate":true},
+  "validation_boundary": {"browser_engine":false,"static":true,"application_state":false,"limitations":["Session 0 validated frozen files, packet contracts, hashes, and blank source boundaries; no condition application was built or run."]}
+}

@@ -1,0 +1,215 @@
+{
+  "version": "1.0",
+  "mission": {
+    "name": "Apollo 11",
+    "dates": {
+      "launch": "1969-07-16",
+      "lunar_landing": "1969-07-20",
+      "return": "1969-07-24"
+    },
+    "purpose": "Perform the first crewed lunar landing and return the crew safely to Earth.",
+    "landing_region": "Sea of Tranquility",
+    "crew": [
+      {
+        "id": "neil-armstrong",
+        "name": "Neil A. Armstrong",
+        "role": "Commander",
+        "responsibility": "Commanded the mission and piloted Eagle during the lunar landing. He and Aldrin worked on the lunar surface."
+      },
+      {
+        "id": "michael-collins",
+        "name": "Michael Collins",
+        "role": "Command Module Pilot",
+        "responsibility": "Piloted Columbia and remained in lunar orbit while Armstrong and Aldrin were on the surface."
+      },
+      {
+        "id": "buzz-aldrin",
+        "name": "Edwin “Buzz” Aldrin Jr.",
+        "role": "Lunar Module Pilot",
+        "responsibility": "Piloted lunar-module systems and worked with Armstrong during the landing and lunar surface activity."
+      }
+    ],
+    "spacecraft": [
+      {
+        "id": "saturn-v",
+        "name": "Saturn V AS-506",
+        "kind": "Launch vehicle",
+        "function": "Placed Apollo 11 into Earth orbit and sent the spacecraft toward the Moon.",
+        "parts": [
+          "S-IC first stage",
+          "S-II second stage",
+          "S-IVB third stage",
+          "Instrument Unit"
+        ]
+      },
+      {
+        "id": "columbia",
+        "name": "Columbia",
+        "kind": "Command and Service Module",
+        "function": "Served as the crew’s principal spacecraft during most of the mission. The command module was the only crewed part to return through Earth’s atmosphere.",
+        "parts": [
+          "Command Module CM-107",
+          "Service Module SM-107"
+        ]
+      },
+      {
+        "id": "eagle",
+        "name": "Eagle",
+        "kind": "Lunar Module LM-5",
+        "function": "Carried Armstrong and Aldrin from lunar orbit to the surface and returned its ascent stage to rendezvous with Columbia.",
+        "parts": [
+          "Descent stage",
+          "Ascent stage"
+        ]
+      }
+    ],
+    "milestones": [
+      {
+        "id": "launch",
+        "date": "1969-07-16",
+        "title": "Launch",
+        "summary": "Saturn V launched Apollo 11 from Launch Pad 39A at 9:32 a.m. EDT.",
+        "people": ["neil-armstrong","michael-collins","buzz-aldrin"],
+        "systems": ["saturn-v","columbia","eagle"],
+        "image": "01-mission-trajectory.png",
+        "source_ids": ["nasa-mission-overview","nasa-launch"]
+      },
+      {
+        "id": "earth-orbit",
+        "date": "1969-07-16",
+        "title": "Earth orbit and translunar injection",
+        "summary": "After reaching Earth orbit, the S-IVB stage restarted to send the spacecraft toward the Moon. Columbia separated, turned, docked with Eagle, and extracted it from the adapter.",
+        "people": ["neil-armstrong","michael-collins","buzz-aldrin"],
+        "systems": ["saturn-v","columbia","eagle"],
+        "image": "02-launch-stack.png",
+        "source_ids": ["nasa-mission-overview","nasa-saturn-step"]
+      },
+      {
+        "id": "lunar-orbit",
+        "date": "1969-07-19",
+        "title": "Lunar orbit",
+        "summary": "Apollo 11 entered lunar orbit. Armstrong and Aldrin prepared Eagle while Collins continued operating Columbia.",
+        "people": ["neil-armstrong","michael-collins","buzz-aldrin"],
+        "systems": ["columbia","eagle"],
+        "image": "03-lunar-orbit-operations.png",
+        "source_ids": ["nasa-mission-overview"]
+      },
+      {
+        "id": "separation",
+        "date": "1969-07-20",
+        "title": "Eagle separates",
+        "summary": "Eagle separated from Columbia for the powered descent. Collins remained aboard Columbia in lunar orbit.",
+        "people": ["neil-armstrong","michael-collins","buzz-aldrin"],
+        "systems": ["columbia","eagle"],
+        "image": "03-lunar-orbit-operations.png",
+        "source_ids": ["nasa-mission-overview","nasa-eagle-land"]
+      },
+      {
+        "id": "landing",
+        "date": "1969-07-20",
+        "title": "Lunar landing",
+        "summary": "Armstrong and Aldrin landed Eagle in the Sea of Tranquility.",
+        "people": ["neil-armstrong","buzz-aldrin"],
+        "systems": ["eagle"],
+        "image": "04-landing-sequence.png",
+        "source_ids": ["nasa-mission-overview","nasa-surface-journal"]
+      },
+      {
+        "id": "surface",
+        "date": "1969-07-20/21",
+        "title": "Surface activity",
+        "summary": "Armstrong and Aldrin explored the landing area, photographed their work, collected samples, and deployed experiments.",
+        "people": ["neil-armstrong","buzz-aldrin"],
+        "systems": ["eagle"],
+        "image": "05-surface-activity.png",
+        "source_ids": ["nasa-mission-overview","nasa-surface-journal"]
+      },
+      {
+        "id": "ascent",
+        "date": "1969-07-21",
+        "title": "Ascent and rendezvous",
+        "summary": "Eagle’s ascent stage lifted from the Moon and reunited with Columbia in lunar orbit. The crew and samples transferred before Eagle was released.",
+        "people": ["neil-armstrong","michael-collins","buzz-aldrin"],
+        "systems": ["columbia","eagle"],
+        "image": "06-return-recovery.png",
+        "source_ids": ["nasa-mission-overview","nasa-eagle-return"]
+      },
+      {
+        "id": "return",
+        "date": "1969-07-22/24",
+        "title": "Return to Earth",
+        "summary": "Columbia left lunar orbit, crossed back to Earth, separated from the service module, and entered the atmosphere.",
+        "people": ["neil-armstrong","michael-collins","buzz-aldrin"],
+        "systems": ["columbia"],
+        "image": "06-return-recovery.png",
+        "source_ids": ["nasa-mission-overview"]
+      },
+      {
+        "id": "splashdown",
+        "date": "1969-07-24",
+        "title": "Splashdown and recovery",
+        "summary": "The command module splashed down in the Pacific Ocean and the crew was recovered by USS Hornet.",
+        "people": ["neil-armstrong","michael-collins","buzz-aldrin"],
+        "systems": ["columbia"],
+        "image": "06-return-recovery.png",
+        "source_ids": ["nasa-mission-overview"]
+      }
+    ],
+    "artifacts": [
+      {
+        "id": "flight-plan",
+        "title": "Apollo 11 flight plan",
+        "kind": "Planning record",
+        "description": "A procedural record of the mission sequence, crew activity, communications, and spacecraft operations.",
+        "connects_to": ["launch","earth-orbit","lunar-orbit","landing","surface","ascent","return"],
+        "source_id": "nasa-flight-plan"
+      },
+      {
+        "id": "mission-report",
+        "title": "Apollo 11 mission report",
+        "kind": "Technical and historical report",
+        "description": "A post-mission record covering objectives, operations, systems performance, anomalies, and results.",
+        "connects_to": ["launch","earth-orbit","lunar-orbit","landing","surface","ascent","return","splashdown"],
+        "source_id": "nasa-mission-report"
+      },
+      {
+        "id": "surface-journal",
+        "title": "Apollo 11 Lunar Surface Journal",
+        "kind": "Annotated transcript and archive",
+        "description": "A time-ordered archive of surface communications, commentary, photographs, and mission documentation.",
+        "connects_to": ["landing","surface","ascent"],
+        "source_id": "nasa-surface-journal"
+      },
+      {
+        "id": "sample-record",
+        "title": "Lunar sample record",
+        "kind": "Scientific collection",
+        "description": "Returned rock and soil samples linked the landing site to laboratory study on Earth.",
+        "connects_to": ["surface","return","splashdown"],
+        "source_id": "nasa-sample-catalog"
+      },
+      {
+        "id": "laser-reflector",
+        "title": "Laser Ranging Retroreflector",
+        "kind": "Surface experiment",
+        "description": "A reflector array placed on the Moon that supports laser-ranging measurements from Earth.",
+        "connects_to": ["surface"],
+        "source_id": "nasa-experiments"
+      }
+    ],
+    "sources": [
+      {"id":"nasa-mission-overview","title":"Apollo 11 Mission Overview","publisher":"NASA","url":"https://www.nasa.gov/history/apollo-11-mission-overview/"},
+      {"id":"nasa-apollo-mission","title":"Apollo 11 mission page","publisher":"NASA","url":"https://www.nasa.gov/mission/apollo-11/"},
+      {"id":"nasa-surface-journal","title":"Apollo 11 Lunar Surface Journal — Mission Overview","publisher":"NASA History","url":"https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/a11ov.html"},
+      {"id":"nasa-launch","title":"Apollo 11 Launch","publisher":"NASA Science","url":"https://science.nasa.gov/resource/apollo-11-launch/"},
+      {"id":"nasa-eagle-land","title":"The Eagle Prepares to Land","publisher":"NASA Science","url":"https://science.nasa.gov/resource/the-eagle-prepares-to-land/"},
+      {"id":"nasa-eagle-return","title":"Eagle’s Return","publisher":"NASA Science","url":"https://science.nasa.gov/resource/eagles-return/"},
+      {"id":"nasa-saturn-step","title":"Saturn V Step-by-Step","publisher":"NASA History","url":"https://www.nasa.gov/wp-content/uploads/static/history/afj/pdf/saturn-V-step-by-step.pdf"},
+      {"id":"nasa-flight-plan","title":"Apollo 11 Flight Plan","publisher":"NASA History","url":"https://www.nasa.gov/wp-content/uploads/static/history/alsj/a11/A11FlightPlan.pdf"},
+      {"id":"nasa-mission-report","title":"Apollo 11 Mission Report","publisher":"NASA History","url":"https://history.nasa.gov/wp-content/uploads/static/history/alsj/a11/A11_PAOMissionReport.html"},
+      {"id":"nasa-sample-catalog","title":"Apollo 11 Lunar Sample Catalog","publisher":"NASA","url":"https://curator.jsc.nasa.gov/lunar/catalogs/apollo11/index.cfm"},
+      {"id":"nasa-experiments","title":"Apollo 11 Experiments","publisher":"NASA","url":"https://www.nasa.gov/history/alsj/a11/a11.eaasep.html"},
+      {"id":"nasa-media-guidelines","title":"NASA Images and Media Usage Guidelines","publisher":"NASA","url":"https://www.nasa.gov/nasa-brand-center/images-and-media/"}
+    ]
+  }
+}

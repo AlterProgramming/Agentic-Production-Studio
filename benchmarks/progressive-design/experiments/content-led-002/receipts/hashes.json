@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "experiment_id": "content-led-002",
+  "algorithm": "sha256",
+  "scope": "Frozen brief and all approved image binaries.",
+  "files": [
+    {"path":"FROZEN_BRIEF.md","sha256":"dc5904b8e3a21eb6b28f476285398e8b27071fd67a0fdebb9442756b6188a1b2"},
+    {"path":"fixtures/images/01-mission-trajectory.png","sha256":"103167201b1ececbf0b3fe4b39bca27b7ea017d1b672e3667c43807f44d716a8"},
+    {"path":"fixtures/images/02-launch-stack.png","sha256":"e6316e9479376773c79fbb6b2730ff505efc871fa306202cc9ddaeb165beec1f"},
+    {"path":"fixtures/images/03-lunar-orbit-operations.png","sha256":"564383cf84d75eb6ea5bec940c5483b2172e65848bd1930ea26a8f0cfa2e4832"},
+    {"path":"fixtures/images/04-landing-sequence.png","sha256":"dada1e5f2abeac3a26ed890da041e61fcf9e46cdc3cc59d46c074ac4bb8c9bcb"},
+    {"path":"fixtures/images/05-surface-activity.png","sha256":"2744564f0e6d02a317187d618660b66a198d92807db08e210b42e8193f3698e9"},
+    {"path":"fixtures/images/06-return-recovery.png","sha256":"a7534863b4c91a20e09d82fcb9992b179d9d10f42fdfffb4917d86011c17bc67"}
+  ]
+}

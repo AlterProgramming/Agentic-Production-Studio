@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "title": "Apollo 11 Learning Paths",
+  "dek": "Choose a way into the mission, then follow the people, machines, decisions, and records that carried three astronauts to the Moon and back.",
+  "overview": {
+    "heading": "One mission, several ways to understand it",
+    "body": [
+      "Apollo 11 launched on July 16, 1969, carried Neil Armstrong, Michael Collins, and Edwin “Buzz” Aldrin to the Moon, and returned safely to Earth on July 24.",
+      "Armstrong and Aldrin landed the lunar module Eagle in the Sea of Tranquility while Collins remained in lunar orbit aboard the command and service module Columbia.",
+      "The mission joined launch operations, navigation, spacecraft systems, crew roles, surface work, scientific collection, and recovery into one tightly sequenced journey."
+    ],
+    "source_ids": ["nasa-mission-overview","nasa-apollo-mission"]
+  },
+  "paths": [
+    {
+      "id": "quick-orientation",
+      "label": "Quick orientation",
+      "summary": "Understand the mission’s purpose, principal events, crew, vehicles, and outcome in a concise sequence.",
+      "recommended_sections": ["overview","crew","mission:launch","mission:landing","mission:return"]
+    },
+    {
+      "id": "mission-sequence",
+      "label": "Mission sequence",
+      "summary": "Follow the mission chronologically from launch through lunar operations, rendezvous, re-entry, and recovery.",
+      "recommended_sections": ["mission:launch","mission:translunar","mission:lunar-orbit","mission:landing","mission:surface","mission:ascent","mission:return"]
+    },
+    {
+      "id": "people-and-systems",
+      "label": "People and systems",
+      "summary": "See how crew responsibilities and spacecraft modules changed as the mission moved between Earth, lunar orbit, and the surface.",
+      "recommended_sections": ["crew","spacecraft:saturn-v","spacecraft:columbia","spacecraft:eagle","mission:lunar-orbit","mission:ascent"]
+    }
+  ],
+  "people_intro": "Apollo 11 depended on three distinct flight roles. Their responsibilities overlapped, but each crew member held a different command or piloting assignment.",
+  "spacecraft_intro": "Apollo 11 was not one vehicle. It was a sequence of connected launch and spacecraft systems that separated, operated independently, and reunited as the mission advanced.",
+  "artifacts_intro": "Mission records become easier to understand when they are connected to the event, person, or system they document.",
+  "sources_heading": "Sources and acknowledgements",
+  "source_note": "Mission facts are drawn from NASA historical and mission resources. The six diagrams in this experience were created for this benchmark from those factual references and contain no NASA insignia or logotype."
+}

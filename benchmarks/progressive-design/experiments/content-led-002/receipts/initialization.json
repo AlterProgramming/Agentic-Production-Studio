@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "experiment_id": "content-led-002",
+  "created_at": "2026-08-03T23:20:00Z",
+  "doctrine_base_commit": "a130906f527ca1d5aa1775628d992c1d3bf0b93e",
+  "frozen_brief_sha256": "dc5904b8e3a21eb6b28f476285398e8b27071fd67a0fdebb9442756b6188a1b2",
+  "blank_state": true,
+  "condition_sources_empty": true,
+  "approved_image_binary_count": 6,
+  "packet_contract_count": 4,
+  "launch_prompt_count": 4,
+  "tag_dependency": false,
+  "note": "The final immutable setup commit SHA is recorded in the setup pull request because a Git commit cannot embed its own SHA."
+}
