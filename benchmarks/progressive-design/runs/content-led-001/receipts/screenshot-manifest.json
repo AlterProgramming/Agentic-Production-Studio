@@ -1,0 +1,19 @@
+{
+  "captured": true,
+  "conditions": ["A", "B", "C", "D"],
+  "per_condition": [
+    "desktop-primary",
+    "desktop-secondary",
+    "mobile-primary",
+    "mobile-interaction"
+  ],
+  "total_images": 16,
+  "contact_sheets": [
+    "desktop-primary",
+    "desktop-secondary",
+    "mobile-primary",
+    "mobile-interaction"
+  ],
+  "repository_storage": "Full-resolution screenshots and generated source are retained as conversation artifacts rather than committed to Git in this execution environment.",
+  "evaluation_status": "randomized candidate packets prepared; independent evaluation not run"
+}
