@@ -1,0 +1,13 @@
+{
+  "conditions_implemented": ["A", "B", "C", "D"],
+  "screenshots_captured": 16,
+  "contact_sheets_created": 4,
+  "candidate_packets_created": 4,
+  "browser_engine": "Chromium",
+  "independent_workers": false,
+  "causal_benchmark_valid": false,
+  "independent_evaluator": false,
+  "winner_declared": false,
+  "branch": "agent/progressive-design-content-led-001",
+  "pull_request": 22
+}
