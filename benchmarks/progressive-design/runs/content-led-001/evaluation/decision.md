@@ -1,10 +1,13 @@
-# Experiment decision
+# INVALIDATED EXPERIMENT DECISION
 
-No winner is declared.
+**This run is invalidated. Do not evaluate, rank, continue, or cite it as benchmark evidence.**
 
-All four implementations and required screenshot states were produced, but two evidence gates remain unmet for a valid causal conclusion:
+No winner exists for `content-led-001`.
 
-1. the conditions were implemented sequentially in one coordinator reasoning context rather than by independent workers;
-2. no independent blind evaluator was available.
+The run is excluded because all four conditions were implemented sequentially within one shared reasoning context. That created material cross-condition leakage and defeated the central isolation requirement. An independent blind evaluator was also not used.
 
-The current outputs may be used to inspect implementation range and prepare a future evaluator packet. They must not be treated as uncontaminated confirmation or rejection of the Progressive Design hypothesis.
+The screenshots and implementations must not be treated as calibration evidence, directional evidence, confirmation, rejection, or a starting point for a replacement run. They remain only as an audit trail documenting a failed execution model.
+
+A replacement benchmark must begin from a newly frozen setup state and use separate fresh sessions for setup, A, B, C, D, integration, blind evaluation, and synthesis. Future sessions must not inspect or reuse this run.
+
+See `../INVALIDATED.md` for the binding disposition.
