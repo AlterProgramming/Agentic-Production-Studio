@@ -4,7 +4,13 @@
   "existing_implementation_provided": false,
   "starter_design_provided": false,
   "shared_code": false,
-  "prior_output_exposure": false,
+  "prior_source_inspected": false,
+  "independent_worker": false,
+  "shared_reasoning_context": true,
+  "benchmark_isolation_valid": false,
   "implementation_budget": "one bounded implementation pass; no external UI kits; max 15 implementation files; max 250 KB first-party HTML/CSS/JS before images",
-  "environment_differences": []
+  "environment_differences": [
+    "The coordinator implemented all four conditions sequentially because independent workers were unavailable.",
+    "Approved image binaries were unavailable; source links, captions, alt text, and credits were retained without fabricated documentary imagery."
+  ]
 }
