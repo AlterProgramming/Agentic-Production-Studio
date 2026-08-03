@@ -1,0 +1,119 @@
+{
+  "collection": {
+    "title": "Central California Migrant Camp Voices, 1940–1941",
+    "source_collection": "Voices from the Dust Bowl: The Charles L. Todd and Robert Sonkin Migrant Worker Collection, 1940 to 1941",
+    "repository": "American Folklife Center, Library of Congress",
+    "introduction": "Between 1940 and 1941, Charles L. Todd and Robert Sonkin recorded conversations, meetings, stories, songs, and daily experience in Farm Security Administration migrant worker camps across central California. This bounded selection follows four voices and public moments across Shafter, El Rio, Visalia, and Yuba City.",
+    "interpretive_note": "These recordings preserve individual testimony and community activity within a larger federal collecting project. Present the people represented as historical participants, not as visual atmosphere. Keep names, places, dates, source notes, and credit lines attached to their records.",
+    "rights_note": "The Library of Congress states that it is not aware of U.S. copyright protection or other restrictions in this collection except as noted, while reminding users that privacy, publicity, cultural sensitivity, and item-specific rights may still apply. Every displayed item must retain its Library of Congress source link and credit line.",
+    "source_url": "https://www.loc.gov/collections/todd-and-sonkin-migrant-workers-from-1940-to-1941/about-this-collection/",
+    "rights_url": "https://www.loc.gov/collections/todd-and-sonkin-migrant-workers-from-1940-to-1941/about-this-collection/rights-and-access/",
+    "credit_line": "Charles L. Todd and Robert Sonkin migrant workers collection (AFC 1985/001), American Folklife Center, Library of Congress"
+  },
+  "places": [
+    "Shafter",
+    "El Rio",
+    "Visalia",
+    "Yuba City"
+  ],
+  "topics": [
+    "migration and dust storms",
+    "labor and citizenship",
+    "camp governance",
+    "family and memory"
+  ],
+  "records": [
+    {
+      "id": "flora-robertson-dust-storms",
+      "title": "Interview about dust storms in Oklahoma",
+      "participant": "Flora Robertson",
+      "collectors": [
+        "Charles L. Todd",
+        "Robert Sonkin"
+      ],
+      "date": "1940-08-05",
+      "place": "Shafter",
+      "format": "audio recording",
+      "topics": [
+        "migration and dust storms"
+      ],
+      "summary": "Flora Robertson speaks in Shafter about dust storms in Oklahoma. The record is presented as an individual recollection within the larger migrant-worker field collection.",
+      "short_summary": "A recollection of Oklahoma dust storms, recorded in Shafter in 1940.",
+      "source_url": "https://www.loc.gov/item/toddbib000091/",
+      "credit_line": "Charles L. Todd and Robert Sonkin migrant workers collection (AFC 1985/001), American Folklife Center, Library of Congress",
+      "availability": "Listen at the official Library of Congress item page. No transcript text is included in this fixture."
+    },
+    {
+      "id": "augustus-martinez-camp-closing",
+      "title": "Interview about the camp closing, discrimination, labor issues, efforts to organize youth, citizenship",
+      "participant": "Augustus Martinez",
+      "collectors": [
+        "Charles L. Todd",
+        "Robert Sonkin"
+      ],
+      "date": "1941",
+      "place": "El Rio",
+      "format": "audio recording",
+      "topics": [
+        "labor and citizenship"
+      ],
+      "summary": "Augustus Martinez discusses the closing of the El Rio camp, discrimination, labor issues, efforts to organize youth, and citizenship. The Library of Congress notes that he was thirty at the time and had come to the United States from Mexico at age nine.",
+      "short_summary": "Camp closure, discrimination, labor, youth organizing, and citizenship in El Rio.",
+      "source_url": "https://www.loc.gov/item/toddbib000361/",
+      "credit_line": "Charles L. Todd and Robert Sonkin migrant workers collection (AFC 1985/001), American Folklife Center, Library of Congress",
+      "availability": "Listen at the official Library of Congress item page. No transcript text is included in this fixture."
+    },
+    {
+      "id": "millie-delp-camp-council",
+      "title": "Camp Council meeting — Speech by Millie Delp",
+      "participant": "Millie Delp",
+      "collectors": [
+        "Charles L. Todd",
+        "Robert Sonkin"
+      ],
+      "date": "1941-08-28",
+      "place": "Visalia",
+      "format": "audio recording",
+      "topics": [
+        "camp governance"
+      ],
+      "summary": "A speech by Millie Delp recorded during a camp council meeting at the Visalia FSA Camp on August 28, 1941.",
+      "short_summary": "A 1941 camp council speech recorded in Visalia.",
+      "source_url": "https://www.loc.gov/item/toddbib000326/",
+      "credit_line": "Charles L. Todd and Robert Sonkin migrant workers collection (AFC 1985/001), American Folklife Center, Library of Congress",
+      "availability": "Listen at the official Library of Congress item page. No transcript text is included in this fixture."
+    },
+    {
+      "id": "johnsons-wedding-day",
+      "title": "Interview about the Johnsons’ wedding day",
+      "participant": "A. S. Johnson and Mrs. A. S. Johnson",
+      "collectors": [
+        "Charles L. Todd",
+        "Robert Sonkin"
+      ],
+      "date": "1940-08-18",
+      "place": "Yuba City",
+      "format": "audio recording",
+      "topics": [
+        "family and memory"
+      ],
+      "summary": "A. S. Johnson and Mrs. A. S. Johnson recall their wedding day in an interview recorded at the Yuba City FSA Camp on August 18, 1940.",
+      "short_summary": "A couple’s recollection of their wedding day, recorded in Yuba City.",
+      "source_url": "https://www.loc.gov/item/toddbib000204/",
+      "credit_line": "Charles L. Todd and Robert Sonkin migrant workers collection (AFC 1985/001), American Folklife Center, Library of Congress",
+      "availability": "Listen at the official Library of Congress item page. No transcript text is included in this fixture."
+    }
+  ],
+  "navigation_copy": {
+    "listen_action": "Open the official recording",
+    "browse_places": "Browse by place",
+    "browse_topics": "Browse by topic",
+    "all_voices": "All voices",
+    "clear_filters": "Clear filters",
+    "no_results_title": "No records match this selection",
+    "no_results_body": "Clear the current filters to return to all four records.",
+    "context_closed": "Read source and context",
+    "context_open": "Hide source and context",
+    "about_title": "About this selection"
+  }
+}

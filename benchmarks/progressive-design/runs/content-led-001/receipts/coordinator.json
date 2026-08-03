@@ -1,0 +1,18 @@
+{
+  "subject": "Central California Migrant Camp Voices, 1940\u20131941",
+  "selection_reason": "A regionally bounded Library of Congress collection with hundreds of audio items, photographs, field material, explicit provenance, and a collection-level rights statement. The frozen subset supports discovery by place and topic, a record detail state, a mobile filter interaction, and respectful documentary composition without prescribing a visual style.",
+  "independent_workers_available": false,
+  "conditions_launched": [],
+  "conditions_prepared": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "source_directories_empty_at_initialization": true,
+  "hard_blockers": [
+    "No independent worker or clean-context execution primitive was available.",
+    "Binary image bytes could not be retrieved in the coordinator environment; only official item/resource URLs and metadata are frozen."
+  ],
+  "next_action": "Materialize and hash the four approved image files, then launch A\u2013D in genuinely isolated contexts in parallel."
+}

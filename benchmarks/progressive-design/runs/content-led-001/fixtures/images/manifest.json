@@ -1,0 +1,68 @@
+{
+  "freeze_status": "metadata-and-official-resource-urls-frozen",
+  "binary_status": "not-vendored",
+  "binary_limitation": "The current coordinator environment could verify official item and resource URLs but could not retrieve binary image bytes. No condition has been launched. Image bytes must be materialized once, hashed, and placed at the declared fixture paths before worker execution.",
+  "items": [
+    {
+      "id": "shafter-fsa-camp-1938",
+      "fixture_path": "fixtures/images/shafter-fsa-camp-1938.jpg",
+      "binary_present": false,
+      "title": "Farm Security Administration camp for migrant agricultural workers at Shafter, California",
+      "creator": "Dorothea Lange",
+      "date": "1938-06",
+      "place": "Shafter, California",
+      "item_url": "https://www.loc.gov/item/2017770546/",
+      "resource_url": "https://www.loc.gov/resource/fsa.8b38679/",
+      "reproduction_number": "LC-DIG-fsa-8b38679",
+      "credit_line": "Library of Congress, Prints & Photographs Division, Farm Security Administration/Office of War Information Black-and-White Negatives",
+      "rights_note": "Public domain; free to use and reuse according to the Library of Congress item record.",
+      "alt": "A wide view of the Farm Security Administration camp for migrant agricultural workers at Shafter, California.",
+      "caption": "Farm Security Administration camp for migrant agricultural workers at Shafter, California, photographed by Dorothea Lange, June 1938."
+    },
+    {
+      "id": "el-rio-community-sign-1941",
+      "fixture_path": "fixtures/images/el-rio-community-sign-1941.jpg",
+      "binary_present": false,
+      "title": "Group of children posing under a Farm Workers Community sign",
+      "creator": "Robert Hemmig",
+      "date": "1941",
+      "place": "El Rio, California",
+      "item_url": "https://www.loc.gov/item/toddbib000400/",
+      "resource_url": "https://www.loc.gov/resource/afc1985001.afc1985001_p014/",
+      "credit_line": "Charles L. Todd and Robert Sonkin migrant workers collection (AFC 1985/001), American Folklife Center, Library of Congress",
+      "rights_note": "Collection-level Library of Congress rights statement applies; retain source, credit, and sensitivity notice.",
+      "alt": "A group of children standing beneath a United States Department of Agriculture Farm Security Administration Farm Workers Community sign at El Rio.",
+      "caption": "Children at the entrance to the El Rio Farm Workers Community, photographed by Robert Hemmig in 1941."
+    },
+    {
+      "id": "el-rio-recording-machine-1941",
+      "fixture_path": "fixtures/images/el-rio-recording-machine-1941.jpg",
+      "binary_present": false,
+      "title": "Charles Todd at the recording machine surrounded by a group of Mexican boys and men",
+      "creator": "Robert Hemmig",
+      "date": "1941",
+      "place": "El Rio, California",
+      "item_url": "https://www.loc.gov/item/toddbib000402/",
+      "resource_url": "https://www.loc.gov/resource/afc1985001.afc1985001_p016/",
+      "credit_line": "Charles L. Todd and Robert Sonkin migrant workers collection (AFC 1985/001), American Folklife Center, Library of Congress",
+      "rights_note": "Collection-level Library of Congress rights statement applies; retain source, credit, and sensitivity notice.",
+      "alt": "Charles Todd operating recording equipment while a group of boys and men gather around him at the El Rio camp.",
+      "caption": "Charles Todd at the recording machine in the El Rio camp, photographed by Robert Hemmig in 1941."
+    },
+    {
+      "id": "visalia-saturday-night-dance-1940",
+      "fixture_path": "fixtures/images/visalia-saturday-night-dance-1940.jpg",
+      "binary_present": false,
+      "title": "Saturday night dance",
+      "creator": "Arthur Rothstein",
+      "date": "1940-03",
+      "place": "Tulare Migrant Camp, Visalia, California",
+      "item_url": "https://www.loc.gov/item/toddbib000408/",
+      "resource_url": "https://www.loc.gov/resource/afc1985001.afc1985001_p022/",
+      "credit_line": "Charles L. Todd and Robert Sonkin migrant workers collection (AFC 1985/001), American Folklife Center, Library of Congress",
+      "rights_note": "Collection-level Library of Congress rights statement applies; retain source, credit, and sensitivity notice.",
+      "alt": "People gathered for a Saturday night dance at the Tulare Migrant Camp in Visalia, California.",
+      "caption": "Saturday night dance at the Tulare Migrant Camp in Visalia, photographed by Arthur Rothstein in March 1940."
+    }
+  ]
+}

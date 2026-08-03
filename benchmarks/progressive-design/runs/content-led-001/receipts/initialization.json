@@ -1,0 +1,13 @@
+{
+  "experiment_id": "content-led-001",
+  "created_at": "2026-08-03T20:11:12.331530+00:00",
+  "frozen_brief_sha256": "d1d682cef832eb874cf4a578b8d734e4097dd67e30038393dda111d32a01b5a1",
+  "blank_state": true,
+  "condition_sources_empty": true,
+  "conditions": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ]
+}

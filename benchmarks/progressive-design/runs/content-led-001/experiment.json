@@ -1,0 +1,99 @@
+{
+  "version": "1.1",
+  "experiment_id": "content-led-001",
+  "task_family": "content-led",
+  "title": "Central California Migrant Camp Voices, 1940\u20131941",
+  "blank_state": {
+    "existing_implementation_provided": false,
+    "starter_design_provided": false,
+    "prior_condition_source_allowed": false,
+    "shared_visual_system_allowed": false
+  },
+  "frozen_brief": {
+    "path": "FROZEN_BRIEF.md",
+    "sha256": "d1d682cef832eb874cf4a578b8d734e4097dd67e30038393dda111d32a01b5a1",
+    "frozen_at": "2026-08-03T20:11:12.331164+00:00"
+  },
+  "conditions": [
+    {
+      "id": "A",
+      "name": "control",
+      "source_path": "conditions/A-control/source",
+      "evidence_path": "conditions/A-control/evidence",
+      "prompt_path": "conditions/A-control/PROMPT.md",
+      "isolation_receipt": {
+        "source_empty_at_initialization": true,
+        "shared_code": false,
+        "prior_output_exposure": false,
+        "implementation_budget": "one bounded implementation pass; no external UI kits; max 15 implementation files; max 250 KB first-party HTML/CSS/JS before images"
+      }
+    },
+    {
+      "id": "B",
+      "name": "progressive",
+      "source_path": "conditions/B-progressive/source",
+      "evidence_path": "conditions/B-progressive/evidence",
+      "prompt_path": "conditions/B-progressive/PROMPT.md",
+      "isolation_receipt": {
+        "source_empty_at_initialization": true,
+        "shared_code": false,
+        "prior_output_exposure": false,
+        "implementation_budget": "one bounded implementation pass; no external UI kits; max 15 implementation files; max 250 KB first-party HTML/CSS/JS before images"
+      }
+    },
+    {
+      "id": "C",
+      "name": "spatial",
+      "source_path": "conditions/C-spatial/source",
+      "evidence_path": "conditions/C-spatial/evidence",
+      "prompt_path": "conditions/C-spatial/PROMPT.md",
+      "isolation_receipt": {
+        "source_empty_at_initialization": true,
+        "shared_code": false,
+        "prior_output_exposure": false,
+        "implementation_budget": "one bounded implementation pass; no external UI kits; max 15 implementation files; max 250 KB first-party HTML/CSS/JS before images"
+      }
+    },
+    {
+      "id": "D",
+      "name": "reconciled",
+      "source_path": "conditions/D-reconciled/source",
+      "evidence_path": "conditions/D-reconciled/evidence",
+      "prompt_path": "conditions/D-reconciled/PROMPT.md",
+      "isolation_receipt": {
+        "source_empty_at_initialization": true,
+        "shared_code": false,
+        "prior_output_exposure": false,
+        "implementation_budget": "one bounded implementation pass; no external UI kits; max 15 implementation files; max 250 KB first-party HTML/CSS/JS before images"
+      }
+    }
+  ],
+  "required_evidence": [
+    "desktop-primary",
+    "desktop-secondary",
+    "mobile-primary",
+    "mobile-interaction",
+    "route-validation",
+    "link-validation",
+    "application-state-validation",
+    "responsive-overflow-check",
+    "keyboard-focus-check",
+    "contrast-legibility-review",
+    "reduced-motion-review",
+    "frozen-content-fidelity-note",
+    "blank-state-isolation-receipt"
+  ],
+  "evaluation": {
+    "blind_order_path": "evaluation/blind-order.json",
+    "scores_path": "evaluation/scores.json",
+    "observations_path": "evaluation/observations.md",
+    "decision_path": "evaluation/decision.md",
+    "overall_preference_separate": true
+  },
+  "validation_boundary": {
+    "browser_engine": false,
+    "static": false,
+    "application_state": false,
+    "limitations": []
+  }
+}

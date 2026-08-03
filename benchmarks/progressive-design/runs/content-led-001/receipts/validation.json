@@ -1,0 +1,15 @@
+{
+  "schema_validation": "manifest structure checked against committed schema-required fields; external jsonschema package not required",
+  "json_parse": true,
+  "brief_hash_verified": true,
+  "source_directories_empty_verified": true,
+  "browser_engine": false,
+  "static": false,
+  "application_state": false,
+  "limitations": [
+    "No condition source exists yet.",
+    "No browser render or browser-engine validation has run.",
+    "Image binaries are not yet vendored.",
+    "Independent worker execution is unavailable in this coordinator context."
+  ]
+}

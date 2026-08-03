@@ -1,0 +1,10 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "FROZEN_BRIEF.md": "d1d682cef832eb874cf4a578b8d734e4097dd67e30038393dda111d32a01b5a1",
+    "fixtures/content/archive.json": "66f1788fa1e8e96bedbe6a1f07f47ac8cd03767e3d95794da1b9cc71c33f85ef",
+    "fixtures/images/manifest.json": "3f3ada7c3d87454c0f7815e6b3229fe3e11143ba11c4e5fcba448020e4a2ba77",
+    "fixtures/route-contract.json": "e97e80c77b0c1348986e3af88924db156156e6c025e97a2e8a60f570465e49c5"
+  },
+  "image_binary_hashes": {}
+}

@@ -1,0 +1,112 @@
+{
+  "version": "1.0",
+  "routes": [
+    {
+      "path": "/",
+      "name": "collection-home",
+      "required_content": [
+        "collection introduction",
+        "place choice",
+        "topic choice",
+        "featured path to Augustus Martinez record"
+      ]
+    },
+    {
+      "path": "/voices",
+      "name": "voices-index",
+      "required_content": [
+        "all four records",
+        "place filters",
+        "topic filters",
+        "active filter state",
+        "clear action",
+        "no-results response"
+      ]
+    },
+    {
+      "path": "/voices/augustus-martinez",
+      "name": "record-detail",
+      "required_content": [
+        "full frozen record metadata",
+        "approved summary",
+        "official source-listening action",
+        "context disclosure",
+        "credit line"
+      ]
+    },
+    {
+      "path": "/about",
+      "name": "about",
+      "required_content": [
+        "collection context",
+        "interpretive note",
+        "rights note",
+        "source URL",
+        "credit line"
+      ]
+    }
+  ],
+  "states": [
+    {
+      "id": "home-default",
+      "route": "/",
+      "trigger": "direct load"
+    },
+    {
+      "id": "voices-unfiltered",
+      "route": "/voices",
+      "trigger": "direct load or clear filters"
+    },
+    {
+      "id": "voices-place-filtered",
+      "route": "/voices",
+      "trigger": "select one supplied place"
+    },
+    {
+      "id": "voices-topic-filtered",
+      "route": "/voices",
+      "trigger": "select one supplied topic"
+    },
+    {
+      "id": "voices-no-results",
+      "route": "/voices",
+      "trigger": "a valid combined place/topic selection with no matching record"
+    },
+    {
+      "id": "record-context-collapsed",
+      "route": "/voices/augustus-martinez",
+      "trigger": "direct load"
+    },
+    {
+      "id": "record-context-expanded",
+      "route": "/voices/augustus-martinez",
+      "trigger": "activate context disclosure"
+    },
+    {
+      "id": "mobile-filter-closed",
+      "route": "/voices",
+      "trigger": "390px viewport default"
+    },
+    {
+      "id": "mobile-filter-open",
+      "route": "/voices",
+      "trigger": "activate mobile filter control"
+    },
+    {
+      "id": "reduced-motion",
+      "route": "all",
+      "trigger": "prefers-reduced-motion: reduce"
+    }
+  ],
+  "required_links": [
+    "/",
+    "/voices",
+    "/voices/augustus-martinez",
+    "/about",
+    "all four official item source URLs",
+    "collection source URL",
+    "rights URL"
+  ],
+  "forbidden_routes": true,
+  "direct_reachability_required": true
+}

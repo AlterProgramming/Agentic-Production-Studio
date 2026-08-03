@@ -1,0 +1,10 @@
+{
+  "source_empty_at_initialization": true,
+  "source_initial_entries": [],
+  "existing_implementation_provided": false,
+  "starter_design_provided": false,
+  "shared_code": false,
+  "prior_output_exposure": false,
+  "implementation_budget": "one bounded implementation pass; no external UI kits; max 15 implementation files; max 250 KB first-party HTML/CSS/JS before images",
+  "environment_differences": []
+}
