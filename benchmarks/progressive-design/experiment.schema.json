@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://brightengine.live/schemas/progressive-design-experiment.schema.json",
+  "title": "Progressive Design Experiment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "experiment_id",
+    "task_family",
+    "frozen_brief",
+    "conditions",
+    "required_evidence",
+    "evaluation",
+    "validation_boundary"
+  ],
+  "properties": {
+    "version": {
+      "const": "1.0"
+    },
+    "experiment_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,63}$"
+    },
+    "task_family": {
+      "enum": ["content-led", "transactional", "expressive"]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "frozen_brief": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "frozen_at"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "frozen_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "conditions": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "source_path", "evidence_path", "prompt_path", "isolation_receipt"],
+        "properties": {
+          "id": {"enum": ["A", "B", "C", "D"]},
+          "name": {
+            "enum": ["control", "progressive", "spatial", "reconciled"]
+          },
+          "source_path": {"type": "string", "minLength": 1},
+          "evidence_path": {"type": "string", "minLength": 1},
+          "prompt_path": {"type": "string", "minLength": 1},
+          "isolation_receipt": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["shared_code", "prior_output_exposure", "implementation_budget"],
+            "properties": {
+              "shared_code": {"const": false},
+              "prior_output_exposure": {"const": false},
+              "implementation_budget": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {"id": {"const": "A"}, "name": {"const": "control"}},
+            "required": ["id", "name"]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {"id": {"const": "B"}, "name": {"const": "progressive"}},
+            "required": ["id", "name"]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {"id": {"const": "C"}, "name": {"const": "spatial"}},
+            "required": ["id", "name"]
+          }
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {"id": {"const": "D"}, "name": {"const": "reconciled"}},
+            "required": ["id", "name"]
+          }
+        }
+      ]
+    },
+    "required_evidence": {
+      "type": "array",
+      "minItems": 10,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "desktop-primary",
+          "desktop-secondary",
+          "mobile-primary",
+          "mobile-interaction",
+          "route-validation",
+          "link-validation",
+          "application-state-validation",
+          "responsive-overflow-check",
+          "keyboard-focus-check",
+          "contrast-legibility-review",
+          "reduced-motion-review",
+          "content-preservation-note"
+        ]
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["blind_order_path", "scores_path", "observations_path", "decision_path", "overall_preference_separate"],
+      "properties": {
+        "blind_order_path": {"type": "string", "minLength": 1},
+        "scores_path": {"type": "string", "minLength": 1},
+        "observations_path": {"type": "string", "minLength": 1},
+        "decision_path": {"type": "string", "minLength": 1},
+        "overall_preference_separate": {"const": true}
+      }
+    },
+    "validation_boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["browser_engine", "static", "application_state", "limitations"],
+      "properties": {
+        "browser_engine": {"type": "boolean"},
+        "static": {"type": "boolean"},
+        "application_state": {"type": "boolean"},
+        "limitations": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  }
+}
