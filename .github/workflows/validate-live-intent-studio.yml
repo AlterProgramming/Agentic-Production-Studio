@@ -8,16 +8,22 @@ on:
       - studio_runtime/**
       - studio_console/**
       - tools/studio_console.py
+      - tools/openai_reference_recreation_adapter.py
       - contracts/intent-event.schema.json
       - tests/test_studio_runtime.py
+      - docs/live-intent-studio.md
+      - docs/reference-recreation.md
       - .github/workflows/validate-live-intent-studio.yml
   pull_request:
     paths:
       - studio_runtime/**
       - studio_console/**
       - tools/studio_console.py
+      - tools/openai_reference_recreation_adapter.py
       - contracts/intent-event.schema.json
       - tests/test_studio_runtime.py
+      - docs/live-intent-studio.md
+      - docs/reference-recreation.md
       - .github/workflows/validate-live-intent-studio.yml
 
 jobs:
@@ -33,6 +39,6 @@ jobs:
         with:
           node-version: "24"
       - run: python3 -m pip install pytest
-      - run: python3 -m py_compile studio_runtime/events.py studio_runtime/server.py tools/studio_console.py
+      - run: python3 -m py_compile studio_runtime/events.py studio_runtime/recreation.py studio_runtime/server.py tools/studio_console.py tools/openai_reference_recreation_adapter.py
       - run: python3 -m json.tool contracts/intent-event.schema.json >/dev/null
       - run: python3 -m pytest -q tests/test_studio_runtime.py
