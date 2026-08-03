@@ -2,7 +2,7 @@
   "version": "1.1",
   "experiment_id": "content-led-001",
   "task_family": "content-led",
-  "title": "Central California Migrant Camp Voices, 1940\u20131941",
+  "title": "Central California Migrant Camp Voices, 1940–1941",
   "blank_state": {
     "existing_implementation_provided": false,
     "starter_design_provided": false,
@@ -91,9 +91,14 @@
     "overall_preference_separate": true
   },
   "validation_boundary": {
-    "browser_engine": false,
-    "static": false,
-    "application_state": false,
-    "limitations": []
+    "browser_engine": true,
+    "static": true,
+    "application_state": true,
+    "limitations": [
+      "Independent-worker isolation was not achieved; all four implementations were produced sequentially in one coordinator reasoning context.",
+      "Loopback HTTP navigation was blocked, so route states were rendered as standalone Chromium documents rather than through a refresh-safe production server.",
+      "Approved image binaries were unavailable; source metadata, links, captions, alt text, and credits were retained without fabricated documentary photography.",
+      "No independent blind evaluator was available; no winner is declared."
+    ]
   }
 }
