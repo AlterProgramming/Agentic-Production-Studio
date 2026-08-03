@@ -7,22 +7,72 @@
   <style>
     :root{--bg:#0b0e14;--panel:#141925;--panel2:#1a2130;--line:#2a3346;--text:#edf2fb;--muted:#98a5ba;--accent:#93baff;--good:#78dfad;--warn:#ffd47a}
     *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#090c11,var(--bg));color:var(--text);font:15px/1.45 Inter,ui-sans-serif,system-ui,sans-serif;min-height:100vh}
-    header{padding:24px 28px 18px;border-bottom:1px solid var(--line)}h1{font-size:25px;margin:0 0 4px}.sub{color:var(--muted);max-width:940px}
-    main{display:grid;grid-template-columns:minmax(330px,.82fr) minmax(460px,1.3fr);gap:16px;padding:16px}.panel{background:rgba(20,25,37,.96);border:1px solid var(--line);border-radius:13px;overflow:hidden}.panel h2{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0;padding:13px 15px;border-bottom:1px solid var(--line)}
-    .form{padding:15px;display:grid;gap:12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}textarea,input,select{width:100%;background:#0d121b;border:1px solid var(--line);border-radius:9px;color:var(--text);padding:10px 11px}textarea{min-height:96px;resize:vertical}.compact textarea{min-height:62px}.row{display:flex;gap:8px;flex-wrap:wrap}button{border:1px solid var(--line);border-radius:9px;padding:9px 12px;background:var(--panel2);color:var(--text);cursor:pointer;font-weight:700}button.primary{background:var(--accent);color:#09101e;border-color:transparent}button:disabled{opacity:.45;cursor:default}
-    .stage{min-height:330px;padding:18px;display:grid;place-items:center;background:radial-gradient(circle at 72% 22%,rgba(147,186,255,.17),transparent 32%),linear-gradient(145deg,#121824,#090d14)}.frame{width:min(100%,760px);aspect-ratio:16/9;border:1px solid #3a465f;border-radius:12px;overflow:hidden;position:relative;background:linear-gradient(165deg,#111827 10%,#29344b 50%,#12151d 50%);box-shadow:0 25px 60px rgba(0,0,0,.34)}.frame img{width:100%;height:100%;object-fit:cover;display:none}.caption{position:absolute;left:5%;right:5%;bottom:5%;background:rgba(3,6,10,.72);border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:10px 12px}.caption b{display:block}.caption span{color:#c5cede;font-size:13px}
+    header{padding:24px 28px 18px;border-bottom:1px solid var(--line)}h1{font-size:25px;margin:0 0 4px}.sub{color:var(--muted);max-width:980px}
+    main{display:grid;grid-template-columns:minmax(350px,.86fr) minmax(480px,1.3fr);gap:16px;padding:16px}.panel{background:rgba(20,25,37,.96);border:1px solid var(--line);border-radius:13px;overflow:hidden}.panel h2{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0;padding:13px 15px;border-bottom:1px solid var(--line)}
+    .form{padding:15px;display:grid;gap:12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}textarea,input,select{width:100%;background:#0d121b;border:1px solid var(--line);border-radius:9px;color:var(--text);padding:10px 11px}textarea{min-height:96px;resize:vertical}.plan{min-height:470px;font:12px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}.compact textarea{min-height:62px}.row{display:flex;gap:8px;flex-wrap:wrap}button{border:1px solid var(--line);border-radius:9px;padding:9px 12px;background:var(--panel2);color:var(--text);cursor:pointer;font-weight:700}button.primary{background:var(--accent);color:#09101e;border-color:transparent}button:disabled{opacity:.45;cursor:default}
+    .stage{min-height:360px;padding:18px;display:grid;place-items:center;background:radial-gradient(circle at 72% 22%,rgba(147,186,255,.17),transparent 32%),linear-gradient(145deg,#121824,#090d14)}.frame{width:min(100%,800px);aspect-ratio:16/9;border:1px solid #3a465f;border-radius:12px;overflow:hidden;position:relative;background:linear-gradient(165deg,#111827 10%,#29344b 50%,#12151d 50%);box-shadow:0 25px 60px rgba(0,0,0,.34)}.frame img,.frame video{width:100%;height:100%;object-fit:cover;display:none;background:#05070a}.caption{position:absolute;left:5%;right:5%;bottom:5%;background:rgba(3,6,10,.72);border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:10px 12px;pointer-events:none}.caption b{display:block}.caption span{color:#c5cede;font-size:13px}
     .progress{height:5px;background:#0b1018}.progress div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--good));transition:width .25s}.status{display:flex;justify-content:space-between;padding:11px 14px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
-    .stream{padding:7px 12px 14px;max-height:510px;overflow:auto}.event{display:grid;grid-template-columns:132px 1fr;gap:10px;padding:10px 2px;border-bottom:1px solid rgba(42,51,70,.75)}.type{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--accent);font-weight:800}.message{color:var(--text)}.meta{font-size:11px;color:var(--muted);margin-top:2px}.result{padding:14px;color:#dce5f4;white-space:pre-wrap;max-height:300px;overflow:auto;font:12px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}.hint{font-size:12px;color:var(--muted)}.warning{color:var(--warn)}.hidden{display:none}@media(max-width:900px){main{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
+    .stream{padding:7px 12px 14px;max-height:550px;overflow:auto}.event{display:grid;grid-template-columns:145px 1fr;gap:10px;padding:10px 2px;border-bottom:1px solid rgba(42,51,70,.75)}.type{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--accent);font-weight:800}.message{color:var(--text)}.meta{font-size:11px;color:var(--muted);margin-top:2px}.result{padding:14px;color:#dce5f4;white-space:pre-wrap;max-height:330px;overflow:auto;font:12px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace}.hint{font-size:12px;color:var(--muted)}.hidden{display:none}@media(max-width:900px){main{grid-template-columns:1fr}.grid2{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-<header><h1>Production Studio Intent Console</h1><div class="sub">Execute real builder, SceneForge, or iterative reference-recreation work. The surface renders semantic state, retained candidates, rate-budget waits, and the committed result.</div></header>
+<header><h1>Production Studio Intent Console</h1><div class="sub">Execute retained image, scene, and video work. The surface exposes semantic state, candidate promotion, repair decisions, provider progress, rate-budget waits, and committed artifacts.</div></header>
 <main>
   <section>
     <div class="panel"><h2>Run configuration</h2><div class="form">
-      <div><label for="mode">Runtime</label><select id="mode"><option value="reference_recreation">Reference recreation pipeline</option><option value="sceneforge">SceneForge retained-scene run</option><option value="builder_preview">Studio Builder preview</option></select></div>
+      <div><label for="mode">Runtime</label><select id="mode"><option value="video_project">Video-native shot project</option><option value="reference_recreation">Reference recreation pipeline</option><option value="sceneforge">SceneForge retained-scene run</option><option value="builder_preview">Studio Builder preview</option></select></div>
 
-      <div id="recreationFields">
+      <div id="videoFields">
+        <label for="videoPlan">Video project request JSON</label>
+        <textarea id="videoPlan" class="plan">{
+  "project_id": "ff7-intermission-orb-presence",
+  "rate_policy": {
+    "requests_per_minute": 1,
+    "burst": 1,
+    "max_retries": 4,
+    "base_backoff_seconds": 5,
+    "max_backoff_seconds": 120
+  },
+  "shots": [
+    {
+      "shot_id": "orb-presence",
+      "title": "Orb Presence",
+      "prompt": "A restrained cinematic close portrait in Midgar: Yuffie in her Moogle cape calmly presents a hovering green materia orb above her raised finger. The world breathes through subtle industrial haze and distant light, while her identity and expression remain stable.",
+      "reference_image": "/path/to/selected_best.png",
+      "model": "sora-2-pro",
+      "seconds": 8,
+      "size": "1280x720",
+      "preserve": [
+        "Yuffie's facial identity and calm confidence",
+        "Moogle cape hood, red pom-pom, and button geometry",
+        "orange glove and materia-to-fingertip relationship",
+        "Final Fantasy VII Remake INTERmission visual language"
+      ],
+      "motion": [
+        "slow controlled camera push-in",
+        "near-static face and body",
+        "subtle scarf and cape secondary motion",
+        "materia hover, internal energy swirl, and restrained glow pulse",
+        "soft Midgar haze and distant industrial light flicker"
+      ],
+      "avoid": [
+        "face morphing or identity drift",
+        "generic anime flattening",
+        "large body gestures",
+        "random background replacement",
+        "materia trajectory jumps",
+        "dashboard or interface imagery"
+      ],
+      "candidates": 3,
+      "repair_budget": 3,
+      "target_score": 0.9
+    }
+  ]
+}</textarea>
+        <div class="hint">Plans may contain multiple dependency-linked shots. References must remain inside an allowed root; generated candidates and repair lineage remain inside the configured video output directory.</div>
+      </div>
+
+      <div id="recreationFields" class="hidden">
         <div><label for="reference">Reference image path</label><input id="reference" value="/path/to/reference.png" /></div>
         <div><label for="goal">Recreation goal</label><textarea id="goal">Preserve the intimate close portrait, the animal-like hood, the raised gloved hand, and the green luminous orb while improving world integration, material fidelity, and emotional clarity.</textarea></div>
         <div class="compact"><label for="anchors">Anchors — one per line</label><textarea id="anchors">close portrait framing
@@ -49,7 +99,6 @@ unreadable hand anatomy</textarea></div>
           <div><label for="patience">Plateau patience</label><input id="patience" type="number" min="1" max="20" value="3" /></div>
         </div>
         <div><label for="resume">Resume job ID — optional</label><input id="resume" placeholder="studio-…" /></div>
-        <div class="hint">The console sends paths and intent only. Reference bytes stay local. Every candidate and state file is retained under the configured recreation output directory.</div>
       </div>
 
       <div id="sceneFields" class="hidden"><label for="prompt">Impact-frame intent</label><textarea id="prompt">A solitary figure beneath a fractured artificial sky, with the world beyond beginning to open.</textarea><label for="title">Title</label><input id="title" value="The first open sky" /></div>
@@ -66,22 +115,22 @@ unreadable hand anatomy</textarea></div>
     <div class="panel" style="margin-top:16px"><h2>Committed result</h2><div id="result" class="result">No run yet.</div></div>
   </section>
   <section>
-    <div class="panel"><h2>Live work surface</h2><div class="stage"><div class="frame"><img id="hero" alt="Current best retained image" /><div class="caption"><b id="frameTitle">Unresolved frame</b><span id="frameDetail">Start a run to expose the runtime's work.</span></div></div></div><div class="progress"><div id="bar"></div></div><div class="status"><span id="phase">Idle</span><span id="confidence">Confidence —</span></div></div>
+    <div class="panel"><h2>Live work surface</h2><div class="stage"><div class="frame"><img id="heroImage" alt="Current best retained image" /><video id="heroVideo" controls loop playsinline></video><div class="caption"><b id="frameTitle">Unresolved artifact</b><span id="frameDetail">Start a run to expose the runtime's work.</span></div></div></div><div class="progress"><div id="bar"></div></div><div class="status"><span id="phase">Idle</span><span id="confidence">Confidence —</span></div></div>
     <div class="panel" style="margin-top:16px"><h2>Semantic event stream</h2><div id="stream" class="stream"></div></div>
   </section>
 </main>
 <script>
-const $=s=>document.querySelector(s);let source=null;let activeRun=null;
+const $=s=>document.querySelector(s);let source=null;let activeRun=null;let activeMode=null;
 function esc(v){const d=document.createElement('div');d.textContent=String(v??'');return d.innerHTML}
 function lines(selector){return $(selector).value.split('\n').map(v=>v.trim()).filter(Boolean)}
-function showMode(){const mode=$('#mode').value;$('#recreationFields').classList.toggle('hidden',mode!=='reference_recreation');$('#sceneFields').classList.toggle('hidden',mode!=='sceneforge');$('#builderFields').classList.toggle('hidden',mode!=='builder_preview')}
+function showMode(){const mode=$('#mode').value;$('#videoFields').classList.toggle('hidden',mode!=='video_project');$('#recreationFields').classList.toggle('hidden',mode!=='reference_recreation');$('#sceneFields').classList.toggle('hidden',mode!=='sceneforge');$('#builderFields').classList.toggle('hidden',mode!=='builder_preview')}
 $('#mode').addEventListener('change',showMode);showMode();
-function reset(){if(source){source.close();source=null}activeRun=null;$('#stream').innerHTML='';$('#bar').style.width='0%';$('#phase').textContent='Idle';$('#confidence').textContent='Confidence —';$('#frameTitle').textContent='Unresolved frame';$('#frameDetail').textContent="Start a run to expose the runtime's work.";$('#hero').style.display='none';$('#hero').removeAttribute('src');$('#result').textContent='No run yet.'}
+function reset(){if(source){source.close();source=null}activeRun=null;activeMode=null;$('#stream').innerHTML='';$('#bar').style.width='0%';$('#phase').textContent='Idle';$('#confidence').textContent='Confidence —';$('#frameTitle').textContent='Unresolved artifact';$('#frameDetail').textContent="Start a run to expose the runtime's work.";$('#heroImage').style.display='none';$('#heroImage').removeAttribute('src');$('#heroVideo').pause();$('#heroVideo').style.display='none';$('#heroVideo').removeAttribute('src');$('#result').textContent='No run yet.'}
 $('#clear').addEventListener('click',reset);
-async function refreshRun(showHero=false){if(!activeRun)return null;const state=await fetch(`/api/runs/${activeRun}`).then(r=>r.json());if(showHero&&state.artifacts?.hero){$('#hero').src=`${state.artifacts.hero}?v=${Date.now()}`;$('#hero').style.display='block'}if(state.result)$('#result').textContent=JSON.stringify(state.result,null,2);return state}
-function append(event){const el=document.createElement('div');el.className='event';el.innerHTML=`<div class="type">${esc(event.type)}</div><div><div class="message">${esc(event.message)}</div><div class="meta">${esc(event.phase)} · step ${event.sequence}</div></div>`;$('#stream').appendChild(el);$('#stream').scrollTop=$('#stream').scrollHeight;if(typeof event.progress==='number')$('#bar').style.width=`${Math.round(event.progress*100)}%`;$('#phase').textContent=event.phase||'runtime';$('#confidence').textContent=typeof event.confidence==='number'?`Confidence ${Math.round(event.confidence*100)}%`:'Confidence —';$('#frameTitle').textContent=event.type;$('#frameDetail').textContent=event.message;if(event.type==='best.updated')refreshRun(true);if(event.type==='artifact.committed'||event.type==='run.completed'){$('#result').textContent=JSON.stringify(event.payload,null,2)}}
-function buildBody(){const mode=$('#mode').value;if(mode==='sceneforge')return{mode,request:{prompt:$('#prompt').value,title:$('#title').value,style:'impact-frame',metadata:{surface:'intent-console'}}};if(mode==='builder_preview')return{mode,workspace_root:$('#workspace').value,plan:JSON.parse($('#plan').value)};return{mode,request:{reference_image:$('#reference').value,goal:$('#goal').value,anchors:lines('#anchors'),preserve:lines('#preserve'),avoid:lines('#avoid'),max_iterations:Number($('#iterations').value),candidates_per_iteration:Number($('#candidates').value),target_score:Number($('#target').value),patience:Number($('#patience').value),minimum_improvement:0.01,resume_job_id:$('#resume').value.trim()||null,rate_policy:{requests_per_minute:Number($('#rpm').value),burst:Number($('#burst').value),max_retries:4,base_backoff_seconds:2,max_backoff_seconds:60}}}}
-async function start(){reset();$('#run').disabled=true;let body;try{body=buildBody()}catch(e){alert(`Invalid run configuration: ${e.message}`);$('#run').disabled=false;return}
+async function refreshRun(showHero=false){if(!activeRun)return null;const state=await fetch(`/api/runs/${activeRun}`).then(r=>r.json());if(showHero&&state.artifacts?.hero){if(activeMode==='video_project'){$('#heroImage').style.display='none';$('#heroVideo').src=`${state.artifacts.hero}?v=${Date.now()}`;$('#heroVideo').style.display='block';$('#heroVideo').load()}else{$('#heroVideo').style.display='none';$('#heroImage').src=`${state.artifacts.hero}?v=${Date.now()}`;$('#heroImage').style.display='block'}}if(state.result)$('#result').textContent=JSON.stringify(state.result,null,2);return state}
+function append(event){const el=document.createElement('div');el.className='event';el.innerHTML=`<div class="type">${esc(event.type)}</div><div><div class="message">${esc(event.message)}</div><div class="meta">${esc(event.phase)} · step ${event.sequence}</div></div>`;$('#stream').appendChild(el);$('#stream').scrollTop=$('#stream').scrollHeight;if(typeof event.progress==='number')$('#bar').style.width=`${Math.round(event.progress*100)}%`;$('#phase').textContent=event.phase||'runtime';$('#confidence').textContent=typeof event.confidence==='number'?`Confidence ${Math.round(event.confidence*100)}%`:'Confidence —';$('#frameTitle').textContent=event.type;$('#frameDetail').textContent=event.message;if(event.type==='best.updated'||event.type==='video.best.updated')refreshRun(true);if(event.type==='artifact.committed'||event.type==='run.completed'||event.type==='video.project.completed'){$('#result').textContent=JSON.stringify(event.payload,null,2)}}
+function buildBody(){const mode=$('#mode').value;if(mode==='video_project')return{mode,request:JSON.parse($('#videoPlan').value)};if(mode==='sceneforge')return{mode,request:{prompt:$('#prompt').value,title:$('#title').value,style:'impact-frame',metadata:{surface:'intent-console'}}};if(mode==='builder_preview')return{mode,workspace_root:$('#workspace').value,plan:JSON.parse($('#plan').value)};return{mode,request:{reference_image:$('#reference').value,goal:$('#goal').value,anchors:lines('#anchors'),preserve:lines('#preserve'),avoid:lines('#avoid'),max_iterations:Number($('#iterations').value),candidates_per_iteration:Number($('#candidates').value),target_score:Number($('#target').value),patience:Number($('#patience').value),minimum_improvement:0.01,resume_job_id:$('#resume').value.trim()||null,rate_policy:{requests_per_minute:Number($('#rpm').value),burst:Number($('#burst').value),max_retries:4,base_backoff_seconds:2,max_backoff_seconds:60}}}}
+async function start(){reset();activeMode=$('#mode').value;$('#run').disabled=true;let body;try{body=buildBody()}catch(e){alert(`Invalid run configuration: ${e.message}`);$('#run').disabled=false;return}
 try{const response=await fetch('/api/runs',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});const run=await response.json();if(!response.ok)throw new Error(run.error||'Run rejected');activeRun=run.run_id;source=new EventSource(`/api/runs/${run.run_id}/events`);source.addEventListener('intent',async message=>{const event=JSON.parse(message.data);append(event);if(event.type==='run.completed'||event.type==='run.failed'){await refreshRun(true);source.close();source=null;$('#run').disabled=false}});source.onerror=()=>{$('#run').disabled=false}}
 catch(e){$('#result').textContent=e.message;$('#run').disabled=false}}
 $('#run').addEventListener('click',start);
