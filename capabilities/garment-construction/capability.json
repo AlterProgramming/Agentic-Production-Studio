@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "studio.capability-manifest",
+  "capability_id": "GarmentForge.clothing_construction.v1",
+  "title": "Retained Clothing and Textile Construction",
+  "canonical_decision_refs": [
+    "visual-generation.model-first.v1",
+    "visual-generation.mnemonic-separation.v1"
+  ],
+  "availability": {
+    "status": "source_and_local_runtime_validated",
+    "production_deployment": "pending",
+    "external_finished_model_provider": false
+  },
+  "runtime": {
+    "package": "garmentforge",
+    "entrypoint": "python -m garmentforge.cli --output OUTPUT",
+    "validator": "python -m garmentforge.validate OUTPUT",
+    "canonical_format": "glTF 2.0 binary (.glb)",
+    "viewer": "OUTPUT/viewer/index.html"
+  },
+  "construction_contract": {
+    "body_ownership": "Embodied geometry and motion remain independent of garments.",
+    "garment_ownership": "Every textile is a detachable asset with its own mesh, material, construction metadata, and provenance.",
+    "interaction": "Fit is expressed through skinning, named attachment zones, collision-zone metadata, and secondary textile joints.",
+    "scene_assembly": "Character scenes reference garment assets rather than baking clothing into the body mesh.",
+    "decor_reuse": "Textile assets may be instanced in detached or architectural-decoration states without changing their source identity."
+  },
+  "acceptance": [
+    "The canonical GLB reopens with embedded textures and no external URIs.",
+    "Body and garment mesh ownership are disjoint.",
+    "At least three wearable garment families and one textile-decor family are retained.",
+    "Each garment carries panel, seam, material, fit, attachment, collision, and provenance metadata.",
+    "Body motion and secondary textile motion target different retained joints.",
+    "The package exposes dressed, body-only, and detached-gallery verification states.",
+    "Each garment is also exported as a standalone GLB."
+  ],
+  "truth_boundary": {
+    "implemented": ["retained textile geometry", "skinning", "embedded PBR weave", "detachment", "re-dressing", "secondary cloth-joint motion", "textile decor reuse"],
+    "not_claimed": ["continuum cloth solver", "tailoring-grade patterns", "manufacturing fit approval", "CLO or Marvelous Designer native project export"]
+  }
+}

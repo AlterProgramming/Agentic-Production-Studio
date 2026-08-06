@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-production-studio.local/schemas/garment.schema.json",
+  "title": "GarmentForge Retained Textile Asset",
+  "type": "object",
+  "required": ["asset_id", "garment_class", "detachable", "panels", "seams", "fabric", "provenance"],
+  "properties": {
+    "asset_id": {"type": "string", "minLength": 1},
+    "garment_class": {"enum": ["upper_body", "lower_body", "outer_layer_and_decor", "scene_textile_decor"]},
+    "detachable": {"const": true},
+    "panels": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "seams": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "closures": {"type": "array", "items": {"type": "string"}},
+    "fit_profile": {"type": "string"},
+    "collision_zones": {"type": "array", "items": {"type": "string"}},
+    "fabric": {"type": "object", "required": ["fiber", "areal_density_g_m2", "bending"]},
+    "provenance": {"type": "object", "required": ["construction", "external_finished_model"]}
+  },
+  "additionalProperties": true
+}

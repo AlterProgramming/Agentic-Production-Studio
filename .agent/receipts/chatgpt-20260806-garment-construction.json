@@ -1,0 +1,58 @@
+{
+  "kind": "assistant.command-center-bootstrap-receipt",
+  "initialized_in_command_center": true,
+  "session_id": "chatgpt-20260806-garment-construction",
+  "repository": "AlterProgramming/Agentic-Production-Studio",
+  "task": {
+    "scopes": [
+      "visual-production",
+      "3d-reconstruction",
+      "garment-simulation",
+      "repository-change"
+    ],
+    "text": "Inspect the model-construction code and implement reusable clothing/textile assets, fitting, manipulation, retained-scene integration, validation, and an external-verifier-compatible export."
+  },
+  "authority": {
+    "repository": "AlterProgramming/Agent-Command-Center",
+    "branch": "main",
+    "canonical_state": "memory/registry.json",
+    "capability_registry": "capabilities/registry.json",
+    "session_registry": "sessions/registry.json"
+  },
+  "adapter": {
+    "id": "agentic-production-studio",
+    "binding_path": ".agent/command-center.json",
+    "required": true
+  },
+  "state_hashes": {
+    "hash_source": "github_blob_sha1_via_connector",
+    "canonical_sha256": "unavailable-from-connector-without-local-checkout",
+    "capability_sha256": "unavailable-from-connector-without-local-checkout",
+    "session_sha256": "unavailable-from-connector-without-local-checkout",
+    "canonical_git_blob_sha1": "8fa4d3794b3580840d4edc6ea71bb8dcc1e5ff3f",
+    "capability_git_blob_sha1": "f9c976f726cae045cea19750fd24332c53ca927b",
+    "session_git_blob_sha1": "dffd03eec6d107f23e09da3e0d126ba3351bbd74"
+  },
+  "active_decisions": [
+    {"key": "canonical-state.governance.v1", "summary": "The machine-readable registry is the durable authority for current cross-session direction."},
+    {"key": "conversation.convergence.v1", "summary": "Repeated sessions must converge and material changes must preserve, supersede, reject, or mark unresolved canonical entries."},
+    {"key": "visual-generation.model-first.v1", "summary": "Meaningful visual generation defaults to a retained structured scene/model before rendering."},
+    {"key": "assistant.capability-inheritance.v1", "summary": "Useful discoveries must change real implementation and startup inheritance, then be verified."},
+    {"key": "visual-generation.mnemonic-separation.v1", "summary": "Body, garments/artifacts, interactions, provenance, and conflicting hypotheses remain separate reusable layers."},
+    {"key": "assistant.session-command-center-bootstrap.v1", "summary": "Controlled implementation sessions initialize through Command Center and retain a receipt."}
+  ],
+  "unresolved_decisions": [
+    {"key": "ecosystem.system-boundaries.v1", "summary": "Internal role and record ownership among AI Core, BrightEngine, Forge, and Kairos remains unresolved; this task does not resolve it."}
+  ],
+  "capabilities": [
+    {"key": "capability.integration-loop.v1", "required_steps": ["discovery", "generalization", "applicability", "update", "inheritance", "verification"], "summary": "Turn reusable discoveries into applicable, implemented, validated, inherited capability changes."},
+    {"key": "capability.completion-evidence-gate.v1", "required_steps": ["inventory", "recipient-path-test", "evidence-classification", "claim-boundary"], "summary": "Completion claims require recipient-path testing and clear evidence boundaries."},
+    {"key": "capability.mnemonic-3d-separation.v1", "required_steps": ["embodied-layer", "artifact-layer", "interaction-layer", "provenance-layer", "hypothesis-branches", "reopen-and-reuse-validation"], "summary": "Keep body, garments, interaction, provenance, and competing reconstructions separate and reusable."}
+  ],
+  "execution_gate": {
+    "task_execution_authorized": true,
+    "condition": "The three authoritative registries were read from main via the connected GitHub repository tool; the registered adapter and applicable capabilities were resolved. Exact file SHA-256 values remain unavailable in connector mode, so Git blob IDs are retained as integrity references.",
+    "must_be_retained_in_handoff": true
+  },
+  "receipt_sha256": "e67c07039e530aa7e89fa22ac8ba7f7a616f03f818c938f303d6c1471ccb6ac3"
+}
