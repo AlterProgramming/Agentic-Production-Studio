@@ -17,8 +17,8 @@
     },
     {
       "capability": "capability.mnemonic-3d-separation.v1",
-      "status": "contract_and_garment_runtime_ready",
-      "runtime_status": "garment_construction_validated_mnemonic_reconstruction_pending",
+      "status": "contract_and_validator_ready",
+      "runtime_status": "generation_runtime_pending",
       "implementation": "capabilities/mnemonic-3d-separation/capability.json"
     },
     {
