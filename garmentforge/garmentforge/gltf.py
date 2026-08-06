@@ -47,7 +47,7 @@ def parse_glb(data: bytes) -> tuple[dict[str, Any], bytes]:
 @dataclass
 class GLBBuilder:
     document: dict[str, Any] = field(default_factory=lambda: {
-        "asset": {"version": "2.0", "generator": "GarmentForge.clothing_construction.v1"},
+        "asset": {"version": "2.0", "generator": "GarmentForge.clothing_construction.v2"},
         "scene": 0,
         "scenes": [],
         "nodes": [],
@@ -113,25 +113,38 @@ class GLBBuilder:
         self.document["images"].append({"name": name, "bufferView": view, "mimeType": "image/png"})
         return len(self.document["images"]) - 1
 
-    def add_texture(self, image: int) -> int:
-        if not self.document["samplers"]:
-            self.document["samplers"].append({"magFilter": 9729, "minFilter": 9987, "wrapS": 10497, "wrapT": 10497})
-        self.document["textures"].append({"sampler": 0, "source": image})
+    def add_texture(self, image: int, *, clamp: bool = False) -> int:
+        sampler = {"magFilter": 9729, "minFilter": 9987, "wrapS": 33071 if clamp else 10497, "wrapT": 33071 if clamp else 10497}
+        self.document["samplers"].append(sampler)
+        self.document["textures"].append({"sampler": len(self.document["samplers"]) - 1, "source": image})
         return len(self.document["textures"]) - 1
 
-    def add_material(self, name: str, base_texture: int, normal_texture: int, color: list[float], roughness: float, sheen: list[float]) -> int:
+    def add_textile_material(self, name: str, base_texture: int, normal_texture: int, roughness_texture: int, color: list[float], roughness: float, sheen: list[float]) -> int:
         self.document["materials"].append({
             "name": name,
             "doubleSided": True,
             "pbrMetallicRoughness": {
                 "baseColorFactor": color,
                 "baseColorTexture": {"index": base_texture},
+                "metallicRoughnessTexture": {"index": roughness_texture},
                 "metallicFactor": 0.0,
                 "roughnessFactor": roughness,
             },
-            "normalTexture": {"index": normal_texture, "scale": 0.45},
+            "normalTexture": {"index": normal_texture, "scale": 0.42},
             "extensions": {"KHR_materials_sheen": {"sheenColorFactor": sheen, "sheenRoughnessFactor": 0.72}},
-            "extras": {"material_class": "woven_textile", "two_sided_fabric": True},
+            "extras": {"material_class": "woven_textile", "two_sided_fabric": True, "macro_variation": True},
+        })
+        return len(self.document["materials"]) - 1
+
+    def add_plain_material(self, name: str, color: list[float], roughness: float = 0.68) -> int:
+        self.document["materials"].append({
+            "name": name,
+            "pbrMetallicRoughness": {
+                "baseColorFactor": color,
+                "metallicFactor": 0.0,
+                "roughnessFactor": roughness,
+            },
+            "extras": {"material_class": "plain_body", "textile": False},
         })
         return len(self.document["materials"]) - 1
 

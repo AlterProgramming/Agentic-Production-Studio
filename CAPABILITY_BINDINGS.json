@@ -22,7 +22,7 @@
       "implementation": "capabilities/mnemonic-3d-separation/capability.json"
     },
     {
-      "capability": "GarmentForge.clothing_construction.v1",
+      "capability": "GarmentForge.clothing_construction.v2",
       "status": "source_and_local_runtime_validated",
       "production_deployment": "pending",
       "implementation": "capabilities/garment-construction/capability.json",

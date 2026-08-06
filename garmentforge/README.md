@@ -1,15 +1,15 @@
-# GarmentForge
+# GarmentForge v2
 
-`GarmentForge.clothing_construction.v1` adds retained, detachable textile assets to the model-first construction stack.
+`GarmentForge.clothing_construction.v2` replaces the original uniform-grid proxy with a bounded retained garment pipeline.
 
-The runtime builds one dressed-character GLB and four independently reusable textile GLBs:
+Each garment now has two separately owned surfaces:
 
-- a panel-built tunic with separate sleeves;
-- a pleated wrap skirt;
-- a draped mantle that can also be reused as scene textile decoration;
-- a hanging architectural textile.
+- a coarse simulation cage whose source representation is quad-oriented and whose GLB derivative is triangulated only for interchange;
+- an adaptive visible surface with variable row density, smooth skin-weight fields, UVs, normals, and garment-specific base, normal, roughness, and sheen response.
 
-Each asset includes geometry, normals, UVs, embedded procedural weave and normal maps, a glTF skin, attachment/collision metadata, panel and seam metadata, and secondary textile joints. The system GLB preserves three scene states: dressed, body-only, and detached garment gallery.
+The tunic cage retains ordered vertex-pair sewing constraints for its front, back, and sleeve boundaries. Wrap, mantle, and hanging-textile closures remain explicitly typed as overlap, fastener, or pinned-boundary constraints instead of being falsely welded. The body uses a plain skin material and no textile maps.
+
+The system GLB preserves four verification states: dressed, body-only, detached render surfaces, and simulation cages with seams. `viewer/construction.html` reveals the already-continuous render surface with a shader-driven UV coverage mask; it never spawns partial geometry.
 
 ## Build
 
@@ -18,8 +18,8 @@ python -m garmentforge.cli --output build/garmentforge
 python -m garmentforge.validate build/garmentforge
 ```
 
-Serve the package and open `viewer/index.html`, or choose a generated GLB directly in the viewer file picker.
-
 ## Evidence boundary
 
-This is a bounded retained-garment runtime, not a painted clothing layer. It proves detachable assets, skinned fit, material response, independent secondary motion, re-dressing, and reuse as decor. It does not claim continuum cloth simulation, tailoring-grade 2D patterns, manufacturing fit certification, or a proprietary CLO/Marvelous Designer project file.
+Implemented: explicit seam mappings, cage/render separation, adaptive variable-row topology, smooth deformation fields, garment-specific macro/micro material variation, plain body shading, detached assets, and a coverage-based construction reveal.
+
+Not claimed: a continuum cloth solver, production collision resolution, tailoring-grade patterns, manufacturing fit certification, or native CLO/Marvelous Designer project export.

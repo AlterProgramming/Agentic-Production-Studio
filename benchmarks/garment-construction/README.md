@@ -1,18 +1,23 @@
-# GarmentForge retained-clothing benchmark
+# GarmentForge v2 retained-clothing benchmark
 
-The fixed benchmark exercises clothing as an actual model-first capability rather than an image treatment.
+The benchmark blocks the uniform-grid proxy architecture that v1 exposed.
 
-## Matrix
+## Required construction layers
 
-- one embodied mannequin with a reusable humanoid skin;
-- tunic, wrap skirt, mantle, and hanging textile;
-- one assembled GLB with dressed, body-only, and detached-gallery scenes;
-- four standalone garment GLBs;
-- ten embedded procedural fabric images;
-- one body-motion clip with eight secondary textile joints.
+- one embodied mannequin with a non-textile body material;
+- one coarse simulation cage per textile family;
+- one separately owned adaptive render surface per textile family;
+- explicit ordered seam pairs for the tunic cage;
+- typed overlap, fastener, or pinned-boundary constraints where welding would be incorrect;
+- smooth skin fields and secondary textile joints;
+- garment-specific base, normal, roughness, and sheen response;
+- a UV coverage-mask construction reveal that never spawns topology.
 
-## Blocking checks
+## Retained states
 
-The benchmark fails on fused body/garment ownership, missing UVs or skin weights, external texture URIs, absent garment construction metadata, absent independent textile motion, fewer than three retained scene states, or a missing standalone garment export.
+- dressed character and textile decor;
+- body-only verification;
+- detached adaptive render surfaces;
+- simulation cages and seam verification.
 
-The intended independent verification path is: Khronos glTF Validator for specification conformance, Babylon.js Sandbox for animation/material/node inspection, and Blender for direct rig, mesh, material, and weight manipulation.
+The benchmark fails on textile maps assigned to the body, uniform render-row density, missing cage/render separation, missing tunic seam pairs, fewer than ten distinct render-weight vectors, external texture URIs, or a construction animation that exposes partial geometry.

@@ -24,19 +24,14 @@ def validate_glb(path:Path,system:bool=False)->dict:
     doc,binary=parse_glb(path.read_bytes()); errors=[]
     if not binary: errors.append("missing binary payload")
     if any(x.get("uri") for x in doc.get("images",[])): errors.append("external image URI present")
-    if len(doc.get("images",[]))<2: errors.append("embedded fabric base and normal textures required")
     if not doc.get("skins"): errors.append("missing skin")
     if not doc.get("animations"): errors.append("missing animation")
-    names={n.get("name") for n in doc.get("nodes",[])}
-    cloth={n for n in names if n and "Hem" in n}
-    if len(cloth)<2: errors.append("secondary cloth joints missing")
-    garment_meshes=[]
+    render=[]; cages=[]; body=[]
     for mesh in doc.get("meshes",[]):
-        extra=mesh.get("extras",{})
-        if extra.get("garment_class"):
-            garment_meshes.append(mesh)
-            if extra.get("detachable") is not True: errors.append(f"{mesh.get('name')} not detachable")
-            if not extra.get("panels") or not extra.get("seams"): errors.append(f"{mesh.get('name')} lacks panel/seam construction metadata")
+        extra=mesh.get("extras",{}); role=extra.get("topology_role")
+        if extra.get("layer")=="embodied": body.append(mesh)
+        if extra.get("garment_class") and role=="render_surface": render.append(mesh)
+        if extra.get("garment_class") and role=="simulation_cage": cages.append(mesh)
         for primitive in mesh.get("primitives",[]):
             attrs=primitive.get("attributes",{})
             for required in ("POSITION","NORMAL","TEXCOORD_0","JOINTS_0","WEIGHTS_0"):
@@ -44,20 +39,39 @@ def validate_glb(path:Path,system:bool=False)->dict:
             if "POSITION" in attrs:
                 pos=accessor_array(doc,binary,attrs["POSITION"])
                 if not np.isfinite(pos).all(): errors.append(f"{mesh.get('name')} non-finite positions")
-                if len(pos)<500: errors.append(f"{mesh.get('name')} under-resolved ({len(pos)} vertices)")
-    channels=[c for a in doc.get("animations",[]) for c in a.get("channels",[])]
-    targeted={doc["nodes"][c["target"]["node"]].get("name") for c in channels}
-    if not any("Hem" in (n or "") for n in targeted): errors.append("animation has no independent cloth-joint target")
-    if not any(n in targeted for n in ("Chest","UpperArm_L","UpperArm_R")): errors.append("animation has no body driver")
+            if extra.get("garment_class") and role=="render_surface" and "WEIGHTS_0" in attrs:
+                weights=accessor_array(doc,binary,attrs["WEIGHTS_0"])
+                if len(np.unique(np.round(weights,3),axis=0))<10: errors.append(f"{mesh.get('name')} weight field is too coarse")
+    for mesh in render:
+        extra=mesh["extras"]
+        if extra.get("adaptive_density") is not True: errors.append(f"{mesh['name']} not adaptive")
+        row_counts=extra.get("adaptive_row_counts",{})
+        if not any(len(set(values))>1 for values in row_counts.values()): errors.append(f"{mesh['name']} has uniform row density")
+        if extra.get("construction_reveal")!="uv_coverage_mask": errors.append(f"{mesh['name']} lacks coverage reveal")
+    for mesh in cages:
+        extra=mesh["extras"]
+        if extra.get("quad_source") is not True or extra.get("triangulated_for_glb") is not True: errors.append(f"{mesh['name']} lacks quad-source boundary")
+        seams=extra.get("seam_constraints",[])
+        if not seams: errors.append(f"{mesh['name']} lacks seam constraints")
+        for seam in seams:
+            if seam.get("simulation_constraint") not in {"distance_pair","layered_contact","pin_pair","pinned_boundary"}: errors.append(f"{mesh['name']} seam constraint invalid")
+            if seam.get("simulation_constraint")=="distance_pair" and not seam.get("ordered_vertex_pairs"): errors.append(f"{mesh['name']} seam pairs missing")
+    if body:
+        primitive=body[0]["primitives"][0]; material=doc["materials"][primitive["material"]]
+        if material.get("extras",{}).get("material_class")!="plain_body": errors.append("body uses textile material")
+        if material.get("normalTexture") or material.get("pbrMetallicRoughness",{}).get("baseColorTexture"): errors.append("body material contains weave textures")
+    target_names={doc["nodes"][c["target"]["node"]].get("name") for a in doc.get("animations",[]) for c in a.get("channels",[])}
+    if not any("Hem" in (n or "") for n in target_names): errors.append("animation has no independent cloth-joint target")
+    if "Chest" not in target_names: errors.append("animation has no body driver")
     if system:
-        if len(doc.get("scenes",[]))<3: errors.append("system GLB must retain dressed, body-only, and detached-gallery scenes")
-        required={"Garment_Tunic","Garment_WrapSkirt","Garment_Mantle","Textile_HangingPanel","Layer_Embodied_Body"}
-        if not required.issubset(names): errors.append(f"system missing nodes: {sorted(required-names)}")
-        if len(garment_meshes)<4: errors.append("system must contain four textile assets")
-        extras=doc.get("extras",{})
-        checks=extras.get("verification",{})
-        if not all(checks.get(k) is True for k in ("reopen","alternate_pose","alternate_garment_state","alternate_camera")): errors.append("reuse verification contract incomplete")
-    return {"path":str(path),"passed":not errors,"errors":errors,"mesh_count":len(doc.get("meshes",[])),"scene_count":len(doc.get("scenes",[])),"skin_count":len(doc.get("skins",[])),"animation_count":len(doc.get("animations",[])),"embedded_image_count":len(doc.get("images",[])),"cloth_joint_count":len(cloth)}
+        if len(render)!=4 or len(cages)!=4: errors.append("system must contain four render garments and four cages")
+        if len(doc.get("scenes",[]))<4: errors.append("system must retain cage verification scene")
+        scene_names={s.get("name") for s in doc.get("scenes",[])}
+        required={"Dressed_Character_And_Textile_Decor","Body_Only_Verification","Detached_Garment_Gallery","Simulation_Cages_And_Seams"}
+        if not required.issubset(scene_names): errors.append(f"missing scenes: {sorted(required-scene_names)}")
+        construction=doc.get("extras",{}).get("construction_animation",{})
+        if construction.get("method")!="viewer_shader_uv_coverage_mask" or construction.get("topology_spawn") is not False: errors.append("construction animation boundary invalid")
+    return {"path":str(path),"passed":not errors,"errors":errors,"mesh_count":len(doc.get("meshes",[])),"scene_count":len(doc.get("scenes",[])),"skin_count":len(doc.get("skins",[])),"animation_count":len(doc.get("animations",[])),"embedded_image_count":len(doc.get("images",[])),"render_garment_count":len(render),"simulation_cage_count":len(cages)}
 
 
 def validate_package(root:Path)->dict:
@@ -65,10 +79,13 @@ def validate_package(root:Path)->dict:
     results=[]
     for name in expected:
         path=root/name
-        if not path.exists(): results.append({"path":str(path),"passed":False,"errors":["missing"]})
-        else: results.append(validate_glb(path,system=name=="clothing-system.glb"))
-    receipt={"schema_version":"1.0.0","kind":"garmentforge.validation-receipt","passed":all(r["passed"] for r in results),"results":results,
-             "evidence_boundary":{"source":True,"local_rebuild":True,"glb_reopen":True,"external_viewer_upload":False,"deployed_runtime":False}}
+        results.append({"path":str(path),"passed":False,"errors":["missing"]} if not path.exists() else validate_glb(path,system=name=="clothing-system.glb"))
+    for viewer in (root/"viewer/index.html",root/"viewer/construction.html"):
+        if not viewer.exists(): results.append({"path":str(viewer),"passed":False,"errors":["missing viewer"]})
+    if (root/"viewer/construction.html").exists():
+        text=(root/"viewer/construction.html").read_text()
+        if "uReveal" not in text or "discard" not in text: results.append({"path":str(root/"viewer/construction.html"),"passed":False,"errors":["coverage shader missing"]})
+    receipt={"schema_version":"2.0.0","kind":"garmentforge.validation-receipt","passed":all(r["passed"] for r in results),"results":results,"evidence_boundary":{"source":True,"local_rebuild":True,"glb_reopen":True,"seam_constraints":True,"cage_render_separation":True,"coverage_reveal_viewer":True,"continuum_cloth_solver":False,"deployed_runtime":False}}
     (root/"validation.json").write_text(json.dumps(receipt,indent=2)+"\n")
     return receipt
 

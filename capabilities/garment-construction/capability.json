@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "2.0.0",
   "kind": "studio.capability-manifest",
-  "capability_id": "GarmentForge.clothing_construction.v1",
+  "capability_id": "GarmentForge.clothing_construction.v2",
   "title": "Retained Clothing and Textile Construction",
   "canonical_decision_refs": [
     "visual-generation.model-first.v1",
@@ -17,26 +17,42 @@
     "entrypoint": "python -m garmentforge.cli --output OUTPUT",
     "validator": "python -m garmentforge.validate OUTPUT",
     "canonical_format": "glTF 2.0 binary (.glb)",
-    "viewer": "OUTPUT/viewer/index.html"
+    "viewer": "OUTPUT/viewer/index.html",
+    "construction_viewer": "OUTPUT/viewer/construction.html"
   },
   "construction_contract": {
-    "body_ownership": "Embodied geometry and motion remain independent of garments.",
-    "garment_ownership": "Every textile is a detachable asset with its own mesh, material, construction metadata, and provenance.",
-    "interaction": "Fit is expressed through skinning, named attachment zones, collision-zone metadata, and secondary textile joints.",
-    "scene_assembly": "Character scenes reference garment assets rather than baking clothing into the body mesh.",
-    "decor_reuse": "Textile assets may be instanced in detached or architectural-decoration states without changing their source identity."
+    "body_ownership": "Embodied geometry and materials remain independent of textiles.",
+    "simulation_cage": "A coarse quad-oriented source cage retains ordered seam and closure constraints.",
+    "render_surface": "A separately owned adaptive visible surface carries smooth deformation, UVs, normals, and material response.",
+    "seams": "Closure seams, overlaps, fasteners, and open boundaries remain semantically distinct.",
+    "construction_reveal": "A shader coverage mask reveals a continuous visible surface; topology is never spawned."
   },
   "acceptance": [
     "The canonical GLB reopens with embedded textures and no external URIs.",
-    "Body and garment mesh ownership are disjoint.",
-    "At least three wearable garment families and one textile-decor family are retained.",
-    "Each garment carries panel, seam, material, fit, attachment, collision, and provenance metadata.",
-    "Body motion and secondary textile motion target different retained joints.",
-    "The package exposes dressed, body-only, and detached-gallery verification states.",
-    "Each garment is also exported as a standalone GLB."
+    "Body, simulation cage, and visible garment ownership are disjoint.",
+    "The tunic cage contains ordered vertex-pair sewing constraints.",
+    "Visible garment surfaces use variable adaptive row density rather than one uniform Cartesian lattice.",
+    "Body materials contain no textile base or normal maps.",
+    "Visible garments contain smooth weight fields with more than ten distinct normalized weight vectors.",
+    "The package exposes dressed, body-only, detached-render, and simulation-cage verification states.",
+    "The construction viewer uses a UV coverage reveal and never exposes partial topology."
   ],
   "truth_boundary": {
-    "implemented": ["retained textile geometry", "skinning", "embedded PBR weave", "detachment", "re-dressing", "secondary cloth-joint motion", "textile decor reuse"],
-    "not_claimed": ["continuum cloth solver", "tailoring-grade patterns", "manufacturing fit approval", "CLO or Marvelous Designer native project export"]
+    "implemented": [
+      "explicit seam constraints",
+      "simulation-cage and render-surface separation",
+      "adaptive variable-row topology",
+      "smooth skin fields",
+      "garment-specific PBR variation",
+      "plain body shading",
+      "coverage reveal"
+    ],
+    "not_claimed": [
+      "continuum cloth solver",
+      "production collision resolution",
+      "tailoring-grade patterns",
+      "manufacturing fit approval",
+      "CLO or Marvelous Designer native project export"
+    ]
   }
 }
