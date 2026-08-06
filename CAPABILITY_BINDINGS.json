@@ -20,6 +20,13 @@
       "status": "contract_and_validator_ready",
       "runtime_status": "generation_runtime_pending",
       "implementation": "capabilities/mnemonic-3d-separation/capability.json"
+    },
+    {
+      "capability": "GarmentForge.clothing_construction.v2",
+      "status": "source_and_local_runtime_validated",
+      "production_deployment": "pending",
+      "implementation": "capabilities/garment-construction/capability.json",
+      "runtime": "garmentforge"
     }
   ],
   "canonical_decision_refs": [

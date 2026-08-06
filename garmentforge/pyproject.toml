@@ -1,0 +1,13 @@
+[build-system]
+requires=["setuptools>=68"]
+build-backend="setuptools.build_meta"
+[project]
+name="garmentforge"
+version="0.2.0"
+description="Retained garment cages, seam constraints, adaptive render surfaces, and coverage reveal"
+requires-python=">=3.11"
+dependencies=["numpy>=2,<3","trimesh>=4.8,<5","Pillow>=12,<13"]
+[project.scripts]
+garmentforge="garmentforge.cli:main"
+[tool.pytest.ini_options]
+pythonpath=["."]
