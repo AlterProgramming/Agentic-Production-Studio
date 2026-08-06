@@ -30,8 +30,8 @@ def test_build_and_validate(tmp_path: Path):
     ]
 
 
-def test_cages_and_adaptive_render_surfaces_are_separate(tmp_path: Path):
-    _, document, _ = _build(tmp_path)
+def test_cages_adaptive_surfaces_seams_and_fit_are_separate(tmp_path: Path):
+    _, document, binary = _build(tmp_path)
     render = [mesh for mesh in document["meshes"] if mesh.get("extras", {}).get("topology_role") == "render_surface"]
     cages = [mesh for mesh in document["meshes"] if mesh.get("extras", {}).get("topology_role") == "simulation_cage"]
     assert len(render) == 4
@@ -43,6 +43,16 @@ def test_cages_and_adaptive_render_surfaces_are_separate(tmp_path: Path):
     distance_seams = [seam for seam in tunic_cage["extras"]["seam_constraints"] if seam["simulation_constraint"] == "distance_pair"]
     assert distance_seams
     assert all(seam["ordered_vertex_pairs"] for seam in distance_seams)
+    tunic = next(mesh for mesh in render if mesh["name"] == "Garment_Tunic")
+    positions = accessor_array(document, binary, tunic["primitives"][0]["attributes"]["POSITION"])
+    ranges = {item["name"]: item for item in tunic["extras"]["component_vertex_ranges"]}
+    front = ranges["front"]
+    back = ranges["back"]
+    front_z = positions[front["vertex_start"]:front["vertex_start"] + front["vertex_count"], 2]
+    back_z = positions[back["vertex_start"]:back["vertex_start"] + back["vertex_count"], 2]
+    assert float(front_z.min()) > .238
+    assert float(back_z.max()) < -.238
+    assert tunic["extras"]["fit_clearance"]["validated"] is True
 
 
 def test_body_material_is_not_textile(tmp_path: Path):

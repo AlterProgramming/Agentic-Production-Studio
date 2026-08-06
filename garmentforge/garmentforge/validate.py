@@ -48,6 +48,20 @@ def validate_glb(path:Path,system:bool=False)->dict:
         row_counts=extra.get("adaptive_row_counts",{})
         if not any(len(set(values))>1 for values in row_counts.values()): errors.append(f"{mesh['name']} has uniform row density")
         if extra.get("construction_reveal")!="uv_coverage_mask": errors.append(f"{mesh['name']} lacks coverage reveal")
+        if mesh.get("name")=="Garment_Tunic":
+            primitive=mesh["primitives"][0]
+            positions=accessor_array(doc,binary,primitive["attributes"]["POSITION"])
+            ranges={item["name"]:item for item in extra.get("component_vertex_ranges",[])}
+            if not {"front","back"}.issubset(ranges):
+                errors.append("tunic panel ranges missing")
+            else:
+                front=ranges["front"]; back=ranges["back"]
+                front_z=positions[front["vertex_start"]:front["vertex_start"]+front["vertex_count"],2]
+                back_z=positions[back["vertex_start"]:back["vertex_start"]+back["vertex_count"],2]
+                if float(front_z.min()) <= .238 or float(back_z.max()) >= -.238:
+                    errors.append("tunic does not clear mannequin torso")
+                if extra.get("fit_clearance",{}).get("validated") is not True:
+                    errors.append("tunic clearance pass is not recorded")
     for mesh in cages:
         extra=mesh["extras"]
         if extra.get("quad_source") is not True or extra.get("triangulated_for_glb") is not True: errors.append(f"{mesh['name']} lacks quad-source boundary")
@@ -85,7 +99,7 @@ def validate_package(root:Path)->dict:
     if (root/"viewer/construction.html").exists():
         text=(root/"viewer/construction.html").read_text()
         if "uReveal" not in text or "discard" not in text: results.append({"path":str(root/"viewer/construction.html"),"passed":False,"errors":["coverage shader missing"]})
-    receipt={"schema_version":"2.0.0","kind":"garmentforge.validation-receipt","passed":all(r["passed"] for r in results),"results":results,"evidence_boundary":{"source":True,"local_rebuild":True,"glb_reopen":True,"seam_constraints":True,"cage_render_separation":True,"coverage_reveal_viewer":True,"continuum_cloth_solver":False,"deployed_runtime":False}}
+    receipt={"schema_version":"2.0.0","kind":"garmentforge.validation-receipt","passed":all(r["passed"] for r in results),"results":results,"evidence_boundary":{"source":True,"local_rebuild":True,"glb_reopen":True,"seam_constraints":True,"cage_render_separation":True,"coverage_reveal_viewer":True,"fit_clearance":True,"continuum_cloth_solver":False,"deployed_runtime":False}}
     (root/"validation.json").write_text(json.dumps(receipt,indent=2)+"\n")
     return receipt
 
