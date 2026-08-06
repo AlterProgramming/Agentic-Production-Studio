@@ -1,0 +1,22 @@
+name: Fetch CesiumMan temporary artifact
+on:
+  push:
+    branches: [agent/garmentforge-clothing-construction]
+    paths: ['.github/workflows/fetch-cesium-man-temporary.yml']
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download attributed sample humanoid
+        run: |
+          curl --fail --location --retry 3 \
+            https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/main/2.0/CesiumMan/glTF-Binary/CesiumMan.glb \
+            --output CesiumMan.glb
+          test "$(stat -c%s CesiumMan.glb)" -eq 490956
+          sha256sum CesiumMan.glb > CesiumMan.glb.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cesium-man-source-asset
+          path: |
+            CesiumMan.glb
+            CesiumMan.glb.sha256
