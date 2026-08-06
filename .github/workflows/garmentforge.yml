@@ -13,19 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch attributed CesiumMan reference asset
-        run: |
-          curl --fail --location --retry 3 \
-            https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/main/2.0/CesiumMan/glTF-Binary/CesiumMan.glb \
-            --output CesiumMan.glb
-          test "$(stat -c%s CesiumMan.glb)" -eq 490956
-          sha256sum CesiumMan.glb > CesiumMan.glb.sha256
-      - uses: actions/upload-artifact@v4
-        with:
-          name: cesium-man-source-asset
-          path: |
-            CesiumMan.glb
-            CesiumMan.glb.sha256
       - uses: actions/setup-python@v5
         with: {python-version: '3.12'}
       - run: python -m pip install -e ./garmentforge pytest
@@ -35,4 +22,3 @@ jobs:
         with:
           name: garmentforge-verification-package
           path: build/garmentforge
-# trigger 2026-08-06
