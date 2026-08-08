@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-production-studio.local/intake/project-intake.schema.json",
+  "title": "Recoverable Project Intake",
+  "type": "object",
+  "required": ["schema_version", "kind", "project_id", "state", "release_target", "evidence", "unknowns", "next_action"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "kind": {"const": "studio.project-intake"},
+    "project_id": {"type": "string", "minLength": 1},
+    "repository": {"type": ["string", "null"]},
+    "state": {"enum": ["DISCOVERED", "TRIAGED", "SPECIFIED", "READY", "ACTIVE", "VERIFYING", "RELEASED", "RECOVERING", "BLOCKED", "ARCHIVED"]},
+    "release_target": {
+      "type": "object",
+      "required": ["period", "outcome"],
+      "properties": {
+        "period": {"type": "string", "minLength": 1},
+        "outcome": {"type": "string", "minLength": 1},
+        "surface": {"type": ["string", "null"]},
+        "deadline": {"type": ["string", "null"]}
+      },
+      "additionalProperties": true
+    },
+    "authority": {
+      "type": "object",
+      "properties": {
+        "owner": {"type": ["string", "null"]},
+        "allowed_reads": {"type": "array", "items": {"type": "string"}},
+        "allowed_writes": {"type": "array", "items": {"type": "string"}},
+        "may_commit": {"type": "boolean", "default": false},
+        "may_push": {"type": "boolean", "default": false},
+        "may_deploy": {"type": "boolean", "default": false}
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/evidenceItem"}
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "required_for_next_action"],
+        "properties": {
+          "question": {"type": "string", "minLength": 1},
+          "required_for_next_action": {"type": "boolean"},
+          "notes": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "recovery": {"$ref": "recovery-record.schema.json"},
+    "next_action": {
+      "type": "object",
+      "required": ["action", "justification"],
+      "properties": {
+        "action": {"type": "string", "minLength": 1},
+        "justification": {"type": "string", "minLength": 1},
+        "blocked_by": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "evidenceItem": {
+      "type": "object",
+      "required": ["observed_at", "kind", "ref", "claim"],
+      "properties": {
+        "observed_at": {"type": "string", "format": "date-time"},
+        "kind": {"enum": ["artifact", "commit", "pull_request", "runtime", "deployment", "conversation", "test", "unknown"]},
+        "ref": {"type": "string", "minLength": 1},
+        "claim": {"type": "string", "minLength": 1},
+        "confidence": {"enum": ["high", "medium", "low"]}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
