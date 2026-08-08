@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-production-studio.local/intake/recovery-record.schema.json",
+  "title": "Project Recovery Record",
+  "type": "object",
+  "required": ["status", "timeline", "last_defensible_state", "contradictions", "unresolved", "smallest_repair"],
+  "properties": {
+    "status": {"enum": ["NOT_REQUIRED", "REQUIRED", "IN_PROGRESS", "RECOVERED", "BLOCKED"]},
+    "timeline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["observed_at", "claim", "evidence_ref"],
+        "properties": {
+          "observed_at": {"type": "string", "format": "date-time"},
+          "claim": {"type": "string", "minLength": 1},
+          "evidence_ref": {"type": "string", "minLength": 1},
+          "effect": {"enum": ["supports", "contradicts", "narrows", "unknown"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "last_defensible_state": {
+      "type": "object",
+      "required": ["state", "basis"],
+      "properties": {
+        "state": {"type": "string", "minLength": 1},
+        "basis": {"type": "array", "items": {"type": "string"}},
+        "observed_at": {"type": ["string", "null"], "format": "date-time"}
+      },
+      "additionalProperties": false
+    },
+    "failed_claims": {"type": "array", "items": {"type": "string"}},
+    "contradictions": {"type": "array", "items": {"type": "string"}},
+    "unresolved": {"type": "array", "items": {"type": "string"}},
+    "smallest_repair": {
+      "type": "object",
+      "required": ["action", "evidence_needed"],
+      "properties": {
+        "action": {"type": "string", "minLength": 1},
+        "evidence_needed": {"type": "array", "items": {"type": "string"}},
+        "requires_unknowns": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
