@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "studio.capability",
+  "key": "capability.project-intake-recovery.v1",
+  "status": "source_ready",
+  "title": "Recoverable Project Intake",
+  "summary": "Converts partial or collapsed project history into an evidence-backed state, required unknowns, smallest repair, and bounded next action without requiring a complete narrative.",
+  "applies_to": [
+    "release-program intake",
+    "project triage",
+    "chronological recovery",
+    "failed project continuation",
+    "work-packet generation"
+  ],
+  "contracts": [
+    "intake/project-intake.schema.json",
+    "intake/recovery-record.schema.json"
+  ],
+  "tooling": ["tools/intake_project.py"],
+  "principles": [
+    "recovery is a normal state and may recur",
+    "history is append-only",
+    "last defensible state outranks narrative completeness",
+    "unknowns block only when required for the next justified action",
+    "artifact, test, runtime, deployment, and human claims remain distinct evidence classes"
+  ],
+  "evidence_status": {
+    "source": "implemented",
+    "local_validation": "required",
+    "integrated_execution": "unverified",
+    "deployed_execution": "unverified"
+  }
+}
