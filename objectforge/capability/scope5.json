@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "kind": "studio.capability",
+  "capability_id": "objectforge.manufacturing-assembly-service-planning.v1",
+  "title": "ObjectForge manufacturing, assembly, and service planning",
+  "status": "foundation_benchmark_pending_ci",
+  "execution": "first_party_local",
+  "external_finished_model_generation_providers": false,
+  "entrypoint": "python -m objectforge.scope5 --output <directory>",
+  "canonical_formats": [
+    "application/json"
+  ],
+  "input_contract": {
+    "required": [
+      "validated Scope 4 system plan",
+      "interface standards",
+      "connection registry"
+    ],
+    "supplier_quote_required": false,
+    "manufacturing_authorization_implied": false
+  },
+  "outputs": [
+    "scope5-index.json",
+    "manufacturing-plan.json",
+    "tolerance-stacks.json",
+    "assembly-sequence.json",
+    "service-plan.json",
+    "cost-envelope.json"
+  ],
+  "completion_gates": [
+    "every Scope 4 object has a process, material, inspection, supplier-class, and bounded cost plan",
+    "every Scope 4 connection has a tolerance-stack calculation",
+    "all tolerance stacks remain inside the declared interface tolerance",
+    "assembly and acceptance operations form an acyclic dependency graph",
+    "deployed-system and transport acceptance operations are present",
+    "critical replaceable modules and assemblies have retained service procedures",
+    "bounded low-volume cost envelope is ordered and explicitly non-quotation",
+    "Scope 4 rebuild succeeds as a regression gate",
+    "no external finished-model generator supplies geometry"
+  ],
+  "benchmark": "Manufacturing, assembly, service, tolerance, and bounded cost planning for the Scope 4 Modular Observation and Service Cell",
+  "boundary": [
+    "planning evidence only",
+    "no engineering or regulatory certification",
+    "no supplier quotation",
+    "no authorization to manufacture safety-critical hardware"
+  ]
+}
