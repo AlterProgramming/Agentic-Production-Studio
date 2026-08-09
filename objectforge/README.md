@@ -51,6 +51,52 @@ python -m objectforge.preview_scope3 \
 
 See `SCOPE_3_PROCEDURAL_DESIGN_LANGUAGE.md`.
 
+## Scope 4 — Multi-object coherent systems
+
+Scope 4 advances from coherent individual products to bounded coordinated systems. It selects a system topology, builds multiple independently useful retained objects, and defines reusable physical interface standards, endpoint contracts, compatibility relationships, deployment/stowage workflows, and a combined retained system model.
+
+The fixed benchmark is the six-object Modular Observation and Service Cell under the Field Service and Precision Lab design languages.
+
+```bash
+python -m objectforge.scope4 --output ./objectforge-scope4
+```
+
+The Scope 4 capability is registered as `objectforge.multi-object-coherent-systems.v1`. Its benchmark has passed the dedicated Scope 4 CI workflow.
+
+See `SCOPE_4_MULTI_OBJECT_SYSTEMS.md`.
+
+## Scope 5 — Manufacturing, assembly, and service planning
+
+Scope 5 consumes the retained Scope 4 system plan and produces bounded manufacturing and service evidence: material/process plans for every system object, interface tolerance stacks, dependency-checked assembly and acceptance operations, service procedures for critical replaceable modules, and a low-volume cost envelope explicitly labeled as a planning estimate rather than a supplier quotation.
+
+```bash
+python -m objectforge.scope5 --output ./objectforge-scope5
+```
+
+The capability is registered as `objectforge.manufacturing-assembly-service-planning.v1`. It is planning infrastructure, not engineering certification or authorization to manufacture safety-critical hardware.
+
+## Scope 6 — Embodied operational validation
+
+Scope 6 adds bounded operational analysis over the Scope 4 system and Scope 5 manufacturing/service plan. It evaluates human, two-person, and mobile-manipulator capability envelopes against deploy, operate, stow, mating, and closure tasks; checks analytical load cases; injects deterministic faults with safe-state and recovery requirements; and retains the operational state machine.
+
+```bash
+python -m objectforge.scope6 --output ./objectforge-scope6
+```
+
+The capability is registered as `objectforge.embodied-operational-validation.v1`. It is bounded analytical validation only: it is not regulatory certification, a substitute for physical testing, or a claim of unrestricted robot autonomy.
+
+## Capability manifests
+
+Machine-readable capability manifests live in `objectforge/capability/`:
+
+- `capability.json` — Scope 0 detailed procedural object generation
+- `scope1.json` — grammar-driven detailed assets
+- `scope2.json` — goal-directed functional construction
+- `scope3.json` — procedural design language
+- `scope4.json` — multi-object coherent systems
+- `scope5.json` — manufacturing, assembly, and service planning
+- `scope6.json` — embodied operational validation
+
 ## Test
 
 ```bash

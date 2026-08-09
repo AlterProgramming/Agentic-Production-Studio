@@ -26,6 +26,9 @@
 | Lightweight technical integration | Active | Import, scene assembly, export automation, handoff | Target-platform integration test | Not a substitute for full product engineering |
 | Model-first scene generation | Foundation | Persistent modeled scene, hero render, render passes, motion or interactive derivatives | Reproducible brief-to-scene benchmark with reopen validation, recovery receipt, and packaged handoff | Doctrine is canonical, but the complete runtime is not yet injected into arbitrary assistant sessions; availability must be discovered and proven per session |
 | Retained-scene character performance | Foundation | Independent character action, reaction, gesture, gaze, and positional change inside a persistent scene | Named-node displacement measurements, authored performance beats, camera-only negative test, and motion receipt | Current benchmark uses articulated proxy rigs; hero deformation, facial acting, and cloth simulation remain later gates |
+| ObjectForge multi-object coherent systems | Foundation | Bounded multi-object systems with shared interfaces, compatibility graph, workflows, and retained combined model | Scope 4 benchmark, paired design-language variants, interface/connection validation, reopen checks, and Scope 0-3 regressions | Bounded topology and interface planning only; no manufacturing or operational certification |
+| ObjectForge manufacturing, assembly, and service planning | Foundation | Process/material plans, tolerance stacks, assembly sequence, service procedures, and bounded cost envelope | Scope 5 benchmark, passing tolerance stacks, acyclic assembly graph, service routes, and Scope 4 regression | Planning evidence only; no supplier quotation, certification, or manufacturing authorization |
+| ObjectForge embodied operational validation | Foundation | Actor-route analysis, analytical load cases, deterministic fault handling, and operational state machine | Scope 6 benchmark, critical-task reachability, capacity checks, safe-state recovery, and Scope 5/4 regression | Analytical validation only; no physical-test substitution, regulatory certification, or unrestricted robot autonomy |
 | White-label agency production | Development | Confidential overflow sprint | NDA-ready process and partner benchmark | Requires trust, responsiveness, and consistent capacity |
 | Surgical builder planning | Foundation | Exact write-set preview with preconditions and postconditions | Builder regression suite and one real benchmark receipt | Plans must remain narrow and inspectable |
 | Guarded metadata mutation | Foundation | Exact text and JSON changes without broad rewrites | Stale-state rejection tests | Requires explicit expected current values |
@@ -94,6 +97,19 @@
 - Motion, alternate-view, relighting, and interactive derivatives
 - Geometry, texture, rig, scene, and render recovery gates
 - Hash-linked provenance from modeled scene to every derivative
+
+### H. ObjectForge System Engineering
+- Multi-object topology planning and coherent retained system models
+- Shared mechanical, electrical/data, module-bay, and transport interfaces
+- Compatibility graphs, connection registries, deployment, stowage, and collision-aware layouts
+- Manufacturing process and material planning for retained system members
+- Interface tolerance-stack analysis
+- Dependency-checked assembly and acceptance sequencing
+- Service procedures and bounded non-quotation cost envelopes
+- Human, team, and mobile-manipulator task-route analysis
+- Analytical load/capacity checks
+- Deterministic fault injection with safe states and recovery routes
+- Operational state-machine validation
 
 ## Executable availability is separate from doctrine
 
