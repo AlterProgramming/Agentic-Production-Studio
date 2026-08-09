@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "kind": "studio.capability",
+  "capability_id": "objectforge.embodied-operational-validation.v1",
+  "title": "ObjectForge embodied operational validation",
+  "status": "foundation_benchmark_pending_ci",
+  "execution": "first_party_local",
+  "external_finished_model_or_simulation_providers": false,
+  "entrypoint": "python -m objectforge.scope6 --output <directory>",
+  "canonical_formats": [
+    "application/json"
+  ],
+  "input_contract": {
+    "required": [
+      "validated Scope 4 system plan",
+      "validated Scope 5 manufacturing and service plan",
+      "bounded actor capability envelopes"
+    ],
+    "physical_test_required_for_claimed_certification": true
+  },
+  "outputs": [
+    "scope6-index.json",
+    "operational-validation.json",
+    "reachability-matrix.json",
+    "load-cases.json",
+    "failure-injection.json",
+    "state-machine.json"
+  ],
+  "completion_gates": [
+    "Scope 5 manufacturing plan validation passes",
+    "every critical deploy, operate, stow, and closure task has at least one valid actor route",
+    "human routes cover every retained operational task",
+    "mobile-manipulator routes cover multiple bounded tasks",
+    "all analytical load cases remain within declared capacities",
+    "every deterministic injected failure has detection, a safe state, and a recovery route",
+    "operational state machine covers deployment, operation, degraded operation, isolation, service, stowage, and transport",
+    "Scopes 4 and 5 rebuild successfully as regression gates",
+    "no external finished-model or simulation provider supplies the evidence"
+  ],
+  "benchmark": "Embodied operational analysis of the Scope 4 Modular Observation and Service Cell using human, two-person, and mobile-manipulator envelopes",
+  "boundary": [
+    "bounded analytical validation only",
+    "no regulatory certification",
+    "no substitute for physical testing",
+    "no unrestricted robot autonomy claim"
+  ]
+}
